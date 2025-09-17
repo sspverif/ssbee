@@ -13,14 +13,7 @@ pub struct EquivalenceTransform;
 impl super::ProofTransform for EquivalenceTransform {
     type Err = Infallible;
 
-    type Aux = Vec<(
-        String,
-        (
-            HashSet<Type>,
-            samplify::SampleInfo,
-            //split_partial::SplitInfo,
-        ),
-    )>;
+    type Aux = Vec<(String, (HashSet<Type>, samplify::SampleInfo))>;
 
     fn transform_proof<'a>(
         &self,
@@ -39,26 +32,16 @@ fn transform_game_inst(
 ) -> Result<
     (
         GameInstance,
-        (
-            String,
-            (
-                HashSet<Type>,
-                samplify::SampleInfo,
-                // split_partial::SplitInfo,
-            ),
-        ),
+        (String, (HashSet<Type>, samplify::SampleInfo)),
     ),
     Infallible,
 > {
     let comp = game_inst.game();
 
-    //let (comp, _) = resolvetypes::Transformation(comp)
-    //    .transform()
-    //    .expect("resolving user-defined types failed");
     let (comp, types) = type_extract::Transformation(comp)
         .transform()
         .expect("type extraction transformation failed unexpectedly");
-    /**
+    /*
      * Note: we currently do samplify early so a `if foo { stuff }
      * else { other stuff } ... x <- Integer` gets the same sample
      * counter for the x sampling after returnify (instead of
@@ -81,12 +64,6 @@ fn transform_game_inst(
     let (comp, _) = treeify::Transformation(&comp)
         .transform()
         .expect("treeify transformation failed unexpectedly");
-    // let (comp, splits) = split_partial::SplitPartial
-    //     .transform_game(&comp)
-    //     .expect("split_partial transform failed unexpectedly");
-    // println!("#####################");
-    // println!("{:#?}", comp);
-    // println!("$$$$$$$$$$$$$$$$$$$$$");
     let (comp, _) = tableinitialize::Transformation(&comp)
         .transform()
         .expect("tableinitialize transformation failed unexpectedly");

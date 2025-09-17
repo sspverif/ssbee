@@ -28,19 +28,16 @@ pub(crate) struct CompositionSmtWriter<'a> {
     game_inst: &'a GameInstance,
 
     sample_info: &'a SampleInfo,
-    //split_info: &'a SplitInfo,
 }
 
 impl<'a> CompositionSmtWriter<'a> {
     pub(crate) fn new(
         game_inst: &'a GameInstance,
         sample_info: &'a SampleInfo,
-        //split_info: &'a SplitInfo,
     ) -> CompositionSmtWriter<'a> {
         CompositionSmtWriter {
             game_inst,
             sample_info,
-            //split_info,
         }
     }
 

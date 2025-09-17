@@ -25,11 +25,7 @@ use crate::{
     hacks,
     package::{Export, OracleSig},
     proof::{Claim, ClaimType, GameInstance, Proof},
-    transforms::{
-        proof_transforms::EquivalenceTransform,
-        samplify::{Position, SampleInfo},
-        ProofTransform,
-    },
+    transforms::{proof_transforms::EquivalenceTransform, samplify::SampleInfo, ProofTransform},
     types::Type,
     util::prover_process::{Communicator, ProverResponse},
     writers::smt::{
