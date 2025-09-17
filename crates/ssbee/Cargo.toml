@@ -2,6 +2,7 @@
 name = "ssbee"
 version.workspace = true
 edition.workspace = true
+readme = { workspace = true }
 
 [dependencies]
 sspverif = { workspace = true }
