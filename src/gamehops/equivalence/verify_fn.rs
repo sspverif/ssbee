@@ -83,7 +83,7 @@ fn verify_oracle<UI: ProofUI>(
             .equivalence
             .proof_tree_by_oracle_name(&oracle_sig.name);
         ui.lock().unwrap().start_oracle(
-            eqctx.proof().as_name(),
+            &eqctx.proof().name,
             &proofstep_name,
             &oracle_sig.name,
             claims.len().try_into().unwrap(),
@@ -96,7 +96,7 @@ fn verify_oracle<UI: ProofUI>(
 
         for claim in claims {
             ui.lock().unwrap().start_lemma(
-                eqctx.proof().as_name(),
+                &eqctx.proof().name,
                 &proofstep_name,
                 &oracle_sig.name,
                 claim.name(),
@@ -123,7 +123,7 @@ fn verify_oracle<UI: ProofUI>(
             }
             write!(prover, "(pop 1)").unwrap();
             ui.lock().unwrap().finish_lemma(
-                eqctx.proof().as_name(),
+                &eqctx.proof().name,
                 &proofstep_name,
                 &oracle_sig.name,
                 claim.name(),
@@ -131,11 +131,9 @@ fn verify_oracle<UI: ProofUI>(
         }
 
         write!(prover, "(pop 1)").unwrap();
-        ui.lock().unwrap().finish_oracle(
-            eqctx.proof().as_name(),
-            &proofstep_name,
-            &oracle_sig.name,
-        );
+        ui.lock()
+            .unwrap()
+            .finish_oracle(&eqctx.proof().name, &proofstep_name, &oracle_sig.name);
     }
     Ok(())
 }
@@ -171,7 +169,7 @@ pub fn verify<UI: ProofUI>(
         .collect();
 
     ui.proofstep_set_oracles(
-        proof.as_name(),
+        &proof.name,
         &proofstep_name,
         oracle_sequence.len().try_into().unwrap(),
     );
@@ -215,7 +213,7 @@ pub fn verify_parallel<UI: ProofUI + std::marker::Send>(
         .collect();
 
     ui.proofstep_set_oracles(
-        proof.as_name(),
+        &proof.name,
         &proofstep_name,
         oracle_sequence.len().try_into().unwrap(),
     );

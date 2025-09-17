@@ -187,7 +187,7 @@ fn test_state_datatypes_remap_consts() {
 
     // check prf package instance
 
-    let pkg_inst = &proof.instances()[0]
+    let pkg_inst = &proof.instances[0]
         .game()
         .pkgs
         .iter()
@@ -222,7 +222,7 @@ fn test_state_datatypes_remap_consts() {
 
     // check key package instance
 
-    let pkg_inst = &proof.instances()[0]
+    let pkg_inst = &proof.instances[0]
         .game()
         .pkgs
         .iter()
@@ -265,7 +265,7 @@ fn test_fully_resolved_idents_103() {
     let proof_file = proofs::read_file(proof_file_name);
     let proof = proofs::parse(&proof_file, proof_file_name, &pkgs, &games);
 
-    for game_inst in proof.instances() {
+    for game_inst in &proof.instances {
         for (_, ty) in &game_inst.game.consts {
             if let Type::Bits(cs) = ty {
                 match &**cs {

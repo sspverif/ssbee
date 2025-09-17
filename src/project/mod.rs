@@ -1,4 +1,3 @@
-use rayon::iter::ParallelIterator;
 /**
  *  project is the high-level structure of sspverif.
  *
@@ -102,7 +101,6 @@ impl Files {
 #[derive(Debug)]
 pub struct Project<'a> {
     root_dir: PathBuf,
-    packages: HashMap<String, Package>,
     games: HashMap<String, Composition>,
     proofs: HashMap<String, Proof<'a>>,
 }
@@ -112,7 +110,6 @@ impl<'a> Project<'a> {
     pub(crate) fn empty() -> Self {
         Self {
             root_dir: PathBuf::new(),
-            packages: HashMap::new(),
             games: HashMap::new(),
             proofs: HashMap::new(),
         }
@@ -153,7 +150,6 @@ impl<'a> Project<'a> {
 
         let project = Project {
             root_dir,
-            packages,
             games,
             proofs,
         };
@@ -168,7 +164,7 @@ impl<'a> Project<'a> {
         for proof_key in proof_keys.into_iter() {
             let proof = &self.proofs[proof_key];
             let max_width_left = proof
-                .game_hops()
+                .game_hops
                 .iter()
                 .map(GameHop::left_game_instance_name)
                 .map(str::len)
@@ -176,7 +172,7 @@ impl<'a> Project<'a> {
                 .unwrap_or(0);
 
             println!("{proof_key}:");
-            for (i, game_hop) in proof.game_hops().iter().enumerate() {
+            for (i, game_hop) in proof.game_hops.iter().enumerate() {
                 match game_hop {
                     GameHop::Equivalence(eq) => {
                         let left_name = eq.left_name();
@@ -223,31 +219,31 @@ impl<'a> Project<'a> {
 
         for proof_key in proof_keys.into_iter() {
             let proof = &self.proofs[proof_key];
-            ui.start_proof(proof.as_name(), proof.game_hops().len().try_into().unwrap());
+            ui.start_proof(&proof.name, proof.game_hops.len().try_into().unwrap());
 
             if let Some(ref req_proof) = req_proof {
                 if proof_key != req_proof {
-                    ui.finish_proof(proof.as_name());
+                    ui.finish_proof(&proof.name);
                     continue;
                 }
             }
 
-            for (i, game_hop) in proof.game_hops().iter().enumerate() {
-                ui.start_proofstep(proof.as_name(), &format!("{game_hop}"));
+            for (i, game_hop) in proof.game_hops.iter().enumerate() {
+                ui.start_proofstep(&proof.name, &format!("{game_hop}"));
 
                 if let Some(ref req_proofstep) = req_proofstep {
                     if i != *req_proofstep {
-                        ui.finish_proofstep(proof.as_name(), &format!("{game_hop}"));
+                        ui.finish_proofstep(&proof.name, &format!("{game_hop}"));
                         continue;
                     }
                 }
 
                 match game_hop {
                     GameHop::Reduction(_) => {
-                        ui.proofstep_is_reduction(proof.as_name(), &format!("{game_hop}"));
+                        ui.proofstep_is_reduction(&proof.name, &format!("{game_hop}"));
                     }
                     GameHop::Conjecture(_) => {
-                        ui.proofstep_is_reduction(proof.as_name(), &format!("{game_hop}"));
+                        ui.proofstep_is_reduction(&proof.name, &format!("{game_hop}"));
                     }
                     GameHop::Equivalence(eq) => {
                         if parallel > 1 {
@@ -261,10 +257,10 @@ impl<'a> Project<'a> {
                         }
                     }
                 }
-                ui.finish_proofstep(proof.as_name(), &format!("{game_hop}"));
+                ui.finish_proofstep(&proof.name, &format!("{game_hop}"));
             }
 
-            ui.finish_proof(proof.as_name());
+            ui.finish_proof(&proof.name);
         }
 
         Ok(())

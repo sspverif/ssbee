@@ -21,7 +21,7 @@ pub enum Identifier {
 }
 
 impl Identifier {
-    pub(crate) fn into_proof_identifier(self) -> Option<ProofIdentifier> {
+    pub fn into_proof_identifier(self) -> Option<ProofIdentifier> {
         match self {
             Identifier::PackageIdentifier(package_identifier) => package_identifier
                 .into_const()?
@@ -39,7 +39,7 @@ impl Identifier {
         }
     }
 
-    pub(crate) fn as_proof_identifier_mut(&mut self) -> Option<&mut ProofIdentifier> {
+    pub fn as_proof_identifier_mut(&mut self) -> Option<&mut ProofIdentifier> {
         match self {
             Identifier::PackageIdentifier(package_identifier) => package_identifier
                 .as_const_mut()?
@@ -61,7 +61,7 @@ impl Identifier {
         }
     }
 
-    pub(crate) fn as_proof_identifier(&self) -> Option<&ProofIdentifier> {
+    pub fn as_proof_identifier(&self) -> Option<&ProofIdentifier> {
         match self {
             Identifier::PackageIdentifier(package_identifier) => package_identifier
                 .as_const()?

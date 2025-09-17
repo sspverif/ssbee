@@ -31,14 +31,14 @@ impl Composition {
  */
 
 #[derive(Debug, Clone)]
-pub(crate) struct Assumption {
+pub struct Assumption {
     pub name: String,
     pub left_name: String,
     pub right_name: String,
 }
 
 #[derive(Debug, Clone)]
-pub(crate) struct Reduction<'a> {
+pub struct Reduction<'a> {
     left: ReductionMapping<'a>,
     right: ReductionMapping<'a>,
 

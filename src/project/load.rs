@@ -45,7 +45,7 @@ pub(crate) fn proofs(
             pkgs.clone(),
             games.clone(),
         )?;
-        let proof_name = proof.as_name().to_string();
+        let proof_name = proof.name.to_string();
 
         proofs.insert(proof_name, proof);
     }

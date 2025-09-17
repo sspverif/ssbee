@@ -112,10 +112,8 @@ This would be the contents is JSONy notation. We'll see how that looks like in t
 
 */
 
-use clap::{Parser, Subcommand};
-use env_logger::Logger;
+use clap::Parser;
 use sspverif::project;
-use sspverif::util::prover_process::ProverBackend;
 
 mod cli;
 use crate::cli::*;

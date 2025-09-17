@@ -23,10 +23,10 @@ pub struct PackageStateSelector<'a> {
     pub ty: &'a Type,
 }
 
-pub(crate) struct PackageStateDatatype<'a>(PackageInstanceContext<'a>);
+pub struct PackageStateDatatype<'a>(PackageInstanceContext<'a>);
 
 impl<'a> PackageInstanceContext<'a> {
-    pub(crate) fn package_state_datatype(self) -> PackageStateDatatype<'a> {
+    pub fn package_state_datatype(self) -> PackageStateDatatype<'a> {
         PackageStateDatatype(self)
     }
 }

@@ -2,7 +2,7 @@ pub(crate) mod indicatif;
 #[cfg(test)]
 pub(crate) mod mock;
 
-pub(crate) trait ProofUI {
+pub trait ProofUI {
     fn println(&self, line: &str) -> std::io::Result<()>;
 
     fn start_proof(&mut self, proof_name: &str, num_proofsteps: u64);

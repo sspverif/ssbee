@@ -426,7 +426,7 @@ fn handle_game_hops<'a>(
 }
 
 pub(crate) fn handle_conjecture<'a>(
-    ctx: &mut ParseProofContext<'a>,
+    _ctx: &mut ParseProofContext<'a>,
     ast: Pair<'a, Rule>,
 ) -> Result<GameHop<'a>, ParseProofError> {
     let mut ast = ast.into_inner();

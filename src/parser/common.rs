@@ -211,7 +211,8 @@ pub(crate) fn handle_game_params_def_list(
                     // TODO:: enforce somehow that this number is not negative
                     Expression::IntegerLiteral(num) => CountSpec::Literal(num as u64),
                     _ => {
-                        return Err(todo!());
+                        //return Err(todo!());
+                        todo!()
                     }
                 };
 
@@ -375,7 +376,8 @@ pub(crate) fn handle_proof_params_def_list(
             // TODO:: enforce somehow that this number is not negative
             Expression::IntegerLiteral(num) => CountSpec::Literal(num as u64),
             _ => {
-                return Err(todo!());
+                //return Err(todo!());
+                todo!()
             }
         };
 

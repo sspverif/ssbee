@@ -109,7 +109,6 @@ impl ProofUI for IndicatifProofUI {
             .seq_proofstep_progress
             .get(&(proof_name.to_string(), proofstep_name.to_string()))
         {
-            let duration = proofstep_progress.elapsed();
             proofstep_progress.finish();
         }
 
@@ -198,7 +197,7 @@ impl ProofUI for IndicatifProofUI {
         proof_name: &str,
         proofstep_name: &str,
         oracle_name: &str,
-        lemma_name: &str,
+        _lemma_name: &str,
     ) {
         if let Some(oracle_progress) = self.seq_oracle_progress.get(&(
             proof_name.to_string(),

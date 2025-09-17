@@ -12,7 +12,6 @@ pub struct ReturnConst<'a> {
     pub game_name: &'a str,
     pub game_params: &'a [(GameConstIdentifier, Expression)],
 
-    pub pkg_inst_name: &'a str,
     pub pkg_name: &'a str,
     pub pkg_params: &'a [(PackageConstIdentifier, Expression)],
 

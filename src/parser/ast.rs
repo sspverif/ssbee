@@ -16,22 +16,22 @@ impl<'a> IdentifierData<'a> {
 }
 
 #[derive(Clone, Debug)]
-pub(crate) struct PackageName<'a>(IdentifierData<'a>);
+pub struct PackageName<'a>(IdentifierData<'a>);
 
 #[derive(Clone, Debug)]
-pub(crate) struct PackageInstanceName<'a>(IdentifierData<'a>);
+pub struct PackageInstanceName<'a>(IdentifierData<'a>);
 
 #[derive(Clone, Debug)]
-pub(crate) struct GameName<'a>(IdentifierData<'a>);
+pub struct GameName<'a>(IdentifierData<'a>);
 
 #[derive(Clone, Debug)]
-pub(crate) struct GameInstanceName<'a>(IdentifierData<'a>);
+pub struct GameInstanceName<'a>(IdentifierData<'a>);
 
 #[derive(Clone, Debug)]
-pub(crate) struct ProofName<'a>(IdentifierData<'a>);
+pub struct ProofName<'a>(IdentifierData<'a>);
 
 #[derive(Clone, Debug)]
-pub(crate) struct AssumptionName<'a>(IdentifierData<'a>);
+pub struct AssumptionName<'a>(IdentifierData<'a>);
 
 macro_rules! impl_ast {
     ($struct:ty) => {

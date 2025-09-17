@@ -115,8 +115,7 @@ pub mod error;
 mod verify_fn;
 
 use error::{Error, Result};
-pub use verify_fn::verify;
-pub use verify_fn::verify_parallel;
+pub use verify_fn::{verify, verify_parallel};
 
 #[derive(Clone, Copy)]
 pub(crate) struct EquivalenceContext<'a> {
@@ -1115,9 +1114,6 @@ impl<'a> EquivalenceContext<'a> {
         let octx_left = gctx_left.exported_oracle_ctx_by_name(oracle_name).unwrap();
         let octx_right = gctx_right.exported_oracle_ctx_by_name(oracle_name).unwrap();
 
-        let pkg_inst_name_left = octx_left.pkg_inst_ctx().pkg_inst_name();
-        let pkg_inst_name_right = octx_right.pkg_inst_ctx().pkg_inst_name();
-
         let pkg_name_left = octx_left.pkg_inst_ctx().pkg_name();
         let pkg_name_right = octx_right.pkg_inst_ctx().pkg_name();
 
@@ -1140,7 +1136,6 @@ impl<'a> EquivalenceContext<'a> {
         // the oracle of this name, both left and right.
         let left_return = patterns::ReturnConst {
             game_inst_name: game_inst_name_left,
-            pkg_inst_name: pkg_inst_name_left,
             game_name: game_name_left,
             game_params: game_params_left,
             pkg_name: pkg_name_left,
@@ -1152,7 +1147,6 @@ impl<'a> EquivalenceContext<'a> {
             game_inst_name: game_inst_name_right,
             game_name: game_name_right,
             game_params: game_params_right,
-            pkg_inst_name: pkg_inst_name_right,
             pkg_name: pkg_name_right,
             pkg_params: pkg_params_right,
             oracle_name,
@@ -1828,7 +1822,6 @@ fn build_returns(game_inst: &GameInstance) -> Vec<(SmtExpr, SmtExpr)> {
             game_inst_name,
             game_name,
             game_params,
-            pkg_inst_name,
             pkg_name,
             pkg_params,
             oracle_name,

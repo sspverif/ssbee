@@ -10,7 +10,7 @@ use crate::{
 ////////////////////////////////////////////////////
 
 #[derive(Debug, Clone)]
-pub(crate) struct GameInstance {
+pub struct GameInstance {
     pub(crate) name: String,
     pub(crate) game: Composition,
     pub(crate) types: Vec<(String, Type)>,
@@ -224,12 +224,12 @@ impl Claim {
 
 #[derive(Clone, Debug)]
 pub struct Proof<'a> {
-    pub(crate) name: String,
-    pub(crate) consts: Vec<(String, Type)>,
-    pub(crate) instances: Vec<GameInstance>,
-    pub(crate) assumptions: Vec<Assumption>,
-    pub(crate) game_hops: Vec<GameHop<'a>>,
-    pub(crate) pkgs: Vec<Package>,
+    pub name: String,
+    pub consts: Vec<(String, Type)>,
+    pub instances: Vec<GameInstance>,
+    pub assumptions: Vec<Assumption>,
+    pub game_hops: Vec<GameHop<'a>>,
+    pub pkgs: Vec<Package>,
 }
 
 impl Proof<'_> {
@@ -238,18 +238,6 @@ impl Proof<'_> {
             instances,
             ..self.clone()
         }
-    }
-
-    pub(crate) fn as_name(&self) -> &str {
-        &self.name
-    }
-
-    pub(crate) fn game_hops(&self) -> &[GameHop] {
-        &self.game_hops
-    }
-
-    pub(crate) fn instances(&self) -> &[GameInstance] {
-        &self.instances
     }
 
     pub(crate) fn find_game_instance(&self, game_inst_name: &str) -> Option<&GameInstance> {

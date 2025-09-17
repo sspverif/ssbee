@@ -3,8 +3,9 @@ use std::{collections::HashSet, convert::Infallible};
 use crate::{proof::GameInstance, types::Type};
 
 use super::{
-    resolveoracles, returnify, samplify, tableinitialize, treeify, type_extract, unwrapify,
-    GameTransform, Transformation,
+    resolveoracles::{self, ResolutionError},
+    returnify, samplify, tableinitialize, treeify, type_extract, unwrapify, GameTransform,
+    Transformation,
 };
 
 pub struct EquivalenceTransform;
@@ -25,7 +26,7 @@ impl super::ProofTransform for EquivalenceTransform {
         &self,
         proof: &'a crate::proof::Proof<'a>,
     ) -> Result<(crate::proof::Proof<'a>, Self::Aux), Self::Err> {
-        let results = proof.instances().iter().map(transform_game_inst);
+        let results = proof.instances.iter().map(transform_game_inst);
         let (instances, auxs) = itertools::process_results(results, |res| res.unzip())?;
         let proof = proof.with_new_instances(instances);
 
@@ -65,7 +66,9 @@ fn transform_game_inst(
         .expect("unwrapify transformation failed unexpectedly");
     let (comp, _) = resolveoracles::Transformation(&comp)
         .transform()
-        .expect("resolveoracles transformation failed unexpectedly");
+        .unwrap_or_else(|ResolutionError(failed_oracle_stmts)| {
+            panic!("error resolving oracles: {failed_oracle_stmts:?}")
+        });
     let (comp, _) = returnify::TransformNg
         .transform_game(&comp)
         .expect("returnify transformation failed unexpectedly");

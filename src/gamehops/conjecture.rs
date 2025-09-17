@@ -1,7 +1,7 @@
 use crate::parser::ast::GameInstanceName;
 
 #[derive(Debug, Clone)]
-pub(crate) struct Conjecture<'a> {
+pub struct Conjecture<'a> {
     left_game: GameInstanceName<'a>,
     right_game: GameInstanceName<'a>,
 }
