@@ -232,8 +232,8 @@ pub struct Proof<'a> {
     pub pkgs: Vec<Package>,
 }
 
-impl Proof<'_> {
-    pub(crate) fn with_new_instances(&self, instances: Vec<GameInstance>) -> Proof {
+impl<'a> Proof<'a> {
+    pub(crate) fn with_new_instances(&self, instances: Vec<GameInstance>) -> Proof<'a> {
         Proof {
             instances,
             ..self.clone()

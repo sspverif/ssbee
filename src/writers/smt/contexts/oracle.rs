@@ -98,7 +98,7 @@ impl<'a> OracleContext<'a> {
         }
     }
 
-    pub(crate) fn return_value_const_pattern(&self) -> ReturnValueConst {
+    pub(crate) fn return_value_const_pattern(&self) -> ReturnValueConst<'a> {
         let game_inst_name = self.game_inst_ctx().game_inst_name();
         let pkg_inst_name = self.pkg_inst_ctx().pkg_inst_name();
         let oracle_name = self.oracle_name();
@@ -112,19 +112,19 @@ impl<'a> OracleContext<'a> {
         }
     }
 
-    pub(crate) fn return_value_pattern(&self) -> ReturnValue {
+    pub(crate) fn return_value_pattern(&self) -> ReturnValue<'a> {
         ReturnValue {
             inner_type: self.return_type(),
         }
     }
 
-    pub(crate) fn oracle_arg_game_consts_pattern(&self) -> oracle_args::GameConstsPattern {
+    pub(crate) fn oracle_arg_game_consts_pattern(&self) -> oracle_args::GameConstsPattern<'a> {
         oracle_args::GameConstsPattern {
             game_name: self.game_inst_ctx().game().name(),
         }
     }
 
-    pub(crate) fn oracle_arg_game_state_pattern(&self) -> oracle_args::GameStatePattern {
+    pub(crate) fn oracle_arg_game_state_pattern(&self) -> oracle_args::GameStatePattern<'a> {
         oracle_args::GameStatePattern {
             game_name: self.game_inst_ctx().game().name(),
             game_params: &self.game_inst_ctx().game_inst().consts,
@@ -136,7 +136,7 @@ impl<'a> OracleContext<'a> {
 
 // Getters
 impl<'a> OracleContext<'a> {
-    fn return_type(&self) -> &Type {
+    fn return_type(&self) -> &'a Type {
         &self.oracle_def().sig.ty
     }
 

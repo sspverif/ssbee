@@ -56,48 +56,6 @@ impl super::GameTransform for TransformNg {
     }
 }
 
-mod old {
-    use super::super::Transformation as TransformationTrait;
-    use super::{returnify, Error};
-    use crate::package::Composition;
-    use crate::types::Type;
-
-    pub struct Transformation<'a>(pub &'a Composition);
-
-    impl TransformationTrait for Transformation<'_> {
-        type Err = Error;
-        type Aux = ();
-
-        fn transform(&self) -> Result<(Composition, ()), Error> {
-            let insts: Result<Vec<_>, _> = self
-                .0
-                .pkgs
-                .iter()
-                .map(|inst| {
-                    let mut newinst = inst.clone();
-                    for (i, oracle) in newinst.pkg.oracles.clone().iter().enumerate() {
-                        newinst.pkg.oracles[i].code = returnify(
-                            &oracle.code,
-                            oracle.file_pos,
-                            oracle.sig.ty == Type::Empty,
-                            &inst.name,
-                            &oracle.sig.name,
-                        )?;
-                    }
-                    Ok(newinst)
-                })
-                .collect();
-            Ok((
-                Composition {
-                    pkgs: insts?,
-                    ..self.0.clone()
-                },
-                (),
-            ))
-        }
-    }
-}
-
 pub fn returnify(
     cb: &CodeBlock,
     span: SourceSpan,

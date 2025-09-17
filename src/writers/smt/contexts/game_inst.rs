@@ -8,7 +8,6 @@ use crate::{
     writers::smt::{
         exprs::SmtExpr,
         names,
-        //partials::PartialsDatatype,
         patterns::{
             self, game_consts::GameConstsPattern, DatastructurePattern, GameStateDeclareInfo,
             GameStatePattern, GameStateSelector,
@@ -55,7 +54,9 @@ impl<'a> GameInstanceContext<'a> {
 
 // Patterns
 impl<'a> GameInstanceContext<'a> {
-    pub(crate) fn oracle_arg_game_state_pattern(&self) -> patterns::oracle_args::GameStatePattern {
+    pub(crate) fn oracle_arg_game_state_pattern(
+        &self,
+    ) -> patterns::oracle_args::GameStatePattern<'a> {
         patterns::oracle_args::GameStatePattern {
             game_name: self.game_name(),
             game_params: self.game_params(),
@@ -75,7 +76,7 @@ impl<'a> GameInstanceContext<'a> {
         GameConstsPattern { game_name }
     }
 
-    fn game_state_declare_info(&self, sample_info: &'a SampleInfo) -> GameStateDeclareInfo {
+    fn game_state_declare_info(&self, sample_info: &'a SampleInfo) -> GameStateDeclareInfo<'a> {
         let game_inst = self.game_inst;
         GameStateDeclareInfo {
             game_inst,
