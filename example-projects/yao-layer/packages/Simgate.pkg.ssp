@@ -38,7 +38,7 @@ package Simgate {
         temp <- invoke GETAIN(r);
         Sr[true] <- Some(temp);
         temp <- invoke GETINAIN(r);
-        Sr[true] <- Some(temp);
+        Sr[false] <- Some(temp);
         temp <- invoke GETAOUT(j);
         Sj[false] <- Some(temp);
         dl <- false;
