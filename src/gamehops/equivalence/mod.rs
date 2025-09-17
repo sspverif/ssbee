@@ -340,7 +340,7 @@ impl<'a> EquivalenceContext<'a> {
          *   - for $oracle in $game_inst.non-split-exports
          *     - partial return = $oracle(state, args...)
          *
-         * Jan's thoughts on the design of the next iteration of this:
+         * Thoughts on the design of the next iteration of this:
          *
          * What can go wrong here?
          *

@@ -273,7 +273,7 @@ impl<'a> CompositionSmtWriter<'a> {
      * log: okay, looks like i have removed a lot of instances where this is a problem. now
      *      this happens when _storing_ something in the gamestate variable. but i'll call it a
      *      night for now :)
-     * log: new day, now together with christoph!
+     * log: new day!
      *      we have started migrating the nonsplit return to also just have a single game state.
      *      that should make things simpler, hopefully!
      *      now it fails at the return statement below again

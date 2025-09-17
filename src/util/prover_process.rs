@@ -179,24 +179,6 @@ impl Communicator {
         )?))
     }
 
-    pub fn new_debug_with_transcript<W: std::io::Write + Send + Sync + 'static>(
-        transcript: W,
-    ) -> Result<Self> {
-        let mut cmd = std::process::Command::new("sh");
-        cmd.args([
-            "/home/keks/academia/ssp-tools/sspds-rs/write_to.sh",
-            "debug_out",
-        ])
-        .stdin(std::process::Stdio::piped())
-        .stdout(std::process::Stdio::piped())
-        .stderr(std::process::Stdio::inherit());
-
-        Ok(Self(process::Communicator::new_from_cmd(
-            cmd,
-            Some(transcript),
-        )?))
-    }
-
     pub fn get_model(&mut self) -> Result<String> {
         writeln!(self, "(get-model)")?;
         self.close();
