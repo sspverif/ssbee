@@ -154,8 +154,8 @@ proof Yao {
                 lemmas {
                     aborts: []
                     equal-aborts: [aborts]
+                    invariant: [no-abort]
                     same-output: [no-abort]
-                    invariant-GBLG: [no-abort]
                 }
             }
         }

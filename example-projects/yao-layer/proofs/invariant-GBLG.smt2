@@ -29,7 +29,20 @@
    (scr-0 Int)
    (scr-1 Int))
   Bool
-  false)
+  (or (and (= id-0 id-1 0)
+           (= base-ctr-0 scr-0)
+           (= base-ctr-1 scr-1))
+      (and (= id-0 id-1 1)
+           (= base-ctr-0 scr-0)
+           (= base-ctr-1 scr-1))
+      (and (= id-0 (+ id-1 2) 6)
+           (= base-ctr-0 scr-0)
+           (= base-ctr-1 scr-1))
+      (and (= id-0 (+ id-1 2) 7)
+           (= base-ctr-0 scr-0)
+           (= base-ctr-1 scr-1))))
+
+
 
 (define-fun randomness-mapping-GETKEYSIN
   ((base-ctr-0 Int)
@@ -126,8 +139,9 @@
             (Right-Bottom-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Right-Keys-Bottom)))
 
     (and
-     (= Pkg-Left-Keys-Top Pkg-Right-Keys-Top)
-     (= Pkg-Left-Keys-Bottom Pkg-Right-Keys-Bottom)
+     (= Left-Top-T Right-Top-T)
+     (= Left-Top-z Right-Top-z)
+     (= Left-Bottom-T Right-Bottom-T)
 
      (wellformed-T Left-Top-T)
      (wellformed-T Right-Top-T)
