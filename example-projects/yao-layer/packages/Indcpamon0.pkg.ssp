@@ -1,7 +1,4 @@
 package Indcpamon0 {
-    types {
-    }
-
     params {
         n: Integer,
         m: Integer,

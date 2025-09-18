@@ -1,7 +1,4 @@
 package Red {
-    types {
-    }
-
     params {
         n: Integer,
         m: Integer,

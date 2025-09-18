@@ -7,9 +7,6 @@ package EncSing0 {
         encm: fn Bits(n),Bits(m),Bits(n) -> Bits(p),
     }
 
-    state {
-    }
-
     import oracles {
         GETKEYSIN() -> Table(Bool, Bits(n)),
     }
