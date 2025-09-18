@@ -9,9 +9,6 @@ package Simgate {
         zerom: Bits(m),
     }
 
-    state {
-    }
-
     import oracles {
         GETAIN(h: Integer) -> Bits(n),
         GETINAIN(h: Integer) -> Bits(n),

@@ -3,9 +3,6 @@ package Lev {
         n: Integer,
     }
 
-    state {
-    }
-
     import oracles {
         GETBIT(h: Integer) -> Bool,
         SETBIT(h: Integer, zz: Bool),
