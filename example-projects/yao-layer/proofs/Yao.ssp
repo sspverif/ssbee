@@ -137,7 +137,7 @@ proof Yao {
             }
             GETKEYSIN: {
                 invariant: [
-                    ./invariant-GBLG.smt2
+                    ./proofs/invariant-GBLG.smt2
                 ]
 
                 lemmas {
@@ -152,14 +152,10 @@ proof Yao {
                 ]
 
                 lemmas {
-                    equal-aborts: []
-                    right-all-aborts: []
-                    right-all-aborts-inverse: []
-                    left-all-aborts: []
-                    left-inverse-all-aborts: []
-                    aborts-equal: [ left-all-aborts , left-inverse-all-aborts , right-all-aborts , right-all-aborts-inverse ]
-                    same-output: [no-abort , left-all-aborts , left-inverse-all-aborts, right-all-aborts, right-all-aborts-inverse]
-                    invariant-GBLG: [no-abort , left-all-aborts , left-inverse-all-aborts, right-all-aborts, right-all-aborts-inverse]
+                    aborts: []
+                    equal-aborts: [aborts]
+                    same-output: [no-abort]
+                    invariant-GBLG: [no-abort]
                 }
             }
         }
