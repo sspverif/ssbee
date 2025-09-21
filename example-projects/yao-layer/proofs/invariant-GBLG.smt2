@@ -38,9 +38,9 @@
         (Pkg-Keys-Top (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> <<game-state-Left_inst-old>>)))
     (let ((zb (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Keys-Bottom))
           (zt (<pkg-state-GenericKeys-<$<!n!>$>-z> Pkg-Keys-Top)))
-      (let ((zr (maybe-get (select zb <arg-GBLG-r>)))
-            (zl (maybe-get (select zb <arg-GBLG-l>)))
-            (zj (maybe-get (select zt <arg-GBLG-j>))))
+      (let ((zr (maybe-get (select zt <arg-GBLG-r>)))
+            (zl (maybe-get (select zt <arg-GBLG-l>)))
+            (zj (maybe-get (select zb <arg-GBLG-j>))))
   (or (and (= id-0 id-1 0)
            (= base-ctr-0 scr-0)
            (= base-ctr-1 scr-1))
@@ -63,7 +63,7 @@
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 0 1)) ; Select matching round
                        (* 2 (ite zr 0 2)) ; Select matching round
-                       (ite zr 0 1)))     ; Offset first/second ENCN call
+                       (ite zr 1 0)))     ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
       (and (= id-0 9)
            (= id-1 9)
@@ -77,7 +77,7 @@
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 1 0)) ; Select matching round
                        (* 2 (ite zr 0 2)) ; Select matching round
-                       (ite zr 0 1)))     ; Offset first/second ENCN call
+                       (ite zr 1 0)))     ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
       (and (= id-0 9)
            (= id-1 11)
@@ -91,7 +91,7 @@
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 0 1)) ; Select matching round
                        (* 2 (ite zr 2 0)) ; Select matching round
-                       (ite zr 1 0)))     ; Offset first/second ENCN call
+                       (ite zr 0 1)))     ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
       (and (= id-0 9)
            (= id-1 13)
@@ -105,7 +105,7 @@
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 1 0)) ; Select matching round
                        (* 2 (ite zr 2 0)) ; Select matching round
-                       (ite zr 1 0)))     ; Offset first/second ENCN call
+                       (ite zr 0 1)))     ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
       (and (= id-0 9)
            (= id-1 15)
