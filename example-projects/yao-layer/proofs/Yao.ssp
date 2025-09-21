@@ -138,7 +138,7 @@ proof Yao {
         equivalence LeftDebug_inst RightDebug_inst {
             GETAOUT: {
                 invariant: [
-                    ./proofs/invariant-GBLG.smt2
+                    ./proofs/invariant-GBLG-Debug.smt2
                 ]
 
                 lemmas {
@@ -149,7 +149,7 @@ proof Yao {
             }
             SETBIT: {
                 invariant: [
-                    ./proofs/invariant-GBLG.smt2
+                    ./proofs/invariant-GBLG-Debug.smt2
                 ]
 
                 lemmas {
@@ -160,7 +160,7 @@ proof Yao {
             }
             GETKEYSIN: {
                 invariant: [
-                    ./proofs/invariant-GBLG.smt2
+                    ./proofs/invariant-GBLG-Debug.smt2
                 ]
 
                 lemmas {
@@ -171,7 +171,7 @@ proof Yao {
             }
             GBLG: {
                 invariant: [
-                    ./proofs/invariant-GBLG.smt2
+                    ./proofs/invariant-GBLG-Debug.smt2
                 ]
 
                 lemmas {
