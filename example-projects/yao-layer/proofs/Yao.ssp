@@ -56,7 +56,30 @@ proof Yao {
             encn: encn,
         }
     }
+        instance LeftDebug_inst = LeftDebug {
+        params {
+            n: n,
+            m: m,
+            p: p,
+            zerom: zerom,
+            zeron: zeron,
+            encm: encm,
+            encn: encn,
+        }
+    }
     instance Right_inst = Right {
+        params {
+            n: n,
+            m: m,
+            p: p,
+            zerom: zerom,
+            zeron: zeron,
+            encm: encm,
+            encn: encn,
+        }
+    }
+
+    instance RightDebug_inst = RightDebug {
         params {
             n: n,
             m: m,
@@ -111,6 +134,54 @@ proof Yao {
             }
         }
 
+
+        equivalence LeftDebug_inst RightDebug_inst {
+            GETAOUT: {
+                invariant: [
+                    ./proofs/invariant-GBLG.smt2
+                ]
+
+                lemmas {
+                    equal-aborts: []
+                    invariant:    [no-abort]
+                    same-output:  [no-abort]
+                }
+            }
+            SETBIT: {
+                invariant: [
+                    ./proofs/invariant-GBLG.smt2
+                ]
+
+                lemmas {
+                    equal-aborts: []
+                    invariant:    [no-abort]
+                    same-output:  [no-abort]
+                }
+            }
+            GETKEYSIN: {
+                invariant: [
+                    ./proofs/invariant-GBLG.smt2
+                ]
+
+                lemmas {
+                    equal-aborts: []
+                    invariant:    [no-abort]
+                    same-output:  [no-abort]
+                }
+            }
+            GBLG: {
+                invariant: [
+                    ./proofs/invariant-GBLG.smt2
+                ]
+
+                lemmas {
+                    aborts: []
+                    equal-aborts: [aborts]
+                    invariant: [no-abort]
+                    same-output: [no-abort]
+                }
+            }
+        }
 
         equivalence Left_inst Right_inst {
             GETAOUT: {
