@@ -19,9 +19,9 @@ package Enc1 {
         r <-$ Bits(n);
         /* c <-$ Bits(m); */
         if (d == z) {
-            c <- encn(Unwrap(K[z]), nzero, r);
+            c <- encn(Unwrap(K[d]), nzero, r);
         } else {
-            c <- encn(Unwrap(K[z]), none, r);
+            c <- encn(Unwrap(K[d]), none, r);
         }
         return c;
     }
@@ -32,9 +32,9 @@ package Enc1 {
         r <-$ Bits(n);
         /* c <-$ Bits(p); */
         if (d == z) {
-            c <- encm(Unwrap(K[z]), mzero, r);
+            c <- encm(Unwrap(K[d]), mzero, r);
         } else {
-            c <- encm(Unwrap(K[z]), mone, r);
+            c <- encm(Unwrap(K[d]), mone, r);
         }
         return c;
     }
