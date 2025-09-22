@@ -21,8 +21,8 @@
   (and
     (= scr-1 base-ctr-1) ; This means that the actual sampling has the same counter as the state counter initially.
     (= scr-0 base-ctr-0) ; This means that the actual sampling has the same counter as the state counter initially.
-    (= id-0  (sample-id "rand" "UsefulOracle" "0"))
-    (= id-1  (sample-id "rand" "UsefulOracle" "0"))))
+    (= id-0  (sample-id "rand" "UsefulOracle" "samplepoint"))
+    (= id-1  (sample-id "rand" "UsefulOracle" "samplepoint"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
