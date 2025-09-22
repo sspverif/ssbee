@@ -14,6 +14,10 @@ package Lev {
         zr <- invoke GETBIT(r);
         z <- Unwrap(op[(zl, zr)]);
         _ <- invoke SETBIT(j, z);
+        _op <- Unwrap(op[(false, false)]);
+        _op <- Unwrap(op[(false, true)]);
+        _op <- Unwrap(op[(true, false)]);
+        _op <- Unwrap(op[(true, true)]);
         return;
     }
 }

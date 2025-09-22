@@ -40,7 +40,6 @@ package Simgate {
         Sj[false] <- Some(temp);
         dl <- false;
         dr <- false;
-        _op <- Unwrap(op[(dl, dr)]);
         kl <- Unwrap(Sl[dl]);
         kr <- Unwrap(Sr[dr]);
         kj <- zeron;
@@ -54,7 +53,6 @@ package Simgate {
         C[cout] <- Some(true);
         dl <- true;
         dr <- false;
-        _op <- Unwrap(op[(dl, dr)]);
         kl <- Unwrap(Sl[dl]);
         kr <- Unwrap(Sr[dr]);
         kj <- zeron;
@@ -68,7 +66,6 @@ package Simgate {
         C[cout] <- Some(true);
         dl <- false;
         dr <- true;
-        _op <- Unwrap(op[(dl, dr)]);
         kl <- Unwrap(Sl[dl]);
         kr <- Unwrap(Sr[dr]);
         kj <- zeron;
@@ -82,7 +79,6 @@ package Simgate {
         C[cout] <- Some(true);
         dl <- true;
         dr <- true;
-        _op <- Unwrap(op[(dl, dr)]);
         kl <- Unwrap(Sl[dl]);
         kr <- Unwrap(Sr[dr]);
         kj <- zeron;
