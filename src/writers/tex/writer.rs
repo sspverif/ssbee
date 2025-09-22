@@ -316,7 +316,7 @@ impl<'a> BlockWriter<'a> {
                     unreachable!();
                 }
             }
-            Statement::Sample(ident, None, maybecnt, ty, _, _) => {
+            Statement::Sample(ident, None, maybecnt, ty, sample_name, _) => {
                 let cnt = maybecnt.expect("Expected samplified input");
 
                 writeln!(
@@ -324,11 +324,11 @@ impl<'a> BlockWriter<'a> {
                     "{}{} \\stackrel{{{}}}{{\\sample}} {}\\\\",
                     genindentation(indentation),
                     self.ident_to_tex(ident),
-                    cnt,
+                    sample_name.clone().unwrap_or(cnt.to_string()),
                     self.type_to_tex(ty)
                 )?;
             }
-            Statement::Sample(ident, Some(idxexpr), maybecnt, ty, _, _) => {
+            Statement::Sample(ident, Some(idxexpr), maybecnt, ty, sample_name, _) => {
                 let cnt = maybecnt.expect("Expected samplified input");
 
                 writeln!(
@@ -337,7 +337,7 @@ impl<'a> BlockWriter<'a> {
                     genindentation(indentation),
                     self.ident_to_tex(ident),
                     self.expression_to_tex(idxexpr),
-                    cnt,
+                    sample_name.clone().unwrap_or(cnt.to_string()),
                     self.type_to_tex(ty)
                 )?;
             }
