@@ -29,22 +29,22 @@ package Simgate {
         Sj <- new Table(Bool, Bits(n));
         _ <- invoke EVAL(j, l, r, op);
         temp <- invoke GETAIN(l);
-        Sl[true] <- Some(temp);
-        temp <- invoke GETINAIN(l);
         Sl[false] <- Some(temp);
+        temp <- invoke GETINAIN(l);
+        Sl[true] <- Some(temp);
         temp <- invoke GETAIN(r);
-        Sr[true] <- Some(temp);
-        temp <- invoke GETINAIN(r);
         Sr[false] <- Some(temp);
+        temp <- invoke GETINAIN(r);
+        Sr[true] <- Some(temp);
         temp <- invoke GETAOUT(j);
-        Sj[false] <- Some(temp);
+        Sj[true] <- Some(temp);
         dl <- false;
         dr <- false;
         kl <- Unwrap(Sl[dl]);
         kr <- Unwrap(Sr[dr]);
         kj <- zeron;
         if (not dl and not dr) {
-            kj <- Unwrap(Sj[false]);
+            kj <- Unwrap(Sj[true]);
         }
         rin <-$ Bits(n);
         rout <-$ Bits(n);
@@ -57,7 +57,7 @@ package Simgate {
         kr <- Unwrap(Sr[dr]);
         kj <- zeron;
         if (not dl and not dr) {
-            kj <- Unwrap(Sj[false]);
+            kj <- Unwrap(Sj[true]);
         }
         rin <-$ Bits(n);
         rout <-$ Bits(n);
@@ -83,7 +83,7 @@ package Simgate {
         kr <- Unwrap(Sr[dr]);
         kj <- zeron;
         if (not dl and not dr) {
-            kj <- Unwrap(Sj[false]);
+            kj <- Unwrap(Sj[true]);
         }
         rin <-$ Bits(n);
         rout <-$ Bits(n);
