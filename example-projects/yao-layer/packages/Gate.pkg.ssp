@@ -28,7 +28,7 @@ package Gate {
         kzero <- Unwrap(Z[bj]);
         czeroin <- invoke ENCN(l, bl, kzero, zeron);
         conein <- invoke ENCN(l, bl, zeron, zeron);
-        cout <- invoke ENCM(r, br, conein, czeroin);
+        cout <- invoke ENCM(r, br, czeroin, conein);
         C[cout] <- Some(true);
         bl <- true;
         br <- false;
@@ -36,7 +36,7 @@ package Gate {
         kzero <- Unwrap(Z[bj]);
         czeroin <- invoke ENCN(l, bl, kzero, zeron);
         conein <- invoke ENCN(l, bl, zeron, zeron);
-        cout <- invoke ENCM(r, br, conein, czeroin);
+        cout <- invoke ENCM(r, br, czeroin, conein);
         C[cout] <- Some(true);
         bl <- false;
         br <- true;
@@ -44,7 +44,7 @@ package Gate {
         kzero <- Unwrap(Z[bj]);
         czeroin <- invoke ENCN(l, bl, kzero, zeron);
         conein <- invoke ENCN(l, bl, zeron, zeron);
-        cout <- invoke ENCM(r, br, conein, czeroin);
+        cout <- invoke ENCM(r, br, czeroin, conein);
         C[cout] <- Some(true);
         bl <- true;
         br <- true;
@@ -52,7 +52,7 @@ package Gate {
         kzero <- Unwrap(Z[bj]);
         czeroin <- invoke ENCN(l, bl, kzero, zeron);
         conein <- invoke ENCN(l, bl, zeron, zeron);
-        cout <- invoke ENCM(r, br, conein, czeroin);
+        cout <- invoke ENCM(r, br, czeroin, conein);
         C[cout] <- Some(true);
         return C;
     }
