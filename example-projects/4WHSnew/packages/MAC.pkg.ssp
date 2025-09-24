@@ -24,8 +24,8 @@ package MAC {
     oracle Mac(handle: (Integer, Integer,Integer,Bits(256),Bits(256)),
                value: (Bits(256), Integer))
            -> Bits(256) {
+        assert (Keys[handle] != None);
         key <- Keys[handle];
-        assert not (key == None);
 
         (val1, val2) <- parse value;
         tag <- mac(Unwrap(key), val1, val2);
@@ -38,15 +38,14 @@ package MAC {
                   value: (Bits(256), Integer),
                   tag: Bits(256))
            -> Bool {
+        assert (Keys[handle] != None);
         key <- Keys[handle];
-        assert not (key == None);
 
         if b {
-            entry <- Values[(handle, value)];
-            if (entry == None) {
+            if (Values[(handle, value)] == None) {
                 return false;
             }
-            if (Unwrap(entry) != tag) {
+            if (Unwrap(Values[(handle, value)]) != tag) {
                 return false;
             }
             return true;
