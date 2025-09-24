@@ -134,55 +134,6 @@ proof Yao {
             }
         }
 
-
-        equivalence LeftDebug_inst RightDebug_inst {
-            GETAOUT: {
-                invariant: [
-                    ./proofs/invariant-GBLG-Debug.smt2
-                ]
-
-                lemmas {
-                    equal-aborts: []
-                    invariant:    [no-abort]
-                    same-output:  [no-abort]
-                }
-            }
-            SETBIT: {
-                invariant: [
-                    ./proofs/invariant-GBLG-Debug.smt2
-                ]
-
-                lemmas {
-                    equal-aborts: []
-                    invariant:    [no-abort]
-                    same-output:  [no-abort]
-                }
-            }
-            GETKEYSIN: {
-                invariant: [
-                    ./proofs/invariant-GBLG-Debug.smt2
-                ]
-
-                lemmas {
-                    equal-aborts: []
-                    invariant:    [no-abort]
-                    same-output:  [no-abort]
-                }
-            }
-            GBLG: {
-                invariant: [
-                    ./proofs/invariant-GBLG-Debug.smt2
-                ]
-
-                lemmas {
-                    aborts: []
-                    equal-aborts: [aborts]
-                    invariant: [no-abort]
-                    same-output: [no-abort]
-                }
-            }
-        }
-
         equivalence Left_inst Right_inst {
             GETAOUT: {
                 invariant: [
@@ -223,11 +174,10 @@ proof Yao {
                 ]
 
                 lemmas {
-                    outputs: [no-abort]
                     aborts: []
                     equal-aborts: [aborts]
                     invariant: [no-abort]
-                    same-output: [no-abort,outputs]
+                    same-output: [no-abort]
                 }
             }
         }

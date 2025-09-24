@@ -48,8 +48,8 @@ package Simgate {
         }
         rin <-$ Bits(n);
         rout <-$ Bits(n);
-        cin <- encn(kr, kj, rin);
-        cout <- encm(kl, cin, rout);
+        cin <- encn(kl, kj, rin);
+        cout <- encm(kr, cin, rout);
         C[cout] <- Some(true);
         dl <- true;
         dr <- false;
@@ -61,8 +61,8 @@ package Simgate {
         }
         rin <-$ Bits(n);
         rout <-$ Bits(n);
-        cin <- encn(kr, kj, rin);
-        cout <- encm(kl, cin, rout);
+        cin <- encn(kl, kj, rin);
+        cout <- encm(kr, cin, rout);
         C[cout] <- Some(true);
         dl <- false;
         dr <- true;
@@ -74,8 +74,8 @@ package Simgate {
         }
         rin <-$ Bits(n);
         rout <-$ Bits(n);
-        cin <- encn(kr, kj, rin);
-        cout <- encm(kl, cin, rout);
+        cin <- encn(kl, kj, rin);
+        cout <- encm(kr, cin, rout);
         C[cout] <- Some(true);
         dl <- true;
         dr <- true;
@@ -87,8 +87,8 @@ package Simgate {
         }
         rin <-$ Bits(n);
         rout <-$ Bits(n);
-        cin <- encn(kr, kj, rin);
-        cout <- encm(kl, cin, rout);
+        cin <- encn(kl, kj, rin);
+        cout <- encm(kr, cin, rout);
         C[cout] <- Some(true);
         return C;
     }
