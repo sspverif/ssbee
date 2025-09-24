@@ -1,8 +1,8 @@
 (define-fun randomness-mapping-GETAOUT
   ((base-ctr-0 Int)
    (base-ctr-1 Int)
-   (id-0  Int)
-   (id-1  Int)
+   (id-0  SampleId)
+   (id-1  SampleId)
    (scr-0 Int)
    (scr-1 Int))
   Bool
@@ -14,8 +14,8 @@
 (define-fun randomness-mapping-SETBIT
   ((base-ctr-0 Int)
    (base-ctr-1 Int)
-   (id-0  Int)
-   (id-1  Int)
+   (id-0  SampleId)
+   (id-1  SampleId)
    (scr-0 Int)
    (scr-1 Int))
   Bool
@@ -25,8 +25,8 @@
 (define-fun randomness-mapping-GBLG
   ((base-ctr-0 Int)
    (base-ctr-1 Int)
-   (id-0  Int)
-   (id-1  Int)
+   (id-0  SampleId)
+   (id-1  SampleId)
    (scr-0 Int)
    (scr-1 Int))
   Bool
@@ -37,16 +37,18 @@
       (let ((zr (not (maybe-get (select zt <arg-GBLG-r>))))
             (zl (not (maybe-get (select zt <arg-GBLG-l>))))
             (zj (maybe-get (select zb <arg-GBLG-j>))))
-  (or (and (= id-0 id-1 0)
+  (or (and (= id-0 id-1 (sample-id "keys_top" "GETAOUT" "1"))
            (= base-ctr-0 scr-0)
            (= base-ctr-1 scr-1))
-      (and (= id-0 id-1 1)
+      (and (= id-0 id-1 (sample-id "keys_top" "GETAOUT" "2"))
            (= base-ctr-0 scr-0)
            (= base-ctr-1 scr-1))
-      (and (= id-0 (+ id-1 2) 6)
+      (and (= id-0 (sample-id "keys_bottom" "GETKEYSOUT" "1"))
+           (= id-1 (sample-id "keys_bottom" "GETAOUT" "1"))
            (= base-ctr-0 scr-0)
            (= base-ctr-1 scr-1))
-      (and (= id-0 (+ id-1 2) 7)
+      (and (= id-0 (sample-id "keys_bottom" "GETKEYSOUT" "2"))
+           (= id-1 (sample-id "keys_bottom" "GETAOUT" "2"))
            (= base-ctr-0 scr-0)
            (= base-ctr-1 scr-1))
       ;; Iteration 0
@@ -54,57 +56,57 @@
       ;; Right: false, false
       ;; Left: Kl[zl], Kr[zr]
       ;; Left: 
-      (and (= id-0 8)
-           (= id-1 8)
+      (and (= id-0 (sample-id "enc" "ENCN" "1"))
+           (= id-1 (sample-id "simgate" "GBLG" "rin_round_0"))
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 0 1)) ; Select matching round
                        (* 2 (ite zr 0 2)) ; Select matching round
                        0)); (ite zr 1 0)))     ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
-      (and (= id-0 9)
-           (= id-1 9)
+      (and (= id-0 (sample-id "enc" "ENCM" "1"))
+           (= id-1 (sample-id "simgate" "GBLG" "rout_round_0"))
            (= scr-0 (+ base-ctr-0
                        (ite zl 0 1)   ; Select matching round
                        (ite zr 0 2))) ; Select matching round
            (= base-ctr-1 scr-1))
       ;; Iteration 1
-      (and (= id-0 8)
-           (= id-1 10)
+      (and (= id-0 (sample-id "enc" "ENCN" "1"))
+           (= id-1 (sample-id "simgate" "GBLG" "rin_round_1"))
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 1 0)) ; Select matching round
                        (* 2 (ite zr 0 2)) ; Select matching round
                        0)); (ite zr 1 0)))     ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
-      (and (= id-0 9)
-           (= id-1 11)
+      (and (= id-0 (sample-id "enc" "ENCM" "1"))
+           (= id-1 (sample-id "simgate" "GBLG" "rout_round_1"))
            (= scr-0 (+ base-ctr-0
                        (ite zl 1 0)   ; Select matching round
                        (ite zr 0 2))) ; Select matching round
            (= base-ctr-1 scr-1))
       ;; iteration 2
-      (and (= id-0 8)
-           (= id-1 12)
+      (and (= id-0 (sample-id "enc" "ENCN" "1"))
+           (= id-1 (sample-id "simgate" "GBLG" "rin_round_2"))
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 0 1)) ; Select matching round
                        (* 2 (ite zr 2 0)) ; Select matching round
                        1));(ite zr 0 1)))     ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
-      (and (= id-0 9)
-           (= id-1 13)
+      (and (= id-0 (sample-id "enc" "ENCM" "1"))
+           (= id-1 (sample-id "simgate" "GBLG" "rout_round_2"))
            (= scr-0 (+ base-ctr-0
                        (ite zl 0 1)   ; Select matching round
                        (ite zr 2 0))) ; Select matching round
            (= base-ctr-1 scr-1))
       ;; iteration 3
-      (and (= id-0 8)
-           (= id-1 14)
+      (and (= id-0 (sample-id "enc" "ENCN" "1"))
+           (= id-1 (sample-id "simgate" "GBLG" "rin_round_3"))
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 1 0)) ; Select matching round
                        (* 2 (ite zr 2 0)) ; Select matching round
                        1));(ite zr 0 1)))     ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
-      (and (= id-0 9)
-           (= id-1 15)
+      (and (= id-0 (sample-id "enc" "ENCM" "1"))
+           (= id-1 (sample-id "simgate" "GBLG" "rout_round_3"))
            (= scr-0 (+ base-ctr-0
                        (ite zl 1 0)   ; Select matching round
                        (ite zr 2 0))) ; Select matching round
@@ -114,8 +116,8 @@
 (define-fun randomness-mapping-GETKEYSIN
   ((base-ctr-0 Int)
    (base-ctr-1 Int)
-   (id-0  Int)
-   (id-1  Int)
+   (id-0  SampleId)
+   (id-1  SampleId)
    (scr-0 Int)
    (scr-1 Int))
   Bool

@@ -46,8 +46,8 @@ package Simgate {
         if (not dl and not dr) {
             kj <- Unwrap(Sj[true]);
         }
-        rin <-$ Bits(n);
-        rout <-$ Bits(n);
+        rin <-$ Bits(n) sample-name rin_round_0;
+        rout <-$ Bits(n) sample-name rout_round_0;
         cin <- encn(kl, kj, rin);
         cout <- encm(kr, cin, rout);
         C[cout] <- Some(true);
@@ -59,8 +59,8 @@ package Simgate {
         if (not dl and not dr) {
             kj <- Unwrap(Sj[true]);
         }
-        rin <-$ Bits(n);
-        rout <-$ Bits(n);
+        rin <-$ Bits(n) sample-name rin_round_1;
+        rout <-$ Bits(n) sample-name rout_round_1;
         cin <- encn(kl, kj, rin);
         cout <- encm(kr, cin, rout);
         C[cout] <- Some(true);
@@ -72,8 +72,8 @@ package Simgate {
         if (not dl and not dr) {
             kj <- Unwrap(Sj[true]);
         }
-        rin <-$ Bits(n);
-        rout <-$ Bits(n);
+        rin <-$ Bits(n) sample-name rin_round_2;
+        rout <-$ Bits(n) sample-name rout_round_2;
         cin <- encn(kl, kj, rin);
         cout <- encm(kr, cin, rout);
         C[cout] <- Some(true);
@@ -85,8 +85,8 @@ package Simgate {
         if (not dl and not dr) {
             kj <- Unwrap(Sj[true]);
         }
-        rin <-$ Bits(n);
-        rout <-$ Bits(n);
+        rin <-$ Bits(n) sample-name rin_round_3;
+        rout <-$ Bits(n) sample-name rout_round_3;
         cin <- encn(kl, kj, rin);
         cout <- encm(kr, cin, rout);
         C[cout] <- Some(true);
