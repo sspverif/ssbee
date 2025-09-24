@@ -22,24 +22,6 @@
   false)
 
 
-
-;;(declare-const <<<christoph-z-top>>> Int)
-;;(assert (= <<<christoph-z-top>>> (<pkg-state-GenericKeys-<$<!n!>$>-z> (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> <<game-state-Left_inst-old>>))))
-
-
-(assert (= (maybe-get (select (<pkg-state-GenericKeys-<$<!n!>$>-z> (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> <<game-state-Left_inst-old>>))
-                              <arg-GBLG-r>))
-           false))
-
-
-(assert (= (maybe-get (select (<pkg-state-GenericKeys-<$<!n!>$>-z> (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> <<game-state-Left_inst-old>>))
-                              <arg-GBLG-l>))
-           false))
-
-;; <arg-GBLG-r>
-;; <<game-state-Left_inst-old>>
-;;
-;; keys_bottom.z[r]
 (define-fun randomness-mapping-GBLG
   ((base-ctr-0 Int)
    (base-ctr-1 Int)
@@ -48,86 +30,85 @@
    (scr-0 Int)
    (scr-1 Int))
   Bool
-  true)
-  ;; (let ((Pkg-Keys-Bottom (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_bottom> <<game-state-Left_inst-old>>))
-  ;;       (Pkg-Keys-Top (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> <<game-state-Left_inst-old>>)))
-  ;;   (let ((zb (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Keys-Bottom))
-  ;;         (zt (<pkg-state-GenericKeys-<$<!n!>$>-z> Pkg-Keys-Top)))
-  ;;     (let ((zr (maybe-get (select zt <arg-GBLG-r>)))
-  ;;           (zl (maybe-get (select zt <arg-GBLG-l>)))
-  ;;           (zj (maybe-get (select zb <arg-GBLG-j>))))
-  ;; (or (and (= id-0 id-1 0)
-  ;;          (= base-ctr-0 scr-0)
-  ;;          (= base-ctr-1 scr-1))
-  ;;     (and (= id-0 id-1 1)
-  ;;          (= base-ctr-0 scr-0)
-  ;;          (= base-ctr-1 scr-1))
-  ;;     (and (= id-0 (+ id-1 2) 6)
-  ;;          (= base-ctr-0 scr-0)
-  ;;          (= base-ctr-1 scr-1))
-  ;;     (and (= id-0 (+ id-1 2) 7)
-  ;;          (= base-ctr-0 scr-0)
-  ;;          (= base-ctr-1 scr-1))
-  ;;     ;; Iteration 0
-  ;;     ;; Right: First iteration 
-  ;;     ;; Right: false, false
-  ;;     ;; Left: Kl[zl], Kr[zr]
-  ;;     ;; Left: 
-  ;;     (and (= id-0 8)
-  ;;          (= id-1 8)
-  ;;          (= scr-0 (+ base-ctr-0
-  ;;                      (* 2 (ite zl 0 1)) ; Select matching round
-  ;;                      (* 2 (ite zr 0 2)) ; Select matching round
-  ;;                      0)); (ite zr 1 0)))     ; Offset first/second ENCN call
-  ;;          (= base-ctr-1 scr-1))
-  ;;     (and (= id-0 9)
-  ;;          (= id-1 9)
-  ;;          (= scr-0 (+ base-ctr-0
-  ;;                      (ite zl 0 1)   ; Select matching round
-  ;;                      (ite zr 0 2))) ; Select matching round
-  ;;          (= base-ctr-1 scr-1))
-  ;;     ;; Iteration 1
-  ;;     (and (= id-0 8)
-  ;;          (= id-1 10)
-  ;;          (= scr-0 (+ base-ctr-0
-  ;;                      (* 2 (ite zl 1 0)) ; Select matching round
-  ;;                      (* 2 (ite zr 0 2)) ; Select matching round
-  ;;                      0)); (ite zr 1 0)))     ; Offset first/second ENCN call
-  ;;          (= base-ctr-1 scr-1))
-  ;;     (and (= id-0 9)
-  ;;          (= id-1 11)
-  ;;          (= scr-0 (+ base-ctr-0
-  ;;                      (ite zl 1 0)   ; Select matching round
-  ;;                      (ite zr 0 2))) ; Select matching round
-  ;;          (= base-ctr-1 scr-1))
-  ;;     ;; iteration 2
-  ;;     (and (= id-0 8)
-  ;;          (= id-1 12)
-  ;;          (= scr-0 (+ base-ctr-0
-  ;;                      (* 2 (ite zl 0 1)) ; Select matching round
-  ;;                      (* 2 (ite zr 2 0)) ; Select matching round
-  ;;                      1));(ite zr 0 1)))     ; Offset first/second ENCN call
-  ;;          (= base-ctr-1 scr-1))
-  ;;     (and (= id-0 9)
-  ;;          (= id-1 13)
-  ;;          (= scr-0 (+ base-ctr-0
-  ;;                      (ite zl 0 1)   ; Select matching round
-  ;;                      (ite zr 2 0))) ; Select matching round
-  ;;          (= base-ctr-1 scr-1))
-  ;;     ;; iteration 3
-  ;;     (and (= id-0 8)
-  ;;          (= id-1 14)
-  ;;          (= scr-0 (+ base-ctr-0
-  ;;                      (* 2 (ite zl 1 0)) ; Select matching round
-  ;;                      (* 2 (ite zr 2 0)) ; Select matching round
-  ;;                      1));(ite zr 0 1)))     ; Offset first/second ENCN call
-  ;;          (= base-ctr-1 scr-1))
-  ;;     (and (= id-0 9)
-  ;;          (= id-1 15)
-  ;;          (= scr-0 (+ base-ctr-0
-  ;;                      (ite zl 1 0)   ; Select matching round
-  ;;                      (ite zr 2 0))) ; Select matching round
-  ;;          (= base-ctr-1 scr-1)))))))
+  (let ((Pkg-Keys-Bottom (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_bottom> <<game-state-Left_inst-old>>))
+        (Pkg-Keys-Top (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> <<game-state-Left_inst-old>>)))
+    (let ((zb (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Keys-Bottom))
+          (zt (<pkg-state-GenericKeys-<$<!n!>$>-z> Pkg-Keys-Top)))
+      (let ((zr (not (maybe-get (select zt <arg-GBLG-r>))))
+            (zl (not (maybe-get (select zt <arg-GBLG-l>))))
+            (zj (maybe-get (select zb <arg-GBLG-j>))))
+  (or (and (= id-0 id-1 0)
+           (= base-ctr-0 scr-0)
+           (= base-ctr-1 scr-1))
+      (and (= id-0 id-1 1)
+           (= base-ctr-0 scr-0)
+           (= base-ctr-1 scr-1))
+      (and (= id-0 (+ id-1 2) 6)
+           (= base-ctr-0 scr-0)
+           (= base-ctr-1 scr-1))
+      (and (= id-0 (+ id-1 2) 7)
+           (= base-ctr-0 scr-0)
+           (= base-ctr-1 scr-1))
+      ;; Iteration 0
+      ;; Right: First iteration 
+      ;; Right: false, false
+      ;; Left: Kl[zl], Kr[zr]
+      ;; Left: 
+      (and (= id-0 8)
+           (= id-1 8)
+           (= scr-0 (+ base-ctr-0
+                       (* 2 (ite zl 0 1)) ; Select matching round
+                       (* 2 (ite zr 0 2)) ; Select matching round
+                       0)); (ite zr 1 0)))     ; Offset first/second ENCN call
+           (= base-ctr-1 scr-1))
+      (and (= id-0 9)
+           (= id-1 9)
+           (= scr-0 (+ base-ctr-0
+                       (ite zl 0 1)   ; Select matching round
+                       (ite zr 0 2))) ; Select matching round
+           (= base-ctr-1 scr-1))
+      ;; Iteration 1
+      (and (= id-0 8)
+           (= id-1 10)
+           (= scr-0 (+ base-ctr-0
+                       (* 2 (ite zl 1 0)) ; Select matching round
+                       (* 2 (ite zr 0 2)) ; Select matching round
+                       0)); (ite zr 1 0)))     ; Offset first/second ENCN call
+           (= base-ctr-1 scr-1))
+      (and (= id-0 9)
+           (= id-1 11)
+           (= scr-0 (+ base-ctr-0
+                       (ite zl 1 0)   ; Select matching round
+                       (ite zr 0 2))) ; Select matching round
+           (= base-ctr-1 scr-1))
+      ;; iteration 2
+      (and (= id-0 8)
+           (= id-1 12)
+           (= scr-0 (+ base-ctr-0
+                       (* 2 (ite zl 0 1)) ; Select matching round
+                       (* 2 (ite zr 2 0)) ; Select matching round
+                       1));(ite zr 0 1)))     ; Offset first/second ENCN call
+           (= base-ctr-1 scr-1))
+      (and (= id-0 9)
+           (= id-1 13)
+           (= scr-0 (+ base-ctr-0
+                       (ite zl 0 1)   ; Select matching round
+                       (ite zr 2 0))) ; Select matching round
+           (= base-ctr-1 scr-1))
+      ;; iteration 3
+      (and (= id-0 8)
+           (= id-1 14)
+           (= scr-0 (+ base-ctr-0
+                       (* 2 (ite zl 1 0)) ; Select matching round
+                       (* 2 (ite zr 2 0)) ; Select matching round
+                       1));(ite zr 0 1)))     ; Offset first/second ENCN call
+           (= base-ctr-1 scr-1))
+      (and (= id-0 9)
+           (= id-1 15)
+           (= scr-0 (+ base-ctr-0
+                       (ite zl 1 0)   ; Select matching round
+                       (ite zr 2 0))) ; Select matching round
+           (= base-ctr-1 scr-1)))))))
 
 
 (define-fun randomness-mapping-GETKEYSIN
@@ -228,8 +209,7 @@
                                                    rin)))
                            (let ((cout (<<func-encm>> right-inactive cin rout)))
                              (= (select right-retval cout)
-                                (mk-some true))))))
-))))))
+                                (mk-some true))))))))))))
 
 (define-fun aout-key-package
     ((T (Array Int (Maybe (Array Bool (Maybe Bits_n)))))
