@@ -101,6 +101,7 @@ impl Files {
 #[derive(Debug)]
 pub struct Project<'a> {
     root_dir: PathBuf,
+    packages: HashMap<String, Package>,
     games: HashMap<String, Composition>,
     proofs: HashMap<String, Proof<'a>>,
 }
@@ -110,6 +111,7 @@ impl<'a> Project<'a> {
     pub(crate) fn empty() -> Self {
         Self {
             root_dir: PathBuf::new(),
+            packages: HashMap::new(),
             games: HashMap::new(),
             proofs: HashMap::new(),
         }
@@ -149,6 +151,7 @@ impl<'a> Project<'a> {
         let proofs = load::proofs(&files.proofs, packages.to_owned(), games.to_owned())?;
 
         let project = Project {
+            packages,
             root_dir,
             games,
             proofs,
@@ -261,6 +264,30 @@ impl<'a> Project<'a> {
             }
 
             ui.finish_proof(&proof.name);
+        }
+
+        Ok(())
+    }
+
+    pub fn python(&self) -> Result<()> {
+        let mut path = self.root_dir.clone();
+        path.push("_build/python/");
+        std::fs::create_dir_all(&path)?;
+
+        println!("from dataclasses import dataclass");
+
+        for (name, pkg) in &self.packages {
+            use crate::writers::python::patterns::game_state::*;
+
+            println!("{}", DataclassWriter(PackageStatePattern::new(pkg)));
+        }
+
+        for (name, proof) in &self.proofs {
+            for game_inst in &proof.instances {
+                use crate::writers::python::patterns::game_state::*;
+
+                println!("{}", DataclassWriter(GameStatePattern::new(game_inst)));
+            }
         }
 
         Ok(())
