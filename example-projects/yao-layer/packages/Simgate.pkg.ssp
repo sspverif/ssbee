@@ -70,7 +70,7 @@ package Simgate {
         kr <- Unwrap(Sr[dr]);
         kj <- zeron;
         if (not dl and not dr) {
-            kj <- Unwrap(Sj[false]);
+            kj <- Unwrap(Sj[true]);
         }
         rin <-$ Bits(n);
         rout <-$ Bits(n);
