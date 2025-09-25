@@ -7,8 +7,8 @@
    (scr-1 Int))
   Bool
   (and
-   ;;(= base-ctr-0 scr-0)
-   ;;(= base-ctr-1 scr-1)
+   (= base-ctr-0 scr-0)
+   (= base-ctr-1 scr-1)
    (= id-0 id-1)))
 
 (define-fun randomness-mapping-SETBIT
