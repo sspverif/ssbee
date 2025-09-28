@@ -23,7 +23,7 @@ package Prot_NoPrf {
         assert (acc  == None );              /* session is still running           */
         assert (mess == 0);
 		
-		ni <-$ Bits(256);
+		ni <-$ Bits(256) sample-name id2;
 		
 		return ((U,u,V,ltk,None,Some(ni),nr,kmac,sid,1),
 		        (ni));
@@ -43,7 +43,7 @@ package Prot_NoPrf {
         assert (acc  == None );              /* session is still running           */
         assert (mess == 0);
 
-		nr         <-$ Bits(256);
+		nr         <-$ Bits(256) sample-name id3;
         kmac       <- invoke Eval(ltk,U,V,ni,nr,false); /* need role agreement here, to be fixed */
         tau        <-  mac(kmac,nr,2);
         sid        <- (U,V,ni,nr,tau);

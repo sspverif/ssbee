@@ -187,7 +187,7 @@ oracle Test(ctr: Integer) -> Bits(256)
     RevTested[Unwrap(sid)] <- Some(true);
 	
     if b {
-	  k <-$ Bits(256);
+	  k <-$ Bits(256) sample-name id4;
 	} else {
        if u {
          k <- invoke Eval(ltk,V,U,Unwrap(ni),Unwrap(nr) ,true);
