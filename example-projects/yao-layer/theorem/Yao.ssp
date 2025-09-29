@@ -1,4 +1,4 @@
-proof Yao {
+theorem Yao {
     const w: Integer;
     const n: Integer;
     const m: Integer;
@@ -56,30 +56,7 @@ proof Yao {
             encn: encn,
         }
     }
-        instance LeftDebug_inst = LeftDebug {
-        params {
-            n: n,
-            m: m,
-            p: p,
-            zerom: zerom,
-            zeron: zeron,
-            encm: encm,
-            encn: encn,
-        }
-    }
     instance Right_inst = Right {
-        params {
-            n: n,
-            m: m,
-            p: p,
-            zerom: zerom,
-            zeron: zeron,
-            encm: encm,
-            encn: encn,
-        }
-    }
-
-    instance RightDebug_inst = RightDebug {
         params {
             n: n,
             m: m,
@@ -137,7 +114,7 @@ proof Yao {
         equivalence Left_inst Right_inst {
             GETAOUT: {
                 invariant: [
-                    ./proofs/invariant-GBLG.smt2
+                    ./theorem/invariant-GBLG.smt2
                 ]
 
                 lemmas {
@@ -148,7 +125,7 @@ proof Yao {
             }
             SETBIT: {
                 invariant: [
-                    ./proofs/invariant-GBLG.smt2
+                    ./theorem/invariant-GBLG.smt2
                 ]
 
                 lemmas {
@@ -159,7 +136,7 @@ proof Yao {
             }
             GETKEYSIN: {
                 invariant: [
-                    ./proofs/invariant-GBLG.smt2
+                    ./theorem/invariant-GBLG.smt2
                 ]
 
                 lemmas {
@@ -170,7 +147,7 @@ proof Yao {
             }
             GBLG: {
                 invariant: [
-                    ./proofs/invariant-GBLG.smt2
+                    ./theorem/invariant-GBLG.smt2
                 ]
 
                 lemmas {
@@ -182,43 +159,6 @@ proof Yao {
             }
         }
         
-    equivalence Indcpamod0_inst Indcpamon0_inst {
-
-          SETBIT: {
-                invariant: [
-                    ./invariant-Indcpa0.smt2
-                ]
-
-                lemmas {
-                    equal-aborts: []
-                    invariant:    [no-abort]
-                    same-output:  [no-abort]
-                }
-            }
-
-            GETAOUT: {
-                invariant: [
-                    ./invariant-Indcpa0.smt2
-                ]
-                lemmas {
-                    equal-aborts: []
-                    invariant:    [no-abort]
-                    same-output:  [no-abort]
-                }
-            }
-
-            ENCN: {
-                invariant: [
-                    ./invariant-Indcpa0.smt2
-                ]
-                lemmas {
-                    equal-aborts: []
-                    invariant:    [no-abort]
-                    same-output:  [no-abort]
-                }
-            }             
-        }
-
 }
 
 }

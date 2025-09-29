@@ -7,7 +7,7 @@ composition Right {
     const encn: fn Bits(n),Bits(n),Bits(n) -> Bits(m);
     const encm: fn Bits(n),Bits(m),Bits(n) -> Bits(p);
 
-    instance keys_top = GenericKeys {
+    instance keys_top = Keys {
         params {
             n: n,
         }

@@ -7,11 +7,10 @@ composition Indcpa1 {
     const encn: fn Bits(n),Bits(n),Bits(n) -> Bits(m);
     const encm: fn Bits(n),Bits(m),Bits(n) -> Bits(p);
 
-    instance keys_top = GenericKeys {
+    instance keys_top = Keys {
         params {
             n: n,
         }
-
     }
 
     instance enc = Enc1 {
@@ -22,8 +21,8 @@ composition Indcpa1 {
             encn: encn,
             encm: encm,
         }
-
     }
+
     compose {
         adversary: {
             GETAOUT: keys_top,

@@ -7,18 +7,16 @@ composition Left {
     const encn: fn Bits(n),Bits(n),Bits(n) -> Bits(m);
     const encm: fn Bits(n),Bits(m),Bits(n) -> Bits(p);
 
-    instance keys_top = GenericKeys {
+    instance keys_top = Keys {
         params {
             n: n,
         }
-
     }
 
     instance keys_bottom = Keys {
         params {
             n: n,
         }
-
     }
 
     instance enc = Enc1 {
@@ -39,7 +37,6 @@ composition Left {
             h: 0,
             zeron: zeron,
         }
-
     }
 
 
@@ -47,8 +44,8 @@ composition Left {
         adversary: {
             GETAOUT: keys_top,
             SETBIT: keys_top,
-            GBLG: gate,
             GETKEYSIN: keys_bottom,
+            GBLG: gate,
         }
         gate: {
             ENCN: enc,

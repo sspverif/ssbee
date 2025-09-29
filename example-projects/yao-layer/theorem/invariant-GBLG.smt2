@@ -33,7 +33,7 @@
   (let ((Pkg-Keys-Bottom (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_bottom> <<game-state-Left_inst-old>>))
         (Pkg-Keys-Top (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> <<game-state-Left_inst-old>>)))
     (let ((zb (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Keys-Bottom))
-          (zt (<pkg-state-GenericKeys-<$<!n!>$>-z> Pkg-Keys-Top)))
+          (zt (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Keys-Top)))
       (let ((zr (not (maybe-get (select zt <arg-GBLG-r>))))
             (zl (not (maybe-get (select zt <arg-GBLG-l>))))
             (zj (maybe-get (select zb <arg-GBLG-j>))))
@@ -52,16 +52,12 @@
            (= base-ctr-0 scr-0)
            (= base-ctr-1 scr-1))
       ;; Iteration 0
-      ;; Right: First iteration 
-      ;; Right: false, false
-      ;; Left: Kl[zl], Kr[zr]
-      ;; Left: 
       (and (= id-0 (sample-id "enc" "ENCN" "1"))
            (= id-1 (sample-id "simgate" "GBLG" "rin_round_0"))
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 0 1)) ; Select matching round
                        (* 2 (ite zr 0 2)) ; Select matching round
-                       0)); (ite zr 1 0)))     ; Offset first/second ENCN call
+                       0))                ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
       (and (= id-0 (sample-id "enc" "ENCM" "1"))
            (= id-1 (sample-id "simgate" "GBLG" "rout_round_0"))
@@ -75,7 +71,7 @@
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 1 0)) ; Select matching round
                        (* 2 (ite zr 0 2)) ; Select matching round
-                       0)); (ite zr 1 0)))     ; Offset first/second ENCN call
+                       0))                ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
       (and (= id-0 (sample-id "enc" "ENCM" "1"))
            (= id-1 (sample-id "simgate" "GBLG" "rout_round_1"))
@@ -89,7 +85,7 @@
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 0 1)) ; Select matching round
                        (* 2 (ite zr 2 0)) ; Select matching round
-                       1));(ite zr 0 1)))     ; Offset first/second ENCN call
+                       1))                ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
       (and (= id-0 (sample-id "enc" "ENCM" "1"))
            (= id-1 (sample-id "simgate" "GBLG" "rout_round_2"))
@@ -103,7 +99,7 @@
            (= scr-0 (+ base-ctr-0
                        (* 2 (ite zl 1 0)) ; Select matching round
                        (* 2 (ite zr 2 0)) ; Select matching round
-                       1));(ite zr 0 1)))     ; Offset first/second ENCN call
+                       1))                ; Offset first/second ENCN call
            (= base-ctr-1 scr-1))
       (and (= id-0 (sample-id "enc" "ENCM" "1"))
            (= id-1 (sample-id "simgate" "GBLG" "rout_round_3"))
@@ -140,78 +136,37 @@
           (Pkg-Left-Keys-Bottom (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_bottom> State-Left))
           (Pkg-Right-Keys-Top (<game-Right-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> State-Right))
           (Pkg-Right-Keys-Bottom (<game-Right-<$<!n!><!m!><!p!>$>-pkgstate-keys_bottom> State-Right)))
-      (let ((Left-Top-T (<pkg-state-GenericKeys-<$<!n!>$>-T> Pkg-Left-Keys-Top))
-            (Left-Top-z (<pkg-state-GenericKeys-<$<!n!>$>-z> Pkg-Left-Keys-Top))
-            (Left-Top-flag (<pkg-state-GenericKeys-<$<!n!>$>-flag> Pkg-Left-Keys-Top))
+      (let ((Left-Top-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Left-Keys-Top))
+            (Left-Top-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Left-Keys-Top))
+            (Left-Top-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Left-Keys-Top))
             (Left-Bottom-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Left-Keys-Bottom))
             (Left-Bottom-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Left-Keys-Bottom))
             (Left-Bottom-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Left-Keys-Bottom))
-            (Right-Top-T (<pkg-state-GenericKeys-<$<!n!>$>-T> Pkg-Right-Keys-Top))
-            (Right-Top-z (<pkg-state-GenericKeys-<$<!n!>$>-z> Pkg-Right-Keys-Top))
-            (Right-Top-flag (<pkg-state-GenericKeys-<$<!n!>$>-flag> Pkg-Right-Keys-Top))
+            (Right-Top-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Right-Keys-Top))
+            (Right-Top-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Right-Keys-Top))
+            (Right-Top-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Right-Keys-Top))
             (Right-Bottom-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Right-Keys-Bottom))
             (Right-Bottom-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Right-Keys-Bottom))
             (Right-Bottom-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Right-Keys-Bottom)))
         (and
+         ;; Left Aborts
          (= (or (is-mk-none (select Left-Top-T r))
                 (is-mk-none (select Left-Top-T l))
                 (= (select Left-Bottom-flag j) (mk-some true))
                 (exists ((left Bool) (right Bool)) (is-mk-none (select op (mk-tuple2 left right)))))
             (is-mk-abort Return-Value-Left))
+         ;; Right Aborts
          (= (or (is-mk-none (select Right-Top-T r))
-                (is-mk-none (select Right-Top-T l))
-                (not (is-mk-none (select Right-Bottom-z j)))
-                (exists ((left Bool) (right Bool)) (is-mk-none (select op (mk-tuple2 left right)))))
-            (is-mk-abort Return-Value-Right)))))))
+                 (is-mk-none (select Right-Top-T l))
+                 (not (is-mk-none (select Right-Bottom-z j)))
+                 (exists ((left Bool) (right Bool)) (is-mk-none (select op (mk-tuple2 left right)))))
+             (is-mk-abort Return-Value-Right)))))))
 
 
 
 
-(define-fun <relation-outputs-Left_inst-Right_inst-GBLG>
-    ((State-Left  <GameState_Left_<$<!n!><!m!><!p!>$>>)
-     (State-Right <GameState_Right_<$<!n!><!m!><!p!>$>>)
-     (Return-Left  <OracleReturn_Left_<$<!n!><!m!><!p!>$>_Gate_<$<!0!><!m!><!n!><!p!>$>_GBLG>)
-     (Return-Right <OracleReturn_Right_<$<!n!><!m!><!p!>$>_Simgate_<$<!m!><!n!><!p!>$>_GBLG>)
-     (l Int)
-     (r Int)
-     (op (Array (Tuple2 Bool Bool) (Maybe Bool)))
-     (j Int))
-  Bool
-  (let ((Return-Value-Left (<oracle-return-Left-<$<!n!><!m!><!p!>$>-Gate-<$<!0!><!m!><!n!><!p!>$>-GBLG-return-value-or-abort> Return-Left))
-        (Return-Value-Right (<oracle-return-Right-<$<!n!><!m!><!p!>$>-Simgate-<$<!m!><!n!><!p!>$>-GBLG-return-value-or-abort> Return-Right)))
-    (let ((Pkg-Left-Keys-Top (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> State-Left))
-          (Pkg-Left-Keys-Bottom (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_bottom> State-Left))
-          (Pkg-Right-Keys-Top (<game-Right-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> State-Right))
-          (Pkg-Right-Keys-Bottom (<game-Right-<$<!n!><!m!><!p!>$>-pkgstate-keys_bottom> State-Right)))
-      (let ((Left-Top-T (<pkg-state-GenericKeys-<$<!n!>$>-T> Pkg-Left-Keys-Top))
-            (Left-Top-z (<pkg-state-GenericKeys-<$<!n!>$>-z> Pkg-Left-Keys-Top))
-            (Left-Top-flag (<pkg-state-GenericKeys-<$<!n!>$>-flag> Pkg-Left-Keys-Top))
-            (Left-Bottom-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Left-Keys-Bottom))
-            (Left-Bottom-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Left-Keys-Bottom))
-            (Left-Bottom-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Left-Keys-Bottom))
-            (Right-Top-T (<pkg-state-GenericKeys-<$<!n!>$>-T> Pkg-Right-Keys-Top))
-            (Right-Top-z (<pkg-state-GenericKeys-<$<!n!>$>-z> Pkg-Right-Keys-Top))
-            (Right-Top-flag (<pkg-state-GenericKeys-<$<!n!>$>-flag> Pkg-Right-Keys-Top))
-            (Right-Bottom-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Right-Keys-Bottom))
-            (Right-Bottom-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Right-Keys-Bottom))
-            (Right-Bottom-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Right-Keys-Bottom)))
-        (let ((right-keys (maybe-get (select Right-Top-T r)))
-              (right-z (maybe-get (select Right-Top-z r)))
-              (right-retval (return-value Return-Value-Right))
-              (left-keys (maybe-get (select Right-Top-T l)))
-              (left-z (maybe-get (select Right-Top-z l)))
-              (left-retval (return-value Return-Value-Left)))
-          (let ((right-active (maybe-get (select right-keys right-z)))
-                (right-inactive (maybe-get (select right-keys (not right-z))))
-                (left-active (maybe-get (select left-keys left-z)))
-                (left-inactive (maybe-get (select left-keys (not left-z)))))
-            (and (exists ((rin Bits_n) (rout Bits_n))
-                         (let ((cin (<<func-encn>> left-inactive
-                                                   (<proof-consts-Yao-zeron> <<proof-consts>>)
-                                                   rin)))
-                           (let ((cout (<<func-encm>> right-inactive cin rout)))
-                             (= (select right-retval cout)
-                                (mk-some true))))))))))))
+            
+
 
 (define-fun aout-key-package
     ((T (Array Int (Maybe (Array Bool (Maybe Bits_n)))))
@@ -243,18 +198,18 @@
         (Pkg-Right-Keys-Top  (<game-Right-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> right-game))
         (Pkg-Left-Keys-Bottom  (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_bottom> left-game))
         (Pkg-Right-Keys-Bottom  (<game-Right-<$<!n!><!m!><!p!>$>-pkgstate-keys_bottom> right-game)))
-          (let ((Left-Top-T (<pkg-state-GenericKeys-<$<!n!>$>-T> Pkg-Left-Keys-Top))
-            (Left-Top-z (<pkg-state-GenericKeys-<$<!n!>$>-z> Pkg-Left-Keys-Top))
-            (Left-Top-flag (<pkg-state-GenericKeys-<$<!n!>$>-flag> Pkg-Left-Keys-Top))
-            (Left-Bottom-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Left-Keys-Bottom))
-            (Left-Bottom-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Left-Keys-Bottom))
-            (Left-Bottom-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Left-Keys-Bottom))
-            (Right-Top-T (<pkg-state-GenericKeys-<$<!n!>$>-T> Pkg-Right-Keys-Top))
-            (Right-Top-z (<pkg-state-GenericKeys-<$<!n!>$>-z> Pkg-Right-Keys-Top))
-            (Right-Top-flag (<pkg-state-GenericKeys-<$<!n!>$>-flag> Pkg-Right-Keys-Top))
-            (Right-Bottom-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Right-Keys-Bottom))
-            (Right-Bottom-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Right-Keys-Bottom))
-            (Right-Bottom-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Right-Keys-Bottom)))
+    (let ((Left-Top-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Left-Keys-Top))
+          (Left-Top-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Left-Keys-Top))
+          (Left-Top-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Left-Keys-Top))
+          (Left-Bottom-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Left-Keys-Bottom))
+          (Left-Bottom-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Left-Keys-Bottom))
+          (Left-Bottom-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Left-Keys-Bottom))
+          (Right-Top-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Right-Keys-Top))
+          (Right-Top-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Right-Keys-Top))
+          (Right-Top-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Right-Keys-Top))
+          (Right-Bottom-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Right-Keys-Bottom))
+          (Right-Bottom-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Right-Keys-Bottom))
+          (Right-Bottom-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Right-Keys-Bottom)))
 
     (and
      (= Left-Top-T Right-Top-T)
@@ -272,3 +227,64 @@
      (aout-key-package Right-Bottom-T Right-Bottom-z Right-Bottom-flag)
 
      (forall ((i Int)) (= (is-mk-none (select Right-Bottom-z i)) (not (= (mk-some true) (select Left-Bottom-flag i)))))))))
+
+
+(define-fun <relation-debug-Left_inst-Right_inst-GBLG>
+    ((State-Left-Old  <GameState_Left_<$<!n!><!m!><!p!>$>>)
+     (State-Right-Old <GameState_Right_<$<!n!><!m!><!p!>$>>)
+     (Return-Left  <OracleReturn_Left_<$<!n!><!m!><!p!>$>_Gate_<$<!0!><!m!><!n!><!p!>$>_GBLG>)
+     (Return-Right <OracleReturn_Right_<$<!n!><!m!><!p!>$>_Simgate_<$<!m!><!n!><!p!>$>_GBLG>)
+     (l Int)
+     (r Int)
+     (op (Array (Tuple2 Bool Bool) (Maybe Bool)))
+     (j Int))
+  Bool
+  (let ((Return-Value-Left (<oracle-return-Left-<$<!n!><!m!><!p!>$>-Gate-<$<!0!><!m!><!n!><!p!>$>-GBLG-return-value-or-abort> Return-Left))
+        (State-Left (<oracle-return-Left-<$<!n!><!m!><!p!>$>-Gate-<$<!0!><!m!><!n!><!p!>$>-GBLG-game-state> Return-Left))
+        (Return-Value-Right (<oracle-return-Right-<$<!n!><!m!><!p!>$>-Simgate-<$<!m!><!n!><!p!>$>-GBLG-return-value-or-abort> Return-Right))
+        (State-Right (<oracle-return-Right-<$<!n!><!m!><!p!>$>-Simgate-<$<!m!><!n!><!p!>$>-GBLG-game-state> Return-Right)))
+    (let ((Pkg-Left-Keys-Top (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> State-Left))
+          (Pkg-Left-Keys-Bottom (<game-Left-<$<!n!><!m!><!p!>$>-pkgstate-keys_bottom> State-Left))
+          (Pkg-Right-Keys-Top (<game-Right-<$<!n!><!m!><!p!>$>-pkgstate-keys_top> State-Right))
+          (Pkg-Right-Keys-Bottom (<game-Right-<$<!n!><!m!><!p!>$>-pkgstate-keys_bottom> State-Right)))
+      (let ((Left-Top-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Left-Keys-Top))
+            (Left-Top-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Left-Keys-Top))
+            (Left-Top-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Left-Keys-Top))
+            (Left-Bottom-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Left-Keys-Bottom))
+            (Left-Bottom-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Left-Keys-Bottom))
+            (Left-Bottom-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Left-Keys-Bottom))
+            (Right-Top-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Right-Keys-Top))
+            (Right-Top-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Right-Keys-Top))
+            (Right-Top-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Right-Keys-Top))
+            (Right-Bottom-T (<pkg-state-Keys-<$<!n!>$>-T> Pkg-Right-Keys-Bottom))
+            (Right-Bottom-z (<pkg-state-Keys-<$<!n!>$>-z> Pkg-Right-Keys-Bottom))
+            (Right-Bottom-flag (<pkg-state-Keys-<$<!n!>$>-flag> Pkg-Right-Keys-Bottom)))
+        (let ((right-keys (maybe-get (select Right-Top-T r)))
+              (right-z (maybe-get (select Right-Top-z r)))
+              (right-retval (return-value Return-Value-Right))
+              (left-keys (maybe-get (select Right-Top-T l)))
+              (left-z (maybe-get (select Right-Top-z l)))
+              (left-retval (return-value Return-Value-Left)))
+          (let ((right-active (maybe-get (select right-keys right-z)))
+                (right-inactive (maybe-get (select right-keys (not right-z))))
+                (left-active (maybe-get (select left-keys left-z)))
+                (left-inactive (maybe-get (select left-keys (not left-z)))))
+            (and true
+
+                 ;; (= Left-Top-T Right-Top-T)
+                 ;; (= Left-Top-z Right-Top-z)
+                 (= Left-Bottom-T Right-Bottom-T)
+
+                 (wellformed-T Left-Top-T)
+                 (wellformed-T Right-Top-T)
+                 (wellformed-T Left-Bottom-T)
+                 (wellformed-T Right-Bottom-T)
+
+                 (aout-key-package Left-Top-T Left-Top-z Left-Top-flag)
+                 (aout-key-package Left-Bottom-T Left-Bottom-flag Left-Bottom-flag)
+                 (aout-key-package Right-Top-T Right-Top-z Right-Top-flag)
+                 (aout-key-package Right-Bottom-T Right-Bottom-z Right-Bottom-flag)
+
+                 (forall ((i Int)) (= (is-mk-none (select Right-Bottom-z i)) (not (= (mk-some true) (select Left-Bottom-flag i)))))
+
+                 )))))))
