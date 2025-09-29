@@ -715,27 +715,34 @@ theorem WHSProto {
 
         equivalence H3_1 H4 {
             Send1: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
-             /*       debug    :    [no-abort]*/
                     invariant:    [no-abort]
                     same-output:  [no-abort]
                 }
             }
              Send2: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
-                    /* debug:        [no-abort]*/
                     invariant:    [no-abort]
                     same-output:  [no-abort]
                 }
             }
              Send3: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
@@ -744,7 +751,10 @@ theorem WHSProto {
                 }
             }
             Send4: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
@@ -753,7 +763,10 @@ theorem WHSProto {
                 }
             }
             Send5: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
@@ -762,7 +775,10 @@ theorem WHSProto {
                 }
             }
             NewKey: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
@@ -771,7 +787,10 @@ theorem WHSProto {
                 }
             }
             NewSession: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
@@ -780,7 +799,10 @@ theorem WHSProto {
                 }
             }
             Test: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
@@ -789,7 +811,10 @@ theorem WHSProto {
                 }
             }
             Reveal: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
@@ -798,7 +823,10 @@ theorem WHSProto {
                 }
             }
             SameKey: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
@@ -807,7 +835,10 @@ theorem WHSProto {
                 }
             }
             AtLeast: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
@@ -816,7 +847,10 @@ theorem WHSProto {
                 }
             }
             AtMost: {
-                invariant: [./theorem/invariant-H3_1-H4.smt2]
+                invariant: [
+                    ./theorem/invariant-H3_1-H4.smt2
+                    ./theorem/randomness-H3_1-H4.smt2
+                ]
 
                 lemmas {
                     equal-aborts: []
