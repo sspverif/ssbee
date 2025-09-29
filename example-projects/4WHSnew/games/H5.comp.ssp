@@ -19,7 +19,7 @@ composition H5 {
         mac: mac,
         }
     }
-    instance Game_nokey = Game_nokey {
+    instance Game = Game_nokey {
         params {
         b: b,
         n: n,
@@ -31,21 +31,21 @@ composition H5 {
 
     compose {
         adversary: {
-            NewKey:     Game_nokey,
-            NewSession: Game_nokey,
-            Send1:      Game_nokey,
-            Send2:      Game_nokey,
-            Send3:      Game_nokey,
-            Send4:      Game_nokey,
-            Send5:      Game_nokey,
-            Reveal:     Game_nokey,
-            Test:       Game_nokey,
-			SameKey:	Game_nokey,
- 			AtMost:		Game_nokey,
- 			AtLeast:	Game_nokey,
+            NewKey:     Game,
+            NewSession: Game,
+            Send1:      Game,
+            Send2:      Game,
+            Send3:      Game,
+            Send4:      Game,
+            Send5:      Game,
+            Reveal:     Game,
+            Test:       Game,
+			SameKey:	Game,
+ 			AtMost:		Game,
+ 			AtLeast:	Game,
        },
 
-        Game_nokey: {
+        Game: {
             Run1:      Prot,
             Run2:      Prot,
             Run3:      Prot,
