@@ -1,8 +1,6 @@
-# ssbee
+# Domino
 
-_When it comes to **s**tate **s**eparating proofs, it's a busy **bee**!_
-
-`ssbee` is a tool that helps you manage the tedious parts of working with the State-Separation Proofs framework for doing crypto proofs.
+`Domino` is a tool that helps you manage the tedious parts of working with the State-Separation Proofs framework for doing crypto proofs.
 
 > **This project is in early alpha. Expect insufficient documentation and  bugs, bugs, bugs!**
 
@@ -12,20 +10,22 @@ _When it comes to **s**tate **s**eparating proofs, it's a busy **bee**!_
 - Type-check oracle code and wiring between packages
 - Check that reduction game hops are valid
 - Use SMT solvers to show equivalence of games with different code
-  - This requires hand-writing invariants in SMT-LIB, but not proving them.
+- This requires hand-writing invariants in SMT-LIB, but not proving them.
 - Generate LATeX cryptocode and diagrams
 
 ## Installation
 
 You need a somewhat recent Rust toolchain. If you don't have that, look into [rustup].
 
-Install the tool using `cargo install --git https://github.com/sspverif/ssbee ssbee`. Ensure that the installed binary is in your `PATH` (by default cargo installs to (`~/.cargo/bin`).
+Install the tool using `cargo install --git https://github.com/domino-lang/domino domino`. 
+Ensure that the installed binary is in your `PATH`. (By default, Cargo installs to (`~/.cargo/bin`).)
 
 ## Usage
 
-Enter a project directory and run `ssbee prove`. To get an idea how a projects is structured, see the `example-projects/hello-world` directory (sorry, proper documentation is on the roadmap).
+Enter a project directory and run `domino prove`. 
+To get an idea how a project is structured, see the `example-projects/hello-world` directory (sorry, proper documentation is on the roadmap).
 
-To generate LaTeX for a project, use `ssbee latex`. The output will be in `_build/latex`, relative to the project root.
+To generate LaTeX for a project, use `domino latex`. The output will be in `_build/latex`, relative to the project root.
 
 ## Model
 
