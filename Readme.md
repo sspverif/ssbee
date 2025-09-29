@@ -10,7 +10,7 @@
 - Type-check oracle code and wiring between packages
 - Check that reduction game hops are valid
 - Use SMT solvers to show equivalence of games with different code
-- This requires hand-writing invariants in SMT-LIB, but not proving them.
+  - This requires hand-writing invariants in SMT-LIB, but not proving them.
 - Generate LATeX cryptocode and diagrams
 
 ## Installation
