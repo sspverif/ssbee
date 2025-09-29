@@ -1,5 +1,5 @@
 [package]
-name = "ssbee"
+name = "domino"
 version.workspace = true
 edition.workspace = true
 readme = { workspace = true }

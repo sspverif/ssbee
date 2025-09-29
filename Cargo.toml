@@ -1,5 +1,5 @@
 [workspace]
-members = [".", "crates/smtlib", "crates/ssbee"]
+members = [".", "crates/smtlib", "crates/domino"]
 
 [workspace.package]
 version = "0.1.0"
@@ -13,7 +13,7 @@ sspverif = { path = "" }
 [package]
 name = "sspverif"
 version = "0.1.0"
-authors = ["The SSBee Team"]
+authors = ["The Domino Team"]
 edition = "2021"
 
 # We are no ready to publish yet.

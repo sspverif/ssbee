@@ -14,7 +14,7 @@ fn main() -> Result<(), Error> {
     };
 
     for &shell in Shell::value_variants() {
-        generate_to(shell, &mut cmd, "ssbee", &outdir)?;
+        generate_to(shell, &mut cmd, "domino", &outdir)?;
     }
 
     Ok(())

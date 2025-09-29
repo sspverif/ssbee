@@ -5,7 +5,7 @@ function fail() {
     touch failed
 }
 
-SSBEE=$(realpath $SSBEE)
+DOMINO=$(realpath $DOMINO)
 
 echo "# Checking Reproducers still prove..."
 for project_path in example-projects/repro-*; do
@@ -13,7 +13,7 @@ for project_path in example-projects/repro-*; do
     (
         echo "## Checking $project proves..."
         cd $project_path
-        $SSBEE prove || fail "expected success, but failed: $project_path"
+        $DOMINO prove || fail "expected success, but failed: $project_path"
     )
 done
 
@@ -23,7 +23,7 @@ for project_path in example-projects/err-repro-*; do
     (
         echo "## Checking $project fails..."
         cd $project_path
-        $SSBEE prove && fail "expected error, but succeeded: $project_path"
+        $DOMINO prove && fail "expected error, but succeeded: $project_path"
     )
 done
 
@@ -39,7 +39,7 @@ sed -e 's/[[:space:]]*#.*// ; /^[[:space:]]*$/d' "example-projects/known-good.tx
     (
         echo "## Checking $project proves..."
         cd $project_path
-        $SSBEE prove || fail "expected success, but failed: $project_path"
+        $DOMINO prove || fail "expected success, but failed: $project_path"
     )
 done
 

@@ -12,7 +12,7 @@ pub enum NewError {}
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("syntax error: {variant}")]
-#[diagnostic(code(ssbee::syntax))]
+#[diagnostic(code(domino::syntax))]
 pub struct PestParseError {
     #[label("here")]
     pub at: SourceSpan,
@@ -41,7 +41,7 @@ impl Display for PestErrorVariantPrinter {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("undefined type '{text}'")]
-#[diagnostic(code(ssbee::code::undefined_type))]
+#[diagnostic(code(domino::code::undefined_type))]
 pub struct UndefinedTypeError {
     #[label("this type is not defined")]
     pub at: SourceSpan,
@@ -51,7 +51,7 @@ pub struct UndefinedTypeError {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("undefined identifier '{ident_name}'")]
-#[diagnostic(code(ssbee::code::undefined_identifier))]
+#[diagnostic(code(domino::code::undefined_identifier))]
 pub struct UndefinedIdentifierError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -64,7 +64,7 @@ pub struct UndefinedIdentifierError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("identifier '{ident_name}' has already been declared")]
-#[diagnostic(code(ssbee::code::identifier_already_declared))]
+#[diagnostic(code(domino::code::identifier_already_declared))]
 pub struct IdentifierAlreadyDeclaredError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -79,7 +79,7 @@ pub struct IdentifierAlreadyDeclaredError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("oracle '{oracle_name}' has already been declared")]
-#[diagnostic(code(ssbee::code::oracle_already_declared))]
+#[diagnostic(code(domino::code::oracle_already_declared))]
 pub struct OracleAlreadyImportedError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -92,7 +92,7 @@ pub struct OracleAlreadyImportedError {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("type mismatch: got {got}, expected {expected}")]
-#[diagnostic(code(ssbee::code::type_mismatch))]
+#[diagnostic(code(domino::code::type_mismatch))]
 pub struct TypeMismatchError {
     #[label("this expression has the wrong type")]
     pub at: SourceSpan,
@@ -107,7 +107,7 @@ pub struct TypeMismatchError {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("package instance '{pkg_inst_name}' is not defined in game {in_game}")]
-#[diagnostic(code(ssbee::code::undefined_package_instance))]
+#[diagnostic(code(domino::code::undefined_package_instance))]
 pub struct UndefinedPackageInstanceError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -121,7 +121,7 @@ pub struct UndefinedPackageInstanceError {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("undefined game instance '{game_inst_name}'")]
-#[diagnostic(code(ssbee::code::undefined_game_instance))]
+#[diagnostic(code(domino::code::undefined_game_instance))]
 pub struct UndefinedGameInstanceError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -134,7 +134,7 @@ pub struct UndefinedGameInstanceError {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("undefined package '{pkg_name}'")]
-#[diagnostic(code(ssbee::code::undefined_package))]
+#[diagnostic(code(domino::code::undefined_package))]
 pub struct UndefinedPackageError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -147,7 +147,7 @@ pub struct UndefinedPackageError {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("undefined oracle '{oracle_name}'")]
-#[diagnostic(code(ssbee::code::undefined_package))]
+#[diagnostic(code(domino::code::undefined_package))]
 pub struct UndefinedOracleError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -160,7 +160,7 @@ pub struct UndefinedOracleError {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("undefined game '{game_name}'")]
-#[diagnostic(code(ssbee::code::undefined_game))]
+#[diagnostic(code(domino::code::undefined_game))]
 pub struct UndefinedGameError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -173,7 +173,7 @@ pub struct UndefinedGameError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("parameter '{param_name}' does not exist on package {pkg_name}")]
-#[diagnostic(code(ssbee::code::pkg::no_such_parameter))]
+#[diagnostic(code(domino::code::pkg::no_such_parameter))]
 pub struct NoSuchPackageParameterError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -187,7 +187,7 @@ pub struct NoSuchPackageParameterError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("parameter '{param_name}' does not exist on game {game_name}")]
-#[diagnostic(code(ssbee::code::game::no_such_parameter))]
+#[diagnostic(code(domino::code::game::no_such_parameter))]
 pub struct NoSuchGameParameterError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -201,7 +201,7 @@ pub struct NoSuchGameParameterError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("type '{type_name}' does not exist ")]
-#[diagnostic(code(ssbee::code::no_such_type))]
+#[diagnostic(code(domino::code::no_such_type))]
 pub struct NoSuchTypeError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -214,7 +214,7 @@ pub struct NoSuchTypeError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("oracle '{oracle_name}' does not exist ")]
-#[diagnostic(code(ssbee::code::no_such_oracle))]
+#[diagnostic(code(domino::code::no_such_oracle))]
 pub struct NoSuchOracleError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -227,7 +227,7 @@ pub struct NoSuchOracleError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("identifiers in for loop spec don't match: {fst:?} != {snd:?}")]
-#[diagnostic(code(ssbee::code::no_such_oracle))]
+#[diagnostic(code(domino::code::no_such_oracle))]
 pub struct ForLoopIdentifersDontMatchError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -246,7 +246,7 @@ pub struct ForLoopIdentifersDontMatchError {
 #[error(
     "package parameter '{param_name}' has been defined twice in package instance {pkg_inst_name}"
 )]
-#[diagnostic(code(ssbee::code::pkg_inst::duplicate_parameter_definition))]
+#[diagnostic(code(domino::code::pkg_inst::duplicate_parameter_definition))]
 pub struct DuplicatePackageParameterDefinitionError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -263,7 +263,7 @@ pub struct DuplicatePackageParameterDefinitionError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("game parameter '{param_name}' has been defined twice in game instance {game_inst_name}")]
-#[diagnostic(code(ssbee::code::game_inst::duplicate_parameter_definition))]
+#[diagnostic(code(domino::code::game_inst::duplicate_parameter_definition))]
 pub struct DuplicateGameParameterDefinitionError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -280,7 +280,7 @@ pub struct DuplicateGameParameterDefinitionError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("package {pkg_name} declares parameters that are not defined in package instance {pkg_inst_name}: {missing_params}")]
-#[diagnostic(code(ssbee::code::pkg::missing_parameter_definition))]
+#[diagnostic(code(domino::code::pkg::missing_parameter_definition))]
 pub struct MissingPackageParameterDefinitionError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -297,7 +297,7 @@ pub struct MissingPackageParameterDefinitionError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("game {game_name} declares parameters that are not defined in game instance {game_inst_name}: {missing_params}")]
-#[diagnostic(code(ssbee::code::game::missing_parameter_definition))]
+#[diagnostic(code(domino::code::game::missing_parameter_definition))]
 pub struct MissingGameParameterDefinitionError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -314,7 +314,7 @@ pub struct MissingGameParameterDefinitionError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("use of undefined assumption {assumption_name}")]
-#[diagnostic(code(ssbee::code::undefined_assumption))]
+#[diagnostic(code(domino::code::undefined_assumption))]
 pub struct UndefinedAssumptionError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -327,7 +327,9 @@ pub struct UndefinedAssumptionError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("the first package instance name in an assumption package mapping block header must be from the assumption, but isn't")]
-#[diagnostic(code(ssbee::code::proof::reduction::assumption_mapping::no_assumption_game_instance))]
+#[diagnostic(code(
+    domino::code::proof::reduction::assumption_mapping::no_assumption_game_instance
+))]
 #[help("the mapping maps the package instances of the assumption game and the model game. Therefore the first needs to be an assumption game instance, while the other needs to be a model game instance. Game instance names from the assumption are {assumption_left_game_instance_name} and {assumption_right_game_instance_name}.")]
 pub struct AssumptionMappingLeftGameInstanceIsNotFromAssumption {
     #[source_code]
@@ -344,7 +346,9 @@ pub struct AssumptionMappingLeftGameInstanceIsNotFromAssumption {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("the second package instance name in an assumption package mapping block header must be from the model (i.e. not from the assumption), but isn't")]
-#[diagnostic(code(ssbee::code::proof::reduction::assumption_mapping::no_assumption_game_instance))]
+#[diagnostic(code(
+    domino::code::proof::reduction::assumption_mapping::no_assumption_game_instance
+))]
 pub struct AssumptionMappingRightGameInstanceIsFromAssumption {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -360,7 +364,7 @@ pub struct AssumptionMappingRightGameInstanceIsFromAssumption {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("Can't infer type of `None`. Use `None as <type>` to construct a `None` of type `Maybe(<type>)`")]
-#[diagnostic(code(ssbee::code::untyped_none_type_inference))]
+#[diagnostic(code(domino::code::untyped_none_type_inference))]
 pub struct UntypedNoneTypeInferenceError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -371,7 +375,7 @@ pub struct UntypedNoneTypeInferenceError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("Expected an expression identifier, got oracle identifier {oracle_name}`")]
-#[diagnostic(code(ssbee::code::expected_expression_identifier))]
+#[diagnostic(code(domino::code::expected_expression_identifier))]
 pub struct ExpectedExpressionIdentifierError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -384,7 +388,7 @@ pub struct ExpectedExpressionIdentifierError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("The package instances {assumption_pkg_inst_name} and {construction_pkg_inst_name} in a reduction mapping have different package types")]
-#[diagnostic(code(ssbee::code::proof::reduction::mapping::package_mismatch))]
+#[diagnostic(code(domino::code::proof::reduction::mapping::package_mismatch))]
 pub struct AssumptionMappingContainsDifferentPackagesError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -402,7 +406,7 @@ pub struct AssumptionMappingContainsDifferentPackagesError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("The package instances {assumption_pkg_inst_name} and {construction_pkg_inst_name} in a reduction mapping have different parameter assignments for {param_names}")]
-#[diagnostic(code(ssbee::code::proof::reduction::mapping::package_mismatch))]
+#[diagnostic(code(domino::code::proof::reduction::mapping::package_mismatch))]
 pub struct AssumptionMappingParameterMismatchError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -420,7 +424,7 @@ pub struct AssumptionMappingParameterMismatchError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("The package instances {left_pkg_inst_name} and {right_pkg_inst_name} in a reduction have different package types: {left_pkg_name} != {right_pkg_name}")]
-#[diagnostic(code(ssbee::code::proof::reduction::mapping::reduction_package_mismatch))]
+#[diagnostic(code(domino::code::proof::reduction::mapping::reduction_package_mismatch))]
 pub struct ReductionContainsDifferentPackagesError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -436,7 +440,7 @@ pub struct ReductionContainsDifferentPackagesError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("The package instances {left_pkg_inst_name} and {right_pkg_inst_name} in a reduction have different parameter assignments for {param_names}")]
-#[diagnostic(code(ssbee::code::proof::reduction::mapping::reduction_package_mismatch))]
+#[diagnostic(code(domino::code::proof::reduction::mapping::reduction_package_mismatch))]
 pub struct ReductionPackageInstanceParameterMismatchError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -453,7 +457,7 @@ pub struct ReductionPackageInstanceParameterMismatchError {
 #[derive(Debug, Diagnostic, Error)]
 #[error("The package instances {pkg_inst_name_1} and {pkg_inst_name_2} should be the same, but {pkg_inst_name_1} is in the assumption part of {game_name_1}, whereas {pkg_inst_name_2} is in the reduction part of {game_name_2}")]
 #[diagnostic(code(
-    ssbee::code::proof::reduction::mapping::reduction_inconsistent_assumption_boundary
+    domino::code::proof::reduction::mapping::reduction_inconsistent_assumption_boundary
 ))]
 pub struct ReductionInconsistentAssumptionBoundaryError {
     #[source_code]
@@ -474,7 +478,7 @@ pub struct ReductionInconsistentAssumptionBoundaryError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("The package instance {pkg_inst_name} was mapped twice")]
-#[diagnostic(code(ssbee::code::proof::reduction::mapping::duplicate_package_instance))]
+#[diagnostic(code(domino::code::proof::reduction::mapping::duplicate_package_instance))]
 pub struct AssumptionMappingDuplicatePackageInstanceError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -489,7 +493,7 @@ pub struct AssumptionMappingDuplicatePackageInstanceError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("The package instance {pkg_inst_name} of the assumption game has not been mapped")]
-#[diagnostic(code(ssbee::code::proof::reduction::mapping::duplicate_package_instance))]
+#[diagnostic(code(domino::code::proof::reduction::mapping::duplicate_package_instance))]
 pub struct AssumptionMappingMissesPackageInstanceError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -502,7 +506,7 @@ pub struct AssumptionMappingMissesPackageInstanceError {
 
 #[derive(Debug, Diagnostic, Error)]
 #[error("The edge {pkg_inst_name} exists in game X but not in game Y, yielding an inconsistent reduction")]
-#[diagnostic(code(ssbee::code::proof::reduction::mapping::duplicate_package_instance))]
+#[diagnostic(code(domino::code::proof::reduction::mapping::duplicate_package_instance))]
 pub struct InconsistentReductions {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -515,7 +519,7 @@ pub struct InconsistentReductions {
 
 #[derive(Debug, Diagnostic, Error, Clone)]
 #[error("The construction package instance `{construction_pkg_inst_name}` has an incoming edge with oracle `{oracle_name}`, but the mapped assumption package instance `{assumption_pkg_inst_name}` doesn't")]
-#[diagnostic(code(ssbee::code::proof::reduction::mapping::assumption_exports_insufficient))]
+#[diagnostic(code(domino::code::proof::reduction::mapping::assumption_exports_insufficient))]
 pub struct AssumptionExportsNotSufficientError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -538,7 +542,7 @@ pub struct AssumptionExportsNotSufficientError {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("package instance {pkg_inst_name} of package type {pkg_name} imports oracle {oracle_name}, but no such edge exists in composition")]
-#[diagnostic(code(ssbee::code::game::missing_edge))]
+#[diagnostic(code(domino::code::game::missing_edge))]
 pub struct MissingEdgeForImportedOracleError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -554,7 +558,7 @@ pub struct MissingEdgeForImportedOracleError {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("game {game_name} assigns an edge from package instance {pkg_inst_name} of package type {pkg_name} for oracle {oracle_name}, but that package doesn't import that oracle")]
-#[diagnostic(code(ssbee::code::game::unused_edge))]
+#[diagnostic(code(domino::code::game::unused_edge))]
 pub struct UnusedEdgeError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -571,7 +575,7 @@ pub struct UnusedEdgeError {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("oracle {oracle_name} wired to incompatible oracle signature")]
-#[diagnostic(code(ssbee::code::game::unused_edge))]
+#[diagnostic(code(domino::code::game::unused_edge))]
 pub struct OracleSigMismatchError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -587,7 +591,7 @@ pub struct OracleSigMismatchError {
 
 #[derive(Error, Diagnostic, Debug)]
 #[error("game {game_name} assigns an edge from package instance {pkg_inst_name} for oracle {oracle_name} twice")]
-#[diagnostic(code(ssbee::code::game::unused_edge))]
+#[diagnostic(code(domino::code::game::unused_edge))]
 pub struct DuplicateEdgeDefinitionError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,
@@ -603,7 +607,7 @@ pub struct DuplicateEdgeDefinitionError {
 
 #[derive(Error, Debug, miette::Diagnostic)]
 #[error("Error parsing '{num_str}' as a number: {source}")]
-#[diagnostic(code(ssbee::code::number_parse))]
+#[diagnostic(code(domino::code::number_parse))]
 pub struct ParseNumberError {
     #[source_code]
     pub source_code: miette::NamedSource<String>,

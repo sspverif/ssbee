@@ -16,8 +16,8 @@ jobs:
 
       - name: Build ssbee
         run: |
-          cargo build --release -p ssbee
-          echo "SSBEE=$(pwd)/target/release/ssbee">>$GITHUB_ENV
+          cargo build --release -p domino
+          echo "DOMINO=$(pwd)/target/release/domino">>$GITHUB_ENV
 
       - name: Run proofs
         run: ./scripts/test-known-examples.sh
