@@ -201,10 +201,11 @@ oracle Test(ctr: Integer) -> Bits(256)
 	/* mark key as tested */
     RevTested[Unwrap(sid)] <- Some(true);
 	
-    k_ <- Unwrap(k);
     if b {
 	    k_ <-$ Bits(256) sample-name id4;
-	}
+	} else {
+        k_ <- Unwrap(k);
+    }
     return k_;
     }
 }
