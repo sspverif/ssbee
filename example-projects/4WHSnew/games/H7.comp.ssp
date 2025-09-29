@@ -34,7 +34,7 @@ composition H7 {
         mac: mac,
         }
     }
-    instance Game_noprfkey = Game_noprfkey {
+    instance Game = Game_noprfkey {
         params {
         b: b,
         n: n,
@@ -47,20 +47,20 @@ composition H7 {
     compose {
         adversary: {
             NewKey:     PRF,
-            NewSession: Game_noprfkey,
-            Send1:      Game_noprfkey,
-            Send2:      Game_noprfkey,
-            Send3:      Game_noprfkey,
-            Send4:      Game_noprfkey,
-            Send5:      Game_noprfkey,
-            Reveal:     Game_noprfkey,
-            Test:       Game_noprfkey,
-			SameKey:	Game_noprfkey,
- 			AtMost:		Game_noprfkey,
- 			AtLeast:	Game_noprfkey,
+            NewSession: Game,
+            Send1:      Game,
+            Send2:      Game,
+            Send3:      Game,
+            Send4:      Game,
+            Send5:      Game,
+            Reveal:     Game,
+            Test:       Game,
+			SameKey:	Game,
+ 			AtMost:		Game,
+ 			AtLeast:	Game,
        },
 
-        Game_noprfkey: {
+        Game: {
             Run1:      Prot,
             Run2:      Prot,
             Run3:      Prot,
