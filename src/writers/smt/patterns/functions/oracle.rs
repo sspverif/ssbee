@@ -21,6 +21,7 @@ pub struct OraclePattern<'a> {
     pub game_name: &'a str,
     pub game_inst_name: &'a str,
     pub pkg_name: &'a str,
+    pub pkg_inst_name: &'a str,
     pub oracle_name: &'a str,
     pub oracle_args: &'a [(String, Type)],
     pub game_params: &'a [(GameConstIdentifier, Expression)],
@@ -36,6 +37,7 @@ impl FunctionPattern for OraclePattern<'_> {
             .push(self.game_name)
             .push(self.game_inst_name)
             .push(self.pkg_name)
+            .push(self.pkg_inst_name)
             .maybe_extend(&pkg_encoded_params)
             .push(self.oracle_name)
             .build()
