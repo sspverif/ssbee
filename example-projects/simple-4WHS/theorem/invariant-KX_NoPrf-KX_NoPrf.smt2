@@ -132,7 +132,7 @@
                        (sid  (el10-9  (maybe-get state)))
                        (mess (el10-10 (maybe-get state))))
                   (=> (not (is-mk-none sid))
-                      (= sid (mk-some (mk-tuple5 (ite u V U) (ite u U V)
+                      (= sid (mk-some (mk-tuple5 U V
                                                  (maybe-get ni) (maybe-get nr)
                                                  (<<func-mac>> (maybe-get kmac) (maybe-get nr) 2))))))))))
 
@@ -218,14 +218,12 @@
                       (= (maybe-get kmac)
                          (ite (= (select Fresh ctr) (mk-some true))
                               (maybe-get (select Prf (mk-tuple6 kid
-                                                                (ite u V U)
-                                                                (ite u U V)
+                                                                U V
                                                                 (maybe-get ni)
                                                                 (maybe-get nr)
                                                                 false)))
                               (<<func-prf>> (maybe-get (select Ltk kid))
-                                            (ite u V U)
-                                            (ite u U V)
+                                            U V
                                             (maybe-get ni)
                                             (maybe-get nr)
                                             false)))))))))
@@ -257,7 +255,7 @@
                       (and
                        (= (select H kid) (mk-some true))
                        (=> (not (is-mk-none kmac))
-                           (not (is-mk-none (select Prf (mk-tuple6 kid (ite u V U) (ite u U V)
+                           (not (is-mk-none (select Prf (mk-tuple6 kid  U V
                                                                    (maybe-get ni) (maybe-get nr)
                                                                    false))))))))))))
 

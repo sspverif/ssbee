@@ -183,11 +183,7 @@ oracle Reveal(ctr: Integer) -> Bits(256)
 
 	/* mark key as revealed */
     RevTested[Unwrap(sid)] <- Some(false);    
-    if u {
-      k <- prf(ltk,V,U,Unwrap(ni),Unwrap(nr) ,true);
-	} else {
-      k <- prf(ltk,U,V,Unwrap(ni),Unwrap(nr) ,true);
-    }
+    k <- prf(ltk,U,V,Unwrap(ni),Unwrap(nr) ,true);
     return k;
     }
 
@@ -205,14 +201,10 @@ oracle Test(ctr: Integer) -> Bits(256)
 	/* mark key as tested */
     RevTested[Unwrap(sid)] <- Some(true);
 	
-     if b {
+    if b {
 	  k <-$ Bits(256) sample-name id4;
 	} else {
-        if u {
-      k <- prf(ltk,V,U,Unwrap(ni),Unwrap(nr) ,true);
-	} else {
       k <- prf(ltk,U,V,Unwrap(ni),Unwrap(nr) ,true);
-    }
     }
     return k;
     }

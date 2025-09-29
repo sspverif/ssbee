@@ -34,7 +34,7 @@ package Prot_NoKey {
 							        Maybe((Integer,Integer,Bits(256),Bits(256),Bits(256))),
 							        Integer),
 							       (Bits(256), Bits(256))) {
-	    (V,v,U,ltk,acc,ni_,nr_,kmac_,sid_,mess) <- parse state;
+	    (U,v,V,ltk,acc,ni_,nr_,kmac_,sid_,mess) <- parse state;
         assert (v   == true );              /* session belongs to responder       */
         assert (acc  == None );              /* session is still running           */
         assert (mess == 0);
@@ -44,7 +44,7 @@ package Prot_NoKey {
         tau        <-  mac(kmac,nr,2);
         sid        <- (U,V,ni,nr,tau);
 
-		return ((V,v,U,ltk,None,Some(ni),Some(nr),Some(kmac),Some(sid),1),
+		return ((U,v,V,ltk,None,Some(ni),Some(nr),Some(kmac),Some(sid),1),
 		        (nr,tau));
 	}
 
@@ -84,7 +84,7 @@ package Prot_NoKey {
 							                Maybe((Integer,Integer,Bits(256),Bits(256),Bits(256))),
 							                Integer),
 							               (Bits(256))) {
-	    (V,v,U,ltk,acc,ni_,nr,kmac,sid,mess) <- parse state;
+	    (U,v,V,ltk,acc,ni_,nr,kmac,sid,mess) <- parse state;
         assert (v   == true );              /* session belongs to responder       */
         assert (acc  == None );              /* session is still running           */
 		assert (mess == 1);
@@ -95,11 +95,11 @@ package Prot_NoKey {
 		    acc        <- Some(true);
 			tau_       <- mac(Unwrap(kmac),zeron,4);
 			
-		   return ((V,v,U,ltk,acc,ni_,nr,kmac,sid,2),
+		   return ((U,v,V,ltk,acc,ni_,nr,kmac,sid,2),
 		           (tau_));
 		} else {
 		    acc <- Some(false);
-		    return ((V,v,U,ltk,acc,ni_,nr,kmac,sid,2),
+		    return ((U,v,V,ltk,acc,ni_,nr,kmac,sid,2),
 		            (zeron));
 		}
 	}
