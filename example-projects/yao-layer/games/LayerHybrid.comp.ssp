@@ -1,4 +1,4 @@
-composition VeryLeft {
+composition LayerHybrid {
     const n: Integer;
     const m: Integer;
     const p: Integer;
@@ -19,6 +19,16 @@ composition VeryLeft {
         }
     }
 
+    instance enc = Enc1 {
+        params {
+            n: n,
+            m: m,
+            p: p,
+            encn: encn,
+            encm: encm,
+        }
+    }
+
     instance gate = Gate {
         params {
             n: n,
@@ -29,22 +39,12 @@ composition VeryLeft {
         }
     }
 
-    instance enc = Enc0 {
-        params {
-            n: n,
-            m: m,
-            p: p,
-            encn: encn,
-            encm: encm,
-        }
-    }
-
     compose {
         adversary: {
             GETAOUT: keys_top,
             SETBIT: keys_top,
-            GBLG: gate,
             GETKEYSIN: keys_bottom,
+            GBLG: gate,
         }
         gate: {
             ENCN: enc,
@@ -53,6 +53,7 @@ composition VeryLeft {
         }
         enc: {
             GETKEYSIN: keys_top,
+            GETBIT: keys_top,
         }
     }
 }

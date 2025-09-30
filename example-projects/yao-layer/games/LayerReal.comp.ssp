@@ -1,4 +1,4 @@
-composition Right {
+composition LayerReal {
     const n: Integer;
     const m: Integer;
     const p: Integer;
@@ -19,21 +19,23 @@ composition Right {
         }
     }
 
-    instance ev = Lev {
+    instance gate = Gate {
         params {
             n: n,
+            m: m,
+            p: p,
+            h: 0,
+            zeron: zeron,
         }
     }
 
-    instance simgate = Simgate {
+    instance enc = Enc0 {
         params {
             n: n,
             m: m,
             p: p,
             encn: encn,
             encm: encm,
-            zeron: zeron,
-            zerom: zerom,
         }
     }
 
@@ -41,18 +43,16 @@ composition Right {
         adversary: {
             GETAOUT: keys_top,
             SETBIT: keys_top,
-            GBLG: simgate,
+            GBLG: gate,
             GETKEYSIN: keys_bottom,
         }
-        simgate: {
-            GETAIN: keys_top,
-            GETINAIN: keys_top,
-            EVAL: ev,
-            GETAOUT: keys_bottom,
+        gate: {
+            ENCN: enc,
+            ENCM: enc,
+            GETKEYSOUT: keys_bottom,
         }
-        ev: {
-            GETBIT: keys_top,
-            SETBIT: keys_bottom,
+        enc: {
+            GETKEYSIN: keys_top,
         }
     }
 }

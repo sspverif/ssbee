@@ -10,7 +10,7 @@ theorem Yao {
     const encm: fn Bits(n),Bits(m),Bits(n) -> Bits(p);
 
   
-    instance Indcpa0_inst = Indcpa0 {
+    instance Indcpa0 = Indcpa0 {
         params {
             n: n,
             m: m,
@@ -22,7 +22,7 @@ theorem Yao {
         }
     }
 
-    instance Indcpa1_inst = Indcpa1 {
+    instance Indcpa1 = Indcpa1 {
         params {
             n: n,
             m: m,
@@ -34,7 +34,7 @@ theorem Yao {
         }
     }
 
-    instance VeryLeft_inst = VeryLeft {
+    instance LayerReal = LayerReal {
         params {
             n: n,
             m: m,
@@ -45,7 +45,7 @@ theorem Yao {
             encn: encn,
         }
     }
-    instance Left_inst = Left {
+    instance LayerHybrid = LayerHybrid {
         params {
             n: n,
             m: m,
@@ -56,7 +56,7 @@ theorem Yao {
             encn: encn,
         }
     }
-    instance Right_inst = Right {
+    instance LayerIdeal = LayerIdeal {
         params {
             n: n,
             m: m,
@@ -68,6 +68,30 @@ theorem Yao {
         }
     }
 
+
+    instance Sec0 = Hybrid0 {
+        params {
+            n: n,
+            m: m,
+            p: p,
+            zerom: zerom,
+            zeron: zeron,
+            encm: encm,
+            encn: encn,
+        }
+    }
+
+    instance Sec1 = Hybrid3 {
+        params {
+            n: n,
+            m: m,
+            p: p,
+            zerom: zerom,
+            zeron: zeron,
+            encm: encm,
+            encn: encn,
+        }
+    }
 
     instance Hybrid0 = Hybrid0 {
         params {
@@ -118,8 +142,8 @@ theorem Yao {
     }
 
     assumptions {
-        Indcpa: Indcpa0_inst ~ Indcpa1_inst
-        Layer: VeryLeft_inst ~ Right_inst
+        Indcpa: Indcpa0 ~ Indcpa1
+        Layer: LayerReal ~ LayerIdeal
     }
 
     gamehops {
@@ -127,14 +151,14 @@ theorem Yao {
         reduction Hybrid0 Hybrid1 {
             assumption Layer
 
-            map VeryLeft_inst Hybrid0 {
+            map LayerReal Hybrid0 {
                 keys_top: keys0
                 keys_bottom: keys1
                 enc: enc1
                 gate: gate1
             }
 
-            map Right_inst Hybrid1 {
+            map LayerIdeal Hybrid1 {
                 keys_top: keys0
                 keys_bottom: keys1
                 ev: ev1
@@ -145,14 +169,14 @@ theorem Yao {
         reduction Hybrid1 Hybrid2 {
             assumption Layer
 
-            map VeryLeft_inst Hybrid1 {
+            map LayerReal Hybrid1 {
                 keys_top: keys1
                 keys_bottom: keys2
                 enc: enc2
                 gate: gate2
             }
 
-            map Right_inst Hybrid2 {
+            map LayerIdeal Hybrid2 {
                 keys_top: keys1
                 keys_bottom: keys2
                 ev: ev2
@@ -163,14 +187,14 @@ theorem Yao {
         reduction Hybrid2 Hybrid3 {
             assumption Layer
 
-            map VeryLeft_inst Hybrid2 {
+            map LayerReal Hybrid2 {
                 keys_top: keys2
                 keys_bottom: keys3
                 enc: enc3
                 gate: gate3
             }
 
-            map Right_inst Hybrid3 {
+            map LayerIdeal Hybrid3 {
                 keys_top: keys2
                 keys_bottom: keys3
                 ev: ev3
@@ -178,21 +202,21 @@ theorem Yao {
             }
         }
 
-        reduction VeryLeft_inst Left_inst {
+        reduction LayerReal LayerHybrid {
             assumption Indcpa
 
-            map Indcpa0_inst VeryLeft_inst {
+            map Indcpa0 LayerReal {
                 keys_top: keys_top
                 enc: enc
             }
 
-            map Indcpa1_inst Left_inst {
+            map Indcpa1 LayerHybrid {
                 keys_top: keys_top
                 enc: enc
             }
         }
 
-        equivalence Left_inst Right_inst {
+        equivalence LayerHybrid LayerIdeal {
             GETAOUT: {
                 invariant: [
                     ./theorem/invariant-GBLG.smt2
@@ -241,7 +265,7 @@ theorem Yao {
         }
     }
     propositions {
-        Layer: VeryLeft_inst ~ Right_inst
-        /*Hybrid: Hybrid0 ~ Hybrid3*/
+        Layer: LayerReal ~ LayerIdeal
+        Hybrid: Sec0 ~ Sec1
     }
 }
