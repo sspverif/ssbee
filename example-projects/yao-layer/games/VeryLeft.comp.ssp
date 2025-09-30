@@ -11,14 +11,12 @@ composition VeryLeft {
         params {
             n: n,
         }
-
     }
 
     instance keys_bottom = Keys {
         params {
             n: n,
         }
-
     }
 
     instance gate = Gate {
@@ -29,7 +27,6 @@ composition VeryLeft {
             h: 0,
             zeron: zeron,
         }
-
     }
 
     instance enc = Enc0 {
@@ -40,8 +37,8 @@ composition VeryLeft {
             encn: encn,
             encm: encm,
         }
-
     }
+
     compose {
         adversary: {
             GETAOUT: keys_top,

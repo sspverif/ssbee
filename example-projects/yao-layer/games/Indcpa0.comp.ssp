@@ -11,7 +11,6 @@ composition Indcpa0 {
         params {
             n: n,
         }
-
     }
 
     instance enc = Enc0 {
@@ -22,8 +21,8 @@ composition Indcpa0 {
             encn: encn,
             encm: encm,
         }
-
     }
+
     compose {
         adversary: {
             GETAOUT: keys_top,

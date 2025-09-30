@@ -39,7 +39,6 @@ composition Left {
         }
     }
 
-
     compose {
         adversary: {
             GETAOUT: keys_top,

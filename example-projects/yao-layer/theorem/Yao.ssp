@@ -68,30 +68,6 @@ theorem Yao {
         }
     }
 
-    instance Indcpamod0_inst = Indcpamod0 {
-        params {
-            n: n,
-            m: m,
-            p: p,
-            zerom: zerom,
-            zeron: zeron,
-            encm: encm,
-            encn: encn,
-        }
-    }
-    
-    instance Indcpamon0_inst = Indcpamon0 {
-        params {
-            n: n,
-            m: m,
-            p: p,
-            zerom: zerom,
-            zeron: zeron,
-            encm: encm,
-            encn: encn,
-        }
-    }
-
     assumptions {
         Indcpa: Indcpa0_inst ~ Indcpa1_inst
     }

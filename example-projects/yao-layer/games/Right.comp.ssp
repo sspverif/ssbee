@@ -11,15 +11,14 @@ composition Right {
         params {
             n: n,
         }
-
     }
 
     instance keys_bottom = Keys {
         params {
             n: n,
         }
-
     }
+
     instance ev = Lev {
         params {
             n: n,
@@ -36,7 +35,6 @@ composition Right {
             zeron: zeron,
             zerom: zerom,
         }
-
     }
 
     compose {
