@@ -68,11 +68,116 @@ theorem Yao {
         }
     }
 
+
+    instance Hybrid0 = Hybrid0 {
+        params {
+            n: n,
+            m: m,
+            p: p,
+            zerom: zerom,
+            zeron: zeron,
+            encm: encm,
+            encn: encn,
+        }
+    }
+
+    instance Hybrid1 = Hybrid1 {
+        params {
+            n: n,
+            m: m,
+            p: p,
+            zerom: zerom,
+            zeron: zeron,
+            encm: encm,
+            encn: encn,
+        }
+    }
+
+    instance Hybrid2 = Hybrid2 {
+        params {
+            n: n,
+            m: m,
+            p: p,
+            zerom: zerom,
+            zeron: zeron,
+            encm: encm,
+            encn: encn,
+        }
+    }
+
+    instance Hybrid3 = Hybrid3 {
+        params {
+            n: n,
+            m: m,
+            p: p,
+            zerom: zerom,
+            zeron: zeron,
+            encm: encm,
+            encn: encn,
+        }
+    }
+
     assumptions {
         Indcpa: Indcpa0_inst ~ Indcpa1_inst
+        Layer: VeryLeft_inst ~ Right_inst
     }
 
     gamehops {
+
+        reduction Hybrid0 Hybrid1 {
+            assumption Layer
+
+            map VeryLeft_inst Hybrid0 {
+                keys_top: keys0
+                keys_bottom: keys1
+                enc: enc1
+                gate: gate1
+            }
+
+            map Right_inst Hybrid1 {
+                keys_top: keys0
+                keys_bottom: keys1
+                ev: ev1
+                simgate: simgate1            
+            }
+        }
+
+        reduction Hybrid1 Hybrid2 {
+            assumption Layer
+
+            map VeryLeft_inst Hybrid1 {
+                keys_top: keys1
+                keys_bottom: keys2
+                enc: enc2
+                gate: gate2
+            }
+
+            map Right_inst Hybrid2 {
+                keys_top: keys1
+                keys_bottom: keys2
+                ev: ev2
+                simgate: simgate2            
+            }
+        }
+
+        reduction Hybrid2 Hybrid3 {
+            assumption Layer
+
+            map VeryLeft_inst Hybrid2 {
+                keys_top: keys2
+                keys_bottom: keys3
+                enc: enc3
+                gate: gate3
+            }
+
+            map Right_inst Hybrid3 {
+                keys_top: keys2
+                keys_bottom: keys3
+                ev: ev3
+                simgate: simgate3            
+            }
+        }
+
         reduction VeryLeft_inst Left_inst {
             assumption Indcpa
 
@@ -134,7 +239,9 @@ theorem Yao {
                 }
             }
         }
-        
-}
-
+    }
+    propositions {
+        Layer: VeryLeft_inst ~ Right_inst
+        /*Hybrid: Hybrid0 ~ Hybrid3*/
+    }
 }
