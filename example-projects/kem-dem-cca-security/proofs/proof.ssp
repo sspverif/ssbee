@@ -282,7 +282,6 @@ proof Proof {
 
         /* We have finally reached our destination (namely modular_pke_cca_game_with_real_kem_and_ideal_dem) */
         /* We now prove the ideal PKE-CCA game  */
-        /*
         equivalence monolithic_pke_cca_ideal_game modular_pke_cca_game_with_real_kem_and_ideal_dem {
             PKGEN: {
                 invariant: [
@@ -320,7 +319,7 @@ proof Proof {
                 }
             }
         }
-        */
+
         /* 
         Instead of previous equivalence goals, we can concisely prove the following equivalence in one go.
         Note that both games are initialized using the same idealization bit "b" (i.e. left_b = right_dem_idealization).
