@@ -29,6 +29,7 @@ package ReductionMac {
         (U,u,V,kid,acc,k,ni_,nr,kmac,sid,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
         assert (mess == 0);
+        assert (u == false);
         
         ni <- invoke Sample();
         
@@ -45,9 +46,10 @@ package ReductionMac {
                                     Maybe((Integer,Integer,Bits(256),Bits(256),Bits(256))),
                                     Integer),
                                    (Bits(256), Bits(256))) {
-        (V,v,U,kid,acc,k_,ni_,nr_,kmac__,sid_,mess) <- parse state;
+        (U,v,V,kid,acc,k_,ni_,nr_,kmac__,sid_,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
         assert (mess == 0);
+        assert (v == true);
 
         nr         <- invoke Sample();
         hon        <- invoke Hon(kid);
@@ -62,7 +64,7 @@ package ReductionMac {
         }
         sid        <- (U,V,ni,nr,tau);
 
-        return ((V,v,U,kid,None,None,Some(ni),Some(nr),kmac,Some(sid),1),
+        return ((U,v,V,kid,None,None,Some(ni),Some(nr),kmac,Some(sid),1),
                 (nr,tau));
     }
 
@@ -78,6 +80,8 @@ package ReductionMac {
         (U,u,V,kid,acc,k_,ni,nr_,kmac__,sid_,mess) <- parse state;
         assert (mess == 1);
         assert (acc  == None );              /* session is still running           */
+        assert (u == false);
+        
         (nr,tau) <- parse msg;
 
         hon        <- invoke Hon(kid);
@@ -114,9 +118,10 @@ package ReductionMac {
                                             Maybe((Integer,Integer,Bits(256),Bits(256),Bits(256))),
                                             Integer),
                                            (Bits(256))) {
-        (V,v,U,kid,acc,k,ni_,nr,kmac,sid,mess) <- parse state;
+        (U,v,V,kid,acc,k,ni_,nr,kmac,sid,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
         assert (mess == 1);
+        assert (v == true);
         (ni,tau) <- parse msg;
 
         hon           <- invoke Hon(kid);
@@ -130,11 +135,11 @@ package ReductionMac {
         if (verified and (ni == Unwrap(ni_))) {
            acc        <- Some(true);
             
-           return ((V,v,U,kid,acc,k,ni_,nr,kmac,sid,2),
+           return ((U,v,V,kid,acc,k,ni_,nr,kmac,sid,2),
                    (tau_));
         } else {
             acc       <- Some(false);
-            return ((V,v,U,kid,acc,k,ni_,nr,kmac,sid,2),
+            return ((U,v,V,kid,acc,k,ni_,nr,kmac,sid,2),
                     (zeron));
         }
     }
@@ -152,6 +157,7 @@ package ReductionMac {
         (U,u,V,kid,acc,k,ni,nr,kmac,sid,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
         assert (mess == 2);
+        assert (u == false);
 
         hon        <- invoke Hon(kid);
         if hon {

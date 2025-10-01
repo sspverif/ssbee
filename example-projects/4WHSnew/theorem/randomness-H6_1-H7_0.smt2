@@ -40,8 +40,8 @@
 (define-fun <relation-lemma-randomness-H6_1-H7_0-Send2>
     ((H61-old <GameState_H6_<$<!n!>$>>)
      (H70-old <GameState_H7_<$<!n!>$>>)
-     (H61-return <OracleReturn_H6_<$<!n!>$>_Game_noprfkey_<$<!n!>$>_Send2>)
-     (H70-return <OracleReturn_H7_<$<!n!>$>_Game_noprfkey_<$<!n!>$>_Send2>)
+     (H61-return <OracleReturn_H6_<$<!n!>$>_KX_noprfkey_<$<!n!>$>_Send2>)
+     (H70-return <OracleReturn_H7_<$<!n!>$>_KX_noprfkey_<$<!n!>$>_Send2>)
      (ctr Int) (msg Bits_256))
   Bool
   (and (= (__sample-rand-H6_1-Bits_256 (sample-id "Nonces" "Sample" "1")
