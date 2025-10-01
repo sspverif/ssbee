@@ -44,6 +44,7 @@ impl<'a> OracleContext<'a> {
         let game_name: &'a _ = gctx.game_name();
         let game_inst_name: &'a _ = gctx.game_inst_name();
         let pkg_name: &'a _ = pctx.pkg_name();
+        let pkg_inst_name: &'a _ = pctx.pkg_inst_name();
         let oracle_name: &'a _ = self.oracle_name();
         let oracle_args: &'a _ = self.oracle_args();
         let game_params: &'a _ = gctx.game_params();
@@ -53,6 +54,7 @@ impl<'a> OracleContext<'a> {
             game_name,
             game_inst_name,
             pkg_name,
+            pkg_inst_name,
             oracle_name,
             oracle_args,
             game_params,
