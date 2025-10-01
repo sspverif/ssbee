@@ -83,5 +83,5 @@
   (and
    (= scr-1 base-ctr-1)
    (= scr-0 base-ctr-0)
-   (= id-0 (sample-id "Prf" "Eval" "id5"))
-   (= id-1 (sample-id "Game" "Test" "id4"))))
+   (= id-0 (sample-id "Prf" "Eval" "1"))
+   (= id-1 (sample-id "Game" "Test" "1"))))

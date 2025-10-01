@@ -6,8 +6,8 @@
   (and
    (= scr-1 base-ctr-1)
    (= scr-0 base-ctr-0)
-   (and (= id-0 (sample-id "Game" "NewKey" "id1"))
-        (= id-1 (sample-id "Prf" "NewKey" "id1")))))
+   (and (= id-0 (sample-id "Game" "NewKey" "1"))
+        (= id-1 (sample-id "Prf" "NewKey" "1")))))
 
 (define-fun randomness-mapping-NewSession
     ((base-ctr-0 Int) (base-ctr-1 Int)
@@ -24,7 +24,7 @@
   (and
    (= scr-1 base-ctr-1)
    (= scr-0 base-ctr-0)
-   (= id-0 id-1 (sample-id "Prot" "Run1" "id2"))))
+   (= id-0 id-1)))
 
 (define-fun randomness-mapping-Send2
     ((base-ctr-0 Int) (base-ctr-1 Int)
@@ -34,7 +34,7 @@
   (and
    (= scr-1 base-ctr-1)
    (= scr-0 base-ctr-0)
-   (= id-0 id-1 (sample-id "Prot" "Run2" "id3"))))
+   (= id-0 id-1)))
 
 (define-fun randomness-mapping-Send3
     ((base-ctr-0 Int) (base-ctr-1 Int)
@@ -65,7 +65,7 @@
   (and
    (= scr-1 base-ctr-1)
    (= scr-0 base-ctr-0)
-   (= id-0 id-1 (sample-id "Game" "Test" "id4"))))
+   (= id-0 id-1)))
 
 (define-fun randomness-mapping-Reveal
     ((base-ctr-0 Int) (base-ctr-1 Int)

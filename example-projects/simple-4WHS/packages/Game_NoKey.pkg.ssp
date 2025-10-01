@@ -99,7 +99,7 @@ oracle NewKey(ltk: Maybe(Bits(256))) -> Integer {
       kid_ <- (kid_ + 1);
       if (ltk == None)
       {
-        ltk_ <-$ Bits(256) sample-name id1;
+        ltk_ <-$ Bits(256);
         LTK[kid_] <- Some(ltk_);
         H[kid_]   <- Some(true); 
       }
@@ -202,7 +202,7 @@ oracle Test(ctr: Integer) -> Bits(256)
     RevTested[Unwrap(sid)] <- Some(true);
 	
     if b {
-	  k <-$ Bits(256) sample-name id4;
+	  k <-$ Bits(256);
 	} else {
       k <- prf(ltk,U,V,Unwrap(ni),Unwrap(nr) ,true);
     }

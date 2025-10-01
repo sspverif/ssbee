@@ -16,7 +16,7 @@ oracle NewKey(ltk: Maybe(Bits(256))) -> Integer {
       kid_ <- (kid_ + 1);
       if (ltk == None)
       {
-        ltk_ <-$ Bits(256) sample-name id1;
+        ltk_ <-$ Bits(256);
         LTK[kid_] <- Some(ltk_);
         H[kid_]   <- Some(true); 
       }
@@ -34,7 +34,7 @@ oracle NewKey(ltk: Maybe(Bits(256))) -> Integer {
               return prf(k,a,aa,c,d,e);
             }
         if (PRF[(h,a,aa,c,d,e)] == None) {
-            temp <-$ Bits(256) sample-name id5;
+            temp <-$ Bits(256);
             PRF[(h,a,aa,c,d,e)] <- Some(temp);
 			return temp;
         }
