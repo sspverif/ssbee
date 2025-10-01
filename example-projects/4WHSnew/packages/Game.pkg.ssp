@@ -126,8 +126,6 @@ oracle Send1(ctr: Integer) -> (Bits(256))
     {
         assert not (State[ctr] == None);     /* session has been initialized */
         state <- Unwrap(State[ctr]);
-        (U,u,V,ltk,acc,k,ni,nr,kmac,sid,mess) <- parse state;
-        assert (u == false);                 /* session belongs to initiator */
         return      <- invoke Run1(state);
         (state,msg) <- parse return;
         State[ctr]  <- Some(state);
@@ -138,8 +136,6 @@ oracle Send2(ctr: Integer, msg: Bits(256)) -> (Bits(256),Bits(256))
     {
         assert not (State[ctr] == None);     /* session has been initialized */
         state   <- Unwrap(State[ctr]);
-        (V,v,U,ltk,acc,k,ni_,nr,kmac,sid,mess) <- parse state;
-        assert (v    == true );              /* session belongs to responder */
         return         <- invoke Run2(state,msg);
         (state,msg_)   <- parse return;
         State[ctr]     <-  Some(state);
@@ -150,12 +146,9 @@ oracle Send3(ctr: Integer, msg: (Bits(256),Bits(256))) -> (Bits(256), Bits(256))
     {
         assert not (State[ctr] == None);    /* session has been initialized */
         state                                           <- Unwrap(State[ctr]);
-        (U,u,V,ltk,acc,k_,ni_,nr_,kmac_,sid_,mess)    <- parse state;
-        assert (u    == false);              /* session belongs to initiator       */
         return         <- invoke Run3(state,msg);
         (state,msg_)   <- parse return;
 
-		/* Delete for no authentication */
 		(_U,_u,_V,_ltk,_acc,_k,_ni,_nr,_kmac,sid,_mess) <- parse state;
         if (_mess == 2){
 		if (First[Unwrap(sid)] == None) {
@@ -166,7 +159,6 @@ oracle Send3(ctr: Integer, msg: (Bits(256),Bits(256))) -> (Bits(256), Bits(256))
 		  }
 		}
         }
-		/* Until Here */
 
         State[ctr]     <-  Some(state);
         return msg_;
@@ -176,15 +168,10 @@ oracle Send4(ctr: Integer, msg: (Bits(256),Bits(256))) -> (Bits(256))
     {
         assert not (State[ctr] == None);     /* session has been initialized */
         state                                          <- Unwrap(State[ctr]);
-        (V,v,U,ltk,acc,k,ni_,nr,kmac,sid_,mess)      <- parse state;
-		
-        assert (v    == true);                /* session belongs to responder       */
-
         return       <- invoke Run4(state,msg);
         (state,msg_) <- parse return;
         State[ctr]   <- Some(state);
 
-		/* Delete for no authentication */
 		(_U,_u,_V,_ltk,_acc,_k,_ni,_nr,_kmac,sid,_mess) <- parse state;
 		if (First[Unwrap(sid)] == None) {
 		    First[Unwrap(sid)] <- Some(ctr);
@@ -193,7 +180,6 @@ oracle Send4(ctr: Integer, msg: (Bits(256),Bits(256))) -> (Bits(256))
 		      Second[Unwrap(sid)] <- Some(ctr);
 		  }
 		}
-		/* Until Here */
 
         return msg_;  
     } 
@@ -202,9 +188,7 @@ oracle Send5(ctr: Integer, msg: Bits(256)) -> (Bool)
     {
         assert not (State[ctr] == None);    /* session has been initialized */
         state                                       <- Unwrap(State[ctr]);
-        (U,u,V,ltk,acc,k,ni,nr,kmac,sid,mess)     <- parse state;
 		
-        assert (u    == false);              /* session belongs to initiator       */
 		
         return      <- invoke Run5(state,msg);
         (state,stop) <- parse return;
@@ -241,10 +225,11 @@ oracle Test(ctr: Integer) -> Bits(256)
 	/* mark key as tested */
     RevTested[Unwrap(sid)] <- Some(true);
 	
-    k_ <- Unwrap(k);
     if b {
 	    k_ <-$ Bits(256);
-	}
+	} else {
+        k_ <- Unwrap(k);
+    }
     return k_;
     }
 

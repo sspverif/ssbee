@@ -21,6 +21,7 @@ package ReductionCR {
 	    (U,u,V,ltk,acc,k,ni_,nr,kmac,sid,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
         assert (mess == 0);
+        assert (u == false);
 		
 		ni <- invoke Sample();
 		
@@ -37,9 +38,10 @@ package ReductionCR {
 							        Maybe((Integer,Integer,Bits(256),Bits(256),Bits(256))),
 							        Integer),
 							       (Bits(256), Bits(256))) {
-	    (V,v,U,ltk,acc,k_,ni_,nr_,kmac_,sid_,mess) <- parse state;
+	    (U,v,V,ltk,acc,k_,ni_,nr_,kmac_,sid_,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
         assert (mess == 0);
+        assert (v == true);
 
 		nr         <- invoke Sample();
         kmac       <-  invoke PRF(ltk,U,V,ni,nr,false); /* need role agreement here, to be fixed */
@@ -47,7 +49,7 @@ package ReductionCR {
         tau        <-  invoke MAC(kmac,nr,2);
         sid        <- (U,V,ni,nr,tau);
 
-		return ((V,v,U,ltk,None,Some(k),Some(ni),Some(nr),Some(kmac),Some(sid),1),
+		return ((U,v,V,ltk,None,Some(k),Some(ni),Some(nr),Some(kmac),Some(sid),1),
 		        (nr,tau));
 	}
 
@@ -63,6 +65,8 @@ package ReductionCR {
 	    (U,u,V,ltk,acc,k_,ni,nr_,kmac_,sid_,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
         assert (mess == 1);
+        assert (u == false);
+        
 		(nr,tau) <- parse msg;
 
 		kmac       <- invoke PRF(ltk,U,V,Unwrap(ni),nr,false);
@@ -89,9 +93,10 @@ package ReductionCR {
 							                Maybe((Integer,Integer,Bits(256),Bits(256),Bits(256))),
 							                Integer),
 							               (Bits(256))) {
-	    (V,v,U,ltk,acc,k,ni_,nr,kmac,sid,mess) <- parse state;
+	    (U,v,V,ltk,acc,k,ni_,nr,kmac,sid,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
 		assert (mess == 1);
+        assert (v == true);
 		(ni,tau) <- parse msg;
 
 		mac <- invoke MAC(Unwrap(kmac),ni,3);
@@ -101,11 +106,11 @@ package ReductionCR {
 		    acc        <- Some(true);
 			tau_       <- invoke MAC(Unwrap(kmac),zeron,4);
 			
-		   return ((V,v,U,ltk,acc,k,ni_,nr,kmac,sid,2),
+		   return ((U,v,V,ltk,acc,k,ni_,nr,kmac,sid,2),
 		           (tau_));
 		} else {
 		    acc <- Some(false);
-		    return ((V,v,U,ltk,acc,k,ni_,nr,kmac,sid,2),
+		    return ((U,v,V,ltk,acc,k,ni_,nr,kmac,sid,2),
 		            (zeron));
 		}
 	}
@@ -123,6 +128,7 @@ package ReductionCR {
 	    (U,u,V,ltk,acc,k,ni,nr,kmac,sid,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
         assert (mess == 2);
+        assert (u == false);
 
 		mac <- invoke MAC(Unwrap(kmac),zeron,4);
 
