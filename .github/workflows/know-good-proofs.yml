@@ -20,4 +20,4 @@ jobs:
           echo "DOMINO=$(pwd)/target/release/domino">>$GITHUB_ENV
 
       - name: Run proofs
-        run: ./scripts/test-known-examples.sh
+        run: ./scripts/test-known-examples.sh || exit 1
