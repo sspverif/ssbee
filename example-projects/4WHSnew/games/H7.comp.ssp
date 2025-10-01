@@ -34,7 +34,7 @@ composition H7 {
         mac: mac,
         }
     }
-    instance Game = Game_noprfkey {
+    instance Game = KX_noprfkey {
         params {
         b: b,
         n: n,

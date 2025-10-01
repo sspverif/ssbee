@@ -22,6 +22,7 @@ package ProtNoKeyOnlyKid {
 	    (U,u,V,kid,acc,k,ni_,nr,kmac,sid,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
         assert (mess == 0);
+        assert (u ==false);
 		
 		ni <- invoke Sample();
 		
@@ -38,16 +39,17 @@ package ProtNoKeyOnlyKid {
 							        Maybe((Integer,Integer,Bits(256),Bits(256),Bits(256))),
 							        Integer),
 							       (Bits(256), Bits(256))) {
-	    (V,v,U,kid,acc,k_,ni_,nr_,kmac_,sid_,mess) <- parse state;
+	    (U,v,V,kid,acc,k_,ni_,nr_,kmac_,sid_,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
         assert (mess == 0);
+        assert (v == true);
 
 		nr         <- invoke Sample();
         kmac       <- invoke Eval(kid,U,V,ni,nr,false); /* need role agreement here, to be fixed */
         tau        <- mac(kmac,nr,2);
         sid        <- (U,V,ni,nr,tau);
 
-		return ((V,v,U,kid,None,None,Some(ni),Some(nr),Some(kmac),Some(sid),1),
+		return ((U,v,V,kid,None,None,Some(ni),Some(nr),Some(kmac),Some(sid),1),
 		        (nr,tau));
 	}
 
@@ -63,6 +65,8 @@ package ProtNoKeyOnlyKid {
 	    (U,u,V,kid,acc,k_,ni,nr_,kmac_,sid_,mess) <- parse state;
         assert (mess == 1);
         assert (acc  == None );              /* session is still running           */
+        assert (u == false);
+        
 		(nr,tau) <- parse msg;
 
 		kmac       <- invoke Eval(kid,U,V,Unwrap(ni),nr,false);
@@ -86,9 +90,10 @@ package ProtNoKeyOnlyKid {
 							                Maybe((Integer,Integer,Bits(256),Bits(256),Bits(256))),
 							                Integer),
 							               (Bits(256))) {
-	    (V,v,U,kid,acc,k,ni_,nr,kmac,sid,mess) <- parse state;
+	    (U,v,V,kid,acc,k,ni_,nr,kmac,sid,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
 		assert (mess == 1);
+        assert (v == true);
 		(ni,tau) <- parse msg;
 
         if ((mac(Unwrap(kmac),ni,3) == tau) and
@@ -96,11 +101,11 @@ package ProtNoKeyOnlyKid {
 		    acc        <- Some(true);
 			tau_       <- mac(Unwrap(kmac),zeron,4);
 			
-		   return ((V,v,U,kid,acc,k,ni_,nr,kmac,sid,2),
+		   return ((U,v,V,kid,acc,k,ni_,nr,kmac,sid,2),
 		           (tau_));
 		} else {
 		    acc <- Some(false);
-		    return ((V,v,U,kid,acc,k,ni_,nr,kmac,sid,2),
+		    return ((U,v,V,kid,acc,k,ni_,nr,kmac,sid,2),
 		            (zeron));
 		}
 	}
@@ -118,6 +123,7 @@ package ProtNoKeyOnlyKid {
 	    (U,u,V,kid,acc,k,ni,nr,kmac,sid,mess) <- parse state;
         assert (acc  == None );              /* session is still running           */
         assert (mess == 2);
+        assert (u == false);
 
         if (mac(Unwrap(kmac),zeron,4) == tau) {
 		   return ((U,u,V,kid,Some(true),k,ni,nr,kmac,sid,3),
