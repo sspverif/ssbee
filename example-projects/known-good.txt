@@ -1,3 +1,6 @@
 # a simple kem example proof
 simple-KEM-example
 
+# the KEM-DEM security proof
+kem-dem-cca-security
+
