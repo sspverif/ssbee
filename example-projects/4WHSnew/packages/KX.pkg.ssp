@@ -1,4 +1,4 @@
-package Game {
+package KX {
     params {
         b: Bool,
         n: Integer,
