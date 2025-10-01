@@ -5,7 +5,7 @@ package DemScheme {
     }
 
     oracle DEM_ENC(k: Bits(256), m: Bits(*)) -> Bits(*) {
-        r <-$ Bits(500);
+        r <-$ Bits(500) sample-name dem_enc;
         return dem_enc(r, k, m);
     }
 

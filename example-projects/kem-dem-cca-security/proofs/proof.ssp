@@ -190,6 +190,7 @@ proof Proof {
         SSBee algorithimically verifies this using the annotated call/dependecy graph of the compostion by matching the types of the mapped packages and their parameters as well as verifying a single reduction package can be used to split the left and right games to those of the assumption.
         */
         /* We first prove real PKE-CCA game is equivalent to the modular version (i.e. modular_pke_cca_game_with_real_kem_and_real_dem) */
+        /*
         equivalence monolithic_pke_cca_real_game modular_pke_cca_game_with_real_kem_and_real_dem {
             PKGEN: {
                 invariant: [
@@ -227,6 +228,7 @@ proof Proof {
                 }
             }
         }
+        */
 
         /* Now we hop three times to reach modular_pke_cca_game_with_real_kem_and_ideal_dem */
         /* First hop idealizes KEM and reduces to KEM-CCA security */
@@ -282,6 +284,7 @@ proof Proof {
 
         /* We have finally reached our destination (namely modular_pke_cca_game_with_real_kem_and_ideal_dem) */
         /* We now prove the ideal PKE-CCA game  */
+        /*
         equivalence monolithic_pke_cca_ideal_game modular_pke_cca_game_with_real_kem_and_ideal_dem {
             PKGEN: {
                 invariant: [
@@ -319,7 +322,7 @@ proof Proof {
                 }
             }
         }
-
+        */
         /* 
         Instead of previous equivalence goals, we can concisely prove the following equivalence in one go.
         Note that both games are initialized using the same idealization bit "b" (i.e. left_b = right_dem_idealization).
