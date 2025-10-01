@@ -70,7 +70,7 @@ theorem WHSProto {
         }
     }
 
-    instance KX = KX {
+    instance H0 = H0 {
         params {
             b       : b ,
             n       : n    ,
@@ -237,7 +237,7 @@ theorem WHSProto {
 
     gamehops 
     {
-        equivalence KX H1_0 {
+        equivalence H0 H1_0 {
             Send1: {
                 invariant: [
                     ./theorem/invariant-KX-H1_0.smt2

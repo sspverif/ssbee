@@ -58,24 +58,24 @@
    ;;      (not (= kmac (as mk-none (Maybe Bits_256)))))
    (=> (not (= kmac (as mk-none (Maybe Bits_256))))
 	   (and (not (= k (as mk-none (Maybe Bits_256))))
-			(= kmac (mk-some (<<func-prf>> ltk (ite u V U) (ite u U V)     ; then kmac has the right value.
+			(= kmac (mk-some (<<func-prf>> ltk U V     ; then kmac has the right value.
 										   (maybe-get ni)
 										   (maybe-get nr)
 										   false)))
 			(= (select h2-prf (maybe-get kmac))        ; then PRF value kmac is also in PRF table (at correct position).
-			   (mk-some (mk-tuple6 ltk (ite u V U) (ite u U V)
+			   (mk-some (mk-tuple6 ltk U V
 								   (maybe-get ni)
 								   (maybe-get nr)
 								   false)))))
 
    (=> (not (= k (as mk-none (Maybe Bits_256))))
 	   (and (not (= kmac (as mk-none (Maybe Bits_256))))
-			(= k (mk-some (<<func-prf>> ltk (ite u V U) (ite u U V)        ; then k    has the right value.
+			(= k (mk-some (<<func-prf>> ltk U V
 										(maybe-get ni)
 										(maybe-get nr)
 										true)))
 			(= (select h2-prf (maybe-get k))           ; then PRF value k is also in PRF table (at correct position).
-			   (mk-some (mk-tuple6 ltk (ite u V U) (ite u U V)
+			   (mk-some (mk-tuple6 ltk U V
 								   (maybe-get ni)
 								   (maybe-get nr)
 								   true)))))
@@ -110,7 +110,7 @@
 		(not (= nr (as mk-none (Maybe Bits_256))))
 		(not (= kmac (as mk-none (Maybe Bits_256))))
 		(not (= k (as mk-none (Maybe Bits_256))))
-		(= sid (mk-some (mk-tuple5 (ite u V U) (ite u U V) (maybe-get ni) (maybe-get nr)       ; then sid  has the right value.
+		(= sid (mk-some (mk-tuple5 U V (maybe-get ni) (maybe-get nr)       ; then sid  has the right value.
 								   (<<func-mac>> (maybe-get kmac)
 												 (maybe-get nr)
 												 2))))))))
@@ -137,7 +137,7 @@
 				(not (= k (as mk-none (Maybe Bits_256))))
 				(not (= ni (as mk-none (Maybe Bits_256)))) ; then ni is not none.
 				(not (= nr (as mk-none (Maybe Bits_256)))) ; then nr   is not none.
-				(= sid (mk-some (mk-tuple5 V U (maybe-get ni) (maybe-get nr)       ; then sid  has the right value.
+				(= sid (mk-some (mk-tuple5 U V (maybe-get ni) (maybe-get nr)       ; then sid  has the right value.
 										   (<<func-mac>> (maybe-get kmac)
 														 (maybe-get nr)
 														 2)))))))))
