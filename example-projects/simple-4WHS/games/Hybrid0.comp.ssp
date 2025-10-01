@@ -1,11 +1,11 @@
-composition KX_NoKey {
+composition Hybrid0 {
         const n: Integer;
         const zeron: Bits(256);
         const prf: fn Bits(256), Integer, Integer, Bits(256), Bits(256), Bool ->  Bits(256);
         const mac: fn Bits(256), Bits(256), Integer -> Bits(256);
         const b: Bool;
     
-    instance Prot = Prot_NoKey {
+    instance Prot = Prot {
         params {
         n: n,
         zeron: zeron,
@@ -13,29 +13,28 @@ composition KX_NoKey {
         mac: mac,
         }
     }
-    instance Game = Game_NoKey {
+    instance KX = KX {
         params {
         b: b,
         n: n,
         zeron: zeron,
-        prf: prf,
         }
     }
 
     compose {
         adversary: {
-            NewKey:     Game,
-            NewSession: Game,
-            Send1:      Game,
-            Send2:      Game,
-            Send3:      Game,
-            Send4:      Game,
-            Send5:      Game,
-            Reveal:     Game,
-            Test:       Game,
+            NewKey:     KX,
+            NewSession: KX,
+            Send1:      KX,
+            Send2:      KX,
+            Send3:      KX,
+            Send4:      KX,
+            Send5:      KX,
+            Reveal:     KX,
+            Test:       KX,
        },
 
-        Game: {
+        KX: {
             Run1:      Prot,
             Run2:      Prot,
             Run3:      Prot,

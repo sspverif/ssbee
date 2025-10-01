@@ -5,7 +5,7 @@ theorem Simple4WHS {
     const prf: fn Bits(256), Integer, Integer, Bits(256), Bits(256), Bool ->  Bits(256);
     const mac: fn Bits(256), Bits(256), Integer -> Bits(256);
 
-    instance KX = KX {
+    instance Hybrid0 = Hybrid0 {
         params {
             b       : b ,
             n       : n    ,
@@ -15,7 +15,7 @@ theorem Simple4WHS {
         }
     }
 
-    instance KX_NoKey = KX_NoKey {
+    instance Hybrid1 = Hybrid1 {
         params {
             b       : b ,
             n       : n    ,
@@ -26,7 +26,7 @@ theorem Simple4WHS {
     }
 
 
-    instance KX_NoPrf_RealPrf = KX_NoPrf {
+    instance Hybrid2 = Hybrid2 {
         params {
             b       : b ,
             bprf    : false,
@@ -37,7 +37,7 @@ theorem Simple4WHS {
         }
     }
 
-    instance KX_NoPrf_IdealPrf = KX_NoPrf {
+    instance Hybrid3 = Hybrid2 {
         params {
             b       : b ,
             bprf    : true,
@@ -48,7 +48,7 @@ theorem Simple4WHS {
         }
     }
 
-    instance RealKX_NoPrf_IdealPrf = KX_NoPrf {
+    instance Real_Hybrid3 = Hybrid2 {
         params {
             b       : false ,
             bprf    : true,
@@ -59,7 +59,7 @@ theorem Simple4WHS {
         }
     }
 
-    instance IdealKX_NoPrf_IdealPrf = KX_NoPrf {
+    instance Ideal_Hybrid3 = Hybrid2 {
         params {
             b       : true ,
             bprf    : true,
@@ -71,7 +71,7 @@ theorem Simple4WHS {
     }
 
 
-    instance PRFideal = PRF {
+    instance Ideal_PRF = PRF {
         params {
             b  : true,
             n  : n   ,
@@ -79,7 +79,7 @@ theorem Simple4WHS {
         }
     }
 
-    instance PRFreal = PRF {
+    instance Real_PRF = PRF {
         params {
             b  : false,
             n  : n    ,
@@ -88,11 +88,11 @@ theorem Simple4WHS {
     }
 
     assumptions {
-        prf:     PRFreal    ~ PRFideal
+        prf: Real_PRF ~ Ideal_PRF
     }
 
     gamehops {
-        equivalence KX KX_NoKey {
+        equivalence Hybrid0 Hybrid1 {
             Send1: {
                 invariant: [
                     ./theorem/invariant-KX-KX_NoKey.smt2,
@@ -203,7 +203,7 @@ theorem Simple4WHS {
             }
         }
         
-        equivalence KX_NoKey KX_NoPrf_RealPrf {
+        equivalence Hybrid1 Hybrid2 {
             Send1: {
                 invariant: [
                     ./theorem/invariant-KX_NoKey-KX_NoPrf.smt2,
@@ -314,20 +314,20 @@ theorem Simple4WHS {
             }
         }
 
-        reduction KX_NoPrf_RealPrf KX_NoPrf_IdealPrf
+        reduction Hybrid2 Hybrid3
         {
             assumption prf
 
-            map PRFreal KX_NoPrf_RealPrf {
+            map Real_PRF Hybrid2 {
                PRF: Prf
             }
 
-            map PRFideal KX_NoPrf_IdealPrf {
+            map Ideal_PRF Hybrid3 {
                PRF: Prf
             }
         }
 
-        equivalence RealKX_NoPrf_IdealPrf IdealKX_NoPrf_IdealPrf {
+        equivalence Real_Hybrid3 Ideal_Hybrid3 {
             Send1: {
                 invariant: [
                     ./theorem/invariant-KX_NoPrf-KX_NoPrf.smt2,

@@ -6,7 +6,7 @@
   (and
    (= scr-1 base-ctr-1)
    (= scr-0 base-ctr-0)
-   (and (= id-0 (sample-id "Game" "NewKey" "1"))
+   (and (= id-0 (sample-id "KX" "NewKey" "1"))
         (= id-1 (sample-id "Prf" "NewKey" "1")))))
 
 (define-fun randomness-mapping-NewSession
