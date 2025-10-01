@@ -44,7 +44,7 @@ package Prot_NoPrf {
         assert (mess == 0);
 
 		nr         <-$ Bits(256);
-        kmac       <- invoke Eval(ltk,U,V,ni,nr,false); /* need role agreement here, to be fixed */
+        kmac       <- invoke Eval(ltk,U,V,ni,nr,false); 
         tau        <-  mac(kmac,nr,2);
         sid        <- (U,V,ni,nr,tau);
 
