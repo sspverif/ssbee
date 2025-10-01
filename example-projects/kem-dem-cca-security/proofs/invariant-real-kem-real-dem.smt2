@@ -1,29 +1,9 @@
 (define-fun randomness-mapping-PKGEN
     ( 
-        (sample-ctr-old-monolithic_pke_cca_real_game Int)
-        (sample-ctr-old-modular_pke_cca_game_with_real_kem_and_real_dem Int)
-        (sample-id-monolithic_pke_cca_real_game Int)
-        (sample-id-modular_pke_cca_game_with_real_kem_and_real_dem Int)
-        (sample-ctr-monolithic_pke_cca_real_game Int)
-        (sample-ctr-modular_pke_cca_game_with_real_kem_and_real_dem Int)
-    )
-    Bool
-    (or
-        (and
-            (= sample-ctr-monolithic_pke_cca_real_game sample-ctr-old-monolithic_pke_cca_real_game)
-            (= sample-ctr-modular_pke_cca_game_with_real_kem_and_real_dem sample-ctr-old-modular_pke_cca_game_with_real_kem_and_real_dem)
-            (= sample-id-monolithic_pke_cca_real_game 0)
-            (= sample-id-modular_pke_cca_game_with_real_kem_and_real_dem 2)
-        )
-    )
-)
-
-(define-fun randomness-mapping-PKENC
-    ( 
         (sample-ctr-old-monolithic_pke_cca_game Int)
         (sample-ctr-old-modular_pke_cca_game_with_real_kem Int)
-        (sample-id-monolithic_pke_cca_game Int)
-        (sample-id-modular_pke_cca_game_with_real_kem Int)
+        (sample-id-monolithic_pke_cca_game SampleId)
+        (sample-id-modular_pke_cca_game_with_real_kem SampleId)
         (sample-ctr-monolithic_pke_cca_game Int)
         (sample-ctr-modular_pke_cca_game_with_real_kem Int)
     )
@@ -32,14 +12,34 @@
         (and
             (= sample-ctr-monolithic_pke_cca_game sample-ctr-old-monolithic_pke_cca_game)
             (= sample-ctr-modular_pke_cca_game_with_real_kem sample-ctr-old-modular_pke_cca_game_with_real_kem)
-            (= sample-id-monolithic_pke_cca_game 2)
-            (= sample-id-modular_pke_cca_game_with_real_kem 1)
+            (= sample-id-monolithic_pke_cca_game (sample-id "pkg_KemScheme" "KEM_GEN" "kem_gen"))
+            (= sample-id-modular_pke_cca_game_with_real_kem (sample-id "pkg_KemScheme" "KEM_GEN" "kem_gen"))
+        )
+    )
+)
+
+(define-fun randomness-mapping-PKENC
+    ( 
+        (sample-ctr-old-monolithic_pke_cca_game Int)
+        (sample-ctr-old-modular_pke_cca_game_with_real_kem Int)
+        (sample-id-monolithic_pke_cca_game SampleId)
+        (sample-id-modular_pke_cca_game_with_real_kem SampleId)
+        (sample-ctr-monolithic_pke_cca_game Int)
+        (sample-ctr-modular_pke_cca_game_with_real_kem Int)
+    )
+    Bool
+    (or
+        (and
+            (= sample-ctr-monolithic_pke_cca_game sample-ctr-old-monolithic_pke_cca_game)
+            (= sample-ctr-modular_pke_cca_game_with_real_kem sample-ctr-old-modular_pke_cca_game_with_real_kem)
+            (= sample-id-monolithic_pke_cca_game (sample-id "pkg_DemScheme" "DEM_ENC" "dem_enc"))
+            (= sample-id-modular_pke_cca_game_with_real_kem (sample-id "pkg_DemScheme" "DEM_ENC" "dem_enc"))
         )
         (and
             (= sample-ctr-monolithic_pke_cca_game sample-ctr-old-monolithic_pke_cca_game)
             (= sample-ctr-modular_pke_cca_game_with_real_kem sample-ctr-old-modular_pke_cca_game_with_real_kem)
-            (= sample-id-monolithic_pke_cca_game 1)
-            (= sample-id-modular_pke_cca_game_with_real_kem 3)
+            (= sample-id-monolithic_pke_cca_game (sample-id "pkg_KemScheme" "KEM_ENCAPS" "kem_encaps"))
+            (= sample-id-modular_pke_cca_game_with_real_kem (sample-id "pkg_KemScheme" "KEM_ENCAPS" "kem_encaps"))
         )
     )
 )
@@ -48,8 +48,8 @@
     ( 
         (sample-ctr-old-monolithic_pke_cca_game Int)
         (sample-ctr-old-modular_pke_cca_game_with_real_kem Int)
-        (sample-id-monolithic_pke_cca_game Int)
-        (sample-id-modular_pke_cca_game_with_real_kem Int)
+        (sample-id-monolithic_pke_cca_game SampleId)
+        (sample-id-modular_pke_cca_game_with_real_kem SampleId)
         (sample-ctr-monolithic_pke_cca_game Int)
         (sample-ctr-modular_pke_cca_game_with_real_kem Int)
     )
@@ -59,25 +59,25 @@
 
 (define-fun invariant
     (
-        (state-left <GameState_MonolithicPkeCcaGame_<$<!false!>$>>) ; left
-        (state-right <GameState_ModularPkeCcaGame_<$<!false!><!false!>$>>) ; right
+        (state-left <GameState_MonolithicPkeCcaGame>) ; left
+        (state-right <GameState_ModularPkeCcaGame>) ; right
     )
     Bool
     (let
         (
-            (left_pk (<pkg-state-MON_CCA-<$<!b!>$>-pk> (<game-MonolithicPkeCcaGame-<$<!false!>$>-pkgstate-pkg_MON_CCA> state-left)))
-            (left_sk (<pkg-state-MON_CCA-<$<!b!>$>-sk> (<game-MonolithicPkeCcaGame-<$<!false!>$>-pkgstate-pkg_MON_CCA> state-left)))
-            (right_pk_mod_cca (<pkg-state-MOD_CCA-<$$>-pk> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_MOD_CCA> state-right)))
-            (right_pk_kem (<pkg-state-KEM-<$$>-pk> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_KEM> state-right)))
-            (left_c (<pkg-state-MON_CCA-<$<!b!>$>-c> (<game-MonolithicPkeCcaGame-<$<!false!>$>-pkgstate-pkg_MON_CCA> state-left)))
-            (right_c (<pkg-state-MOD_CCA-<$$>-c> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_MOD_CCA> state-right)))
-            (right_kem_ek (<pkg-state-KEM-<$$>-ek> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_KEM> state-right)))
-            (right_mod_cca_ek (<pkg-state-MOD_CCA-<$$>-ek> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_MOD_CCA> state-right)))
-            (right_dem_c (<pkg-state-MOD_CCA-<$$>-em> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_MOD_CCA> state-right)))
-            (right_key_k (<pkg-state-Key-<$<!key_idealization!>$>-k> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_Key> state-right)))
-            (right_sk (<pkg-state-KEM-<$$>-sk> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_KEM> state-right)))
-            (right_encaps_randomness (<pkg-state-KEM-<$$>-encaps_randomness> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_KEM> state-right)))
-            (right_T (<pkg-state-DEM-<$<!dem_idealization!>$>-T> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_DEM> state-right)))
+            (left_pk (<pkg-state-MON_CCA-pk> (<game-MonolithicPkeCcaGame-pkgstate-pkg_MON_CCA> state-left)))
+            (left_sk (<pkg-state-MON_CCA-sk> (<game-MonolithicPkeCcaGame-pkgstate-pkg_MON_CCA> state-left)))
+            (right_pk_mod_cca (<pkg-state-MOD_CCA-pk> (<game-ModularPkeCcaGame-pkgstate-pkg_MOD_CCA> state-right)))
+            (right_pk_kem (<pkg-state-KEM-pk> (<game-ModularPkeCcaGame-pkgstate-pkg_KEM> state-right)))
+            (left_c (<pkg-state-MON_CCA-c> (<game-MonolithicPkeCcaGame-pkgstate-pkg_MON_CCA> state-left)))
+            (right_c (<pkg-state-MOD_CCA-c> (<game-ModularPkeCcaGame-pkgstate-pkg_MOD_CCA> state-right)))
+            (right_kem_ek (<pkg-state-KEM-ek> (<game-ModularPkeCcaGame-pkgstate-pkg_KEM> state-right)))
+            (right_mod_cca_ek (<pkg-state-MOD_CCA-ek> (<game-ModularPkeCcaGame-pkgstate-pkg_MOD_CCA> state-right)))
+            (right_dem_c (<pkg-state-MOD_CCA-em> (<game-ModularPkeCcaGame-pkgstate-pkg_MOD_CCA> state-right)))
+            (right_key_k (<pkg-state-Key-k> (<game-ModularPkeCcaGame-pkgstate-pkg_Key> state-right)))
+            (right_sk (<pkg-state-KEM-sk> (<game-ModularPkeCcaGame-pkgstate-pkg_KEM> state-right)))
+            (right_encaps_randomness (<pkg-state-KEM-encaps_randomness> (<game-ModularPkeCcaGame-pkgstate-pkg_KEM> state-right)))
+            (right_T (<pkg-state-DEM-T> (<game-ModularPkeCcaGame-pkgstate-pkg_DEM> state-right)))
         )
         (and
             (= left_pk right_pk_mod_cca right_pk_kem) ; left_pk = right_pk
@@ -94,8 +94,8 @@
             (=>
                 (not ((_ is mk-none) right_key_k))
                 (and
-                    (= (maybe-get right_key_k) (el2-1 (<<func-proof-kem_encaps>> (maybe-get right_encaps_randomness) (maybe-get right_pk_kem))))
-                    (= (maybe-get right_kem_ek) (el2-2 (<<func-proof-kem_encaps>> (maybe-get right_encaps_randomness) (maybe-get right_pk_kem))))
+                    (= (maybe-get right_key_k) (el2-1 (<<func-kem_encaps>> (maybe-get right_encaps_randomness) (maybe-get right_pk_kem))))
+                    (= (maybe-get right_kem_ek) (el2-2 (<<func-kem_encaps>> (maybe-get right_encaps_randomness) (maybe-get right_pk_kem))))
                 )
             )
             (forall 
@@ -119,17 +119,17 @@
 
 (define-fun <relation-lemma-kem-correctness-monolithic_pke_cca_real_game-modular_pke_cca_game_with_real_kem_and_real_dem-PKDEC>
     (
-        (old-state-left <GameState_MonolithicPkeCcaGame_<$<!false!>$>>)
-        (old-state-right <GameState_ModularPkeCcaGame_<$<!false!><!false!>$>>)
-        (return-left <OracleReturn-MonolithicPkeCcaGame-<$<!false!>$>-MON_CCA-<$<!b!>$>-PKDEC>)
-        (return-right <OracleReturn-ModularPkeCcaGame-<$<!false!><!false!>$>-MOD_CCA-<$$>-PKDEC>)
+        (old-state-left <GameState_MonolithicPkeCcaGame>)
+        (old-state-right <GameState_ModularPkeCcaGame>)
+        (return-left <OracleReturn_MonolithicPkeCcaGame_MON_CCA_PKDEC>)
+        (return-right <OracleReturn_ModularPkeCcaGame_MOD_CCA_PKDEC>)
         (ek_ctxt (Tuple2 Bits_400 Bits_*))
     )
     Bool
     (let
         (
-            (pk (<pkg-state-KEM-<$$>-pk> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_KEM> old-state-right)))
-            (sk (<pkg-state-KEM-<$$>-sk> (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-pkgstate-pkg_KEM> old-state-right)))
+            (pk (<pkg-state-KEM-pk> (<game-ModularPkeCcaGame-pkgstate-pkg_KEM> old-state-right)))
+            (sk (<pkg-state-KEM-sk> (<game-ModularPkeCcaGame-pkgstate-pkg_KEM> old-state-right)))
         )
         (=>
             (not ((_ is mk-none) pk))
@@ -139,10 +139,10 @@
                 )
                 (let
                     (
-                        (k (el2-1 (<<func-proof-kem_encaps>> r (maybe-get pk))))
-                        (ek (el2-2 (<<func-proof-kem_encaps>> r (maybe-get pk))))
+                        (k (el2-1 (<<func-kem_encaps>> r (maybe-get pk))))
+                        (ek (el2-2 (<<func-kem_encaps>> r (maybe-get pk))))
                     )
-                    (= k (<<func-proof-kem_decaps>> (maybe-get sk) ek))
+                    (= k (<<func-kem_decaps>> (maybe-get sk) ek))
                 )
             )
         )
@@ -151,15 +151,21 @@
 
 (define-fun <relation-lemma-rand-is-eq-monolithic_pke_cca_real_game-modular_pke_cca_game_with_real_kem_and_real_dem-PKENC>
     (
-        (old-state-left <GameState_MonolithicPkeCcaGame_<$<!false!>$>>)
-        (old-state-right <GameState_ModularPkeCcaGame_<$<!false!><!false!>$>>)
-        (return-left <OracleReturn-MonolithicPkeCcaGame-<$<!false!>$>-MON_CCA-<$<!b!>$>-PKENC>)
-        (return-right <OracleReturn-ModularPkeCcaGame-<$<!false!><!false!>$>-MOD_CCA-<$$>-PKENC>)
+        (old-state-left <GameState_MonolithicPkeCcaGame>)
+        (old-state-right <GameState_ModularPkeCcaGame>)
+        (return-left <OracleReturn_MonolithicPkeCcaGame_MON_CCA_PKENC>)
+        (return-right <OracleReturn_ModularPkeCcaGame_MOD_CCA_PKENC>)
         (m Bits_*)
     )
     Bool 
-    (and
-        (rand-is-eq 2 1 (<game-MonolithicPkeCcaGame-<$<!false!>$>-rand-2> old-state-left) (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-rand-1> old-state-right))
-        (rand-is-eq 1 3 (<game-MonolithicPkeCcaGame-<$<!false!>$>-rand-1> old-state-left) (<game-ModularPkeCcaGame-<$<!false!><!false!>$>-rand-3> old-state-right))
+    (let 
+        (
+            (dem_mapping_id (sample-id "pkg_DemScheme" "DEM_ENC" "dem_enc"))
+            (kem_mapping_id (sample-id "pkg_KemScheme" "KEM_ENCAPS" "kem_encaps"))
+        )
+        (and
+            (rand-is-eq dem_mapping_id dem_mapping_id (<game-MonolithicPkeCcaGame-rand-pkg_DemScheme-DEM_ENC-dem_enc> old-state-left) (<game-ModularPkeCcaGame-rand-pkg_DemScheme-DEM_ENC-dem_enc> old-state-right))
+            (rand-is-eq kem_mapping_id kem_mapping_id (<game-MonolithicPkeCcaGame-rand-pkg_KemScheme-KEM_ENCAPS-kem_encaps> old-state-left) (<game-ModularPkeCcaGame-rand-pkg_KemScheme-KEM_ENCAPS-kem_encaps> old-state-right))
+        )
     )
 )
