@@ -5,10 +5,10 @@ package Simple {
 
     oracle Sample() -> Bits(256){
         if b {
-            x <-$ Bits(256);
+            x <-$ Bits(256) sample-name first;
             return x;
         } else {
-            x <-$ Bits(256);
+            x <-$ Bits(256) sample-name second;
             return x;
         }
     }
