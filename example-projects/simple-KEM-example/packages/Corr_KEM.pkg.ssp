@@ -15,7 +15,7 @@ oracle GetPK() -> Bits(256)                          /* returns pk              
     {
       if (sk == None)                                /* sample sk if it has not been sampled yet */ 
       {
-        sk_ <-$Bits(256);
+        sk_ <-$Bits(256) sample-name secret_key;
         sk  <- Some(sk_);
         pk  <- kgen(sk_);
       }
@@ -26,11 +26,11 @@ oracle ENC_and_DEC() -> (Bits(256),Bits(256),Bits(256))  /* samples rand and ret
     {
       if (sk == None)                               /* sample sk if it has not been sampled yet */ 
       {
-        sk_ <-$Bits(256);
+        sk_ <-$Bits(256) sample-name secret_key;
         sk  <- Some(sk_);
         pk  <- kgen(sk_);
       }
-      rand <-$ Bits(256);                          /* sample randomness               */
+      rand <-$ Bits(256) sample-name encaps_rand;                          /* sample randomness               */
       (ctxt,ksent)  <- parse encaps(pk,rand);      /* encapsulate key                 */
       kreceived     <- decaps(Unwrap(sk),ctxt);    /* decapsulate ctxt                */
         if isideal_kem_correctness { 

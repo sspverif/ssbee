@@ -19,7 +19,7 @@ oracle GetPK() -> Bits(256)                          /* returns pk              
     {
       if (sk == None)                                /* sample sk if it has not been sampled yet */ 
       {
-        sk_ <-$Bits(256);
+        sk_ <-$Bits(256) sample-name secret_key;
         sk  <- Some(sk_);
         pk  <- kgen(sk_);
       }
@@ -30,11 +30,11 @@ oracle ENC() -> Bits(256)                            /* samples rand and returns
     {
       if (sk == None)                                /* sample sk if it has not been sampled yet */ 
       {
-        sk_ <-$Bits(256);
+        sk_ <-$Bits(256) sample-name secret_key;
         sk  <- Some(sk_);
         pk  <- kgen(sk_);
       }
-      rand <-$ Bits(256);                          /* sample randomness              */
+      rand <-$ Bits(256) sample-name encaps_rand;                          /* sample randomness              */
       (ctxt,k)  <- parse encaps(pk,rand);          /* encapsulate key                */
       CTXT[ctr] <- Some(ctxt);                     /* store ctxt to check that there is a ciphertext in Test  */
       KEY[ctr]  <- Some(k);                        /* store key                      */
@@ -50,7 +50,7 @@ oracle ENC() -> Bits(256)                            /* samples rand and returns
         k <- Unwrap(KEY[ctxt_id]);                      /* retrieve key                           */
 
         if isideal_kem_cpa_security { 
-             k <-$ Bits(256);                      /* in ideal game, replace k by random     */
+             k <-$ Bits(256) sample-name encapsulated_key;                      /* in ideal game, replace k by random     */
         }
         return k;                                  /* return key                             */
    }
