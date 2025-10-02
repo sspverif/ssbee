@@ -2,13 +2,13 @@
 This project contains the formalization of a result by Cramer and Shoup in 
 Domino which states that the composition of a CCA-secure Key Encapsulation 
 Mechanism (KEM) with a CCA-secure Data Encapsulation Mechanism (DEM) yields a
-CCA-secure public key encryption (PKE) scheme. The proof conceptually uses the 
+CCA-secure public key encryption (PKE) scheme. This formalization uses the
 State Separating Proofs (SSP) framework and closely resembles the proof of the 
-same result in Section 4 of the work by [Bruzska, Delignat-Lavaud Fournet, Kohbrok, Kohlweiss](https://eprint.iacr.org/2018/306). Full breakdown and explanation
+same result in Section 4 of the work by [Bruzska, Delignat-Lavaud Fournet, Kohbrok, and Kohlweiss[1]](https://eprint.iacr.org/2018/306). Full breakdown and explanation
 of this formalization along with a general tutorial of Domino
 exists in the [Master's thesis of Amirhosein Rajabi at Aalto University](https://aaltodoc.aalto.fi/items/d68b77e6-3396-4728-9c05-88a9ca90398f).
 
-There are two key differences with the proof introduced in the paper: (1) Stateless packages are used for the KEM and DEM schemes as well as the candidate PKE scheme. (2) Only key packages have the idealization bit while the original paper uses the idealization parameter for KEM and DEM packages.
+There are two key differences with the proof introduced in [[1]](https://eprint.iacr.org/2018/306): (1) Stateless packages are used for the KEM and DEM schemes as well as the candidate PKE scheme. (2) Only DEM and key packages have the idealization bit while the original paper uses the idealization parameter for KEM and DEM packages.
 
 ## Project strucutre
 The proof file `proofs/proof.ssp` contains the game definitions, hybrid games, and game hops to be verified by Domino. See the comments in the file for more explanation 
