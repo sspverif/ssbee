@@ -28,7 +28,7 @@
                               (mk-some (mk-tuple10 U u V (maybe-get ltk) acc ni nr kmac sid mess)))))))))))
 
 
-(define-fun no-overwriting-prf
+(define-fun LTK-table-empty-above-max
     ((max-kid Int)
      (Ltk (Array Int (Maybe Bits_256))))
   Bool
@@ -77,5 +77,5 @@
        (= left-RevTested right-RevTested)
        (state= left-State right-State right-LTK)
 
-       (no-overwriting-prf right-kid right-LTK)
+       (LTK-table-empty-above-max right-kid right-LTK)
        (ltk-and-h-set-together right-LTK right-H)))))
