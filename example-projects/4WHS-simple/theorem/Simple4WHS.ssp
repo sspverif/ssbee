@@ -5,6 +5,26 @@ theorem Simple4WHS {
     const prf: fn Bits(256), Integer, Integer, Bits(256), Bits(256), Bool ->  Bits(256);
     const mac: fn Bits(256), Bits(256), Integer -> Bits(256);
 
+    instance Real = Hybrid0 {
+        params {
+            b       : false ,
+            n       : n    ,
+            zeron   : zeron,
+            prf     : prf  ,
+            mac     : mac  ,
+        }
+    }
+
+    instance Ideal = Hybrid0 {
+        params {
+            b       : true ,
+            n       : n    ,
+            zeron   : zeron,
+            prf     : prf  ,
+            mac     : mac  ,
+        }
+    }
+
     instance Hybrid0 = Hybrid0 {
         params {
             b       : b ,
@@ -437,5 +457,9 @@ theorem Simple4WHS {
                 }
             }
         }
+    }
+
+    propositions {
+        KXSecurity: Real ~ Ideal
     }
 }
