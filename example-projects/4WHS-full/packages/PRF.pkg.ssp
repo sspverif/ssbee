@@ -26,23 +26,22 @@ oracle NewKey(ltk: Maybe(Bits(256))) -> Integer {
       return kid_;
     }
 
-    oracle Eval(h: Integer, a: Integer, aa: Integer, c: Bits(256), d: Bits(256), e: Bool) -> Bits(256) {
-        assert not (LTK[h] == None);
-        if ((H[h] == Some(false)) or not b)
+    oracle Eval(kid: Integer, U: Integer, V: Integer, ni: Bits(256), nr: Bits(256), bit: Bool) -> Bits(256) {
+        assert not (LTK[kid] == None);
+        if ((H[kid] == Some(false)) or not b)
             {
-              k <- Unwrap(LTK[h]);
-              return prf(k,a,aa,c,d,e);
+              k <- Unwrap(LTK[kid]);
+              return prf(k,U,V,ni,nr,bit);
             }
-        if (PRF[(h,a,aa,c,d,e)] == None) {
+        if (PRF[(kid,U,V,ni,nr,bit)] == None) {
             temp <-$ Bits(256);
-            PRF[(h,a,aa,c,d,e)] <- Some(temp);
-			return temp;
+            PRF[(kid,U,V,ni,nr,bit)] <- Some(temp);
         }
-        y <- PRF[(h,a,aa,c,d,e)];
+        y <- PRF[(kid,U,V,ni,nr,bit)];
         return Unwrap(y);
     }
-    oracle Hon(h: Integer) -> Bool {
-        assert not (H[h] == None);
-		return Unwrap(H[h]);
+    oracle Hon(kid: Integer) -> Bool {
+        assert not (H[kid] == None);
+		return Unwrap(H[kid]);
     }
 }
