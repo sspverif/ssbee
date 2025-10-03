@@ -257,7 +257,7 @@ oracle AtLeast(sid: (Integer,Integer,Bits(256),Bits(256),Bits(256))) -> Bool {
    if ((b == false) and (First[sid] != None as Integer)
                     and (Second[sid] == None)){
       (_U,_u,_V,_ltk,acc1,_k,_ni,_nr,_kmac,_sid,_mess) <- parse Unwrap(State[Unwrap(First[sid])]);
-	  if (acc1 == Some(true)) {
+	  if ((acc1 == Some(true)) and (Fresh[Unwrap(First[sid])] == Some(true))) {
           return true;
 	  }
    }
