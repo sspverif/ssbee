@@ -1,6 +1,6 @@
 # KEM-DEM
 
-This project contains the formalization of a result by Cramer and Shoup in
+This project formalizes a result by Cramer and Shoup in
 Domino which states that the composition of a CCA-secure Key Encapsulation
 Mechanism (KEM) with a CCA-secure Data Encapsulation Mechanism (DEM) yields a
 CCA-secure public key encryption (PKE) scheme. This formalization uses the
@@ -20,7 +20,7 @@ There are two key differences with the proof introduced in [[1]]:
 [1]: https://eprint.iacr.org/2018/306
 [2]: https://aaltodoc.aalto.fi/items/d68b77e6-3396-4728-9c05-88a9ca90398f
 
-## Project strucutre
+## Project structure
 
 The proof file `proofs/proof.ssp` contains the game definitions, hybrid games,
 and game hops to be verified by Domino. See the comments in the file for more explanation of the game hops.
@@ -33,7 +33,7 @@ Ensure that it is in your `PATH`. Then, run `domino prove` inside the Domino pro
 You will see 5 game hops are verified. (3 reductions and 2 code equivalences)
 
 Use `--transcript` or `-t` option to generate the proof obligations in SMT-LIB language.
-This options saves the SMT2 code that is fed into the SMT solver (cvc5) as files.
+This option saves the SMT2 code that is fed into the SMT solver (cvc5) as files.
 Domino stores an SMT2 file for each code equivalence game hop in `_build/code_eq`
 (relative to the project root).
 
