@@ -1420,7 +1420,6 @@ theorem WHSProto {
 
                 lemmas {
                     equal-aborts: []
-                    /*lemma-debug:  [no-abort]*/
                     invariant:    [no-abort]
                     same-output:  [no-abort]
                 }
@@ -1454,9 +1453,12 @@ theorem WHSProto {
                 invariant: [
                     ./theorem/invariant-H7_1_0-H7_1_1.smt2
                     ./theorem/randomness-H7_1_0-H7_1_1.smt2
+                    /*./theorem/debug-H7_1_0-H7_1_1.smt2*/
                 ]
 
                 lemmas {
+                    /*lemma-debug:  [no-abort]*/
+                    /*lemma-false:  []*/
                     equal-aborts: []
                     invariant:    [no-abort]
                     same-output:  [no-abort]

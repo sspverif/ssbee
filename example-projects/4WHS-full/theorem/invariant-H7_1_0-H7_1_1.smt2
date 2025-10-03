@@ -555,6 +555,127 @@
                 
 
 
+(define-fun first-set-by-initiator
+    ((State (Array Int (Maybe (Tuple11 Int Bool Int Int (Maybe Bool) (Maybe Bits_256)
+                                       (Maybe Bits_256) (Maybe Bits_256) (Maybe Bits_256)
+                                       (Maybe (Tuple5 Int Int Bits_256 Bits_256 Bits_256)) Int))))
+     (First (Array (Tuple5 Int Int Bits_256 Bits_256 Bits_256) (Maybe Int)))
+     (Fresh (Array Int (Maybe Bool)))
+     (Values (Array (Tuple2 (Tuple5 Int Int Int Bits_256 Bits_256) (Tuple2 Bits_256 Int)) (Maybe Bits_256))))
+  Bool
+  (forall ((U Int) (V Int) (ni Bits_256) (nr Bits_256) (tau Bits_256))
+          (let ((sid (mk-tuple5 U V ni nr tau)))
+            (=> (not (is-mk-none (select First sid)))
+                (let ((ctr (maybe-get (select First sid))))
+                  (let ((kid (el11-4 (maybe-get (select State ctr))))
+                        (acc  (el11-5  (maybe-get (select State ctr))))
+                        (u   (el11-2 (maybe-get (select State ctr)))))
+                    (=> (and (= (select Fresh ctr) (mk-some true))
+                             (not (= acc (mk-some false))))
+                        (and (= u false)))))))))
+
+(define-fun three-mac-implies-two-mac
+    ((Values (Array (Tuple2 (Tuple5 Int Int Int Bits_256 Bits_256) (Tuple2 Bits_256 Int)) (Maybe Bits_256))))
+  Bool
+  (forall ((kid Int) (U Int) (V Int) (ni Bits_256) (nr Bits_256))
+          (=> (not (is-mk-none (select Values (mk-tuple2 (mk-tuple5 kid U V ni nr)
+                                                         (mk-tuple2 ni 3)))))
+              (not (is-mk-none (select Values (mk-tuple2 (mk-tuple5 kid U V ni nr)
+                                                         (mk-tuple2 nr 2))))))))                  
+
+(define-fun four-mac-implies-three-mac
+    ((Values (Array (Tuple2 (Tuple5 Int Int Int Bits_256 Bits_256) (Tuple2 Bits_256 Int)) (Maybe Bits_256))))
+  Bool
+  (forall ((kid Int) (U Int) (V Int) (ni Bits_256) (nr Bits_256))
+          (=> (not (is-mk-none (select Values (mk-tuple2 (mk-tuple5 kid U V ni nr)
+                                                         (mk-tuple2 nr 4)))))
+              (not (is-mk-none (select Values (mk-tuple2 (mk-tuple5 kid U V ni nr)
+                                                         (mk-tuple2 ni 3))))))))                  
+
+(define-fun two-mac-implies-first
+    ((Values (Array (Tuple2 (Tuple5 Int Int Int Bits_256 Bits_256) (Tuple2 Bits_256 Int)) (Maybe Bits_256)))
+     (First (Array (Tuple5 Int Int Bits_256 Bits_256 Bits_256) (Maybe Int))))
+  Bool
+  (forall ((kid Int) (U Int) (V Int) (ni Bits_256) (nr Bits_256))
+          (=> (not (is-mk-none (select Values (mk-tuple2 (mk-tuple5 kid U V ni nr)
+                                                         (mk-tuple2 nr 2)))))
+              (let ((tau (maybe-get (select Values (mk-tuple2 (mk-tuple5 kid U V ni nr)
+                                                              (mk-tuple2 nr 2))))))
+                (not (is-mk-none (select First (mk-tuple5 U V ni nr tau))))))))
+
+(define-fun three-mac-implies-second
+    ((Values (Array (Tuple2 (Tuple5 Int Int Int Bits_256 Bits_256) (Tuple2 Bits_256 Int)) (Maybe Bits_256)))
+     (Second (Array (Tuple5 Int Int Bits_256 Bits_256 Bits_256) (Maybe Int))))
+  Bool
+  (forall ((kid Int) (U Int) (V Int) (ni Bits_256) (nr Bits_256))
+          (=> (not (is-mk-none (select Values (mk-tuple2 (mk-tuple5 kid U V ni nr)
+                                                         (mk-tuple2 ni 3)))))
+              (let ((tau (maybe-get (select Values (mk-tuple2 (mk-tuple5 kid U V ni nr)
+                                                              (mk-tuple2 ni 3))))))
+                (not (is-mk-none (select Second (mk-tuple5 U V ni nr tau))))))))
+
+
+
+(define-fun initiator-accepts-with-mac-four-only
+    ((Values (Array (Tuple2 (Tuple5 Int Int Int Bits_256 Bits_256) (Tuple2 Bits_256 Int)) (Maybe Bits_256)))
+     (Fresh (Array Int (Maybe Bool)))
+     (State (Array Int (Maybe (Tuple11 Int Bool Int Int (Maybe Bool) (Maybe Bits_256)
+                                       (Maybe Bits_256) (Maybe Bits_256) (Maybe Bits_256)
+                                       (Maybe (Tuple5 Int Int Bits_256 Bits_256 Bits_256)) Int)))))
+  Bool
+  (forall ((ctr Int))
+          (let ((state (select State ctr)))
+            (=> (and (not (is-mk-none state))
+                     (= (mk-some true) (select Fresh ctr)))
+                (let  ((U    (el11-1  (maybe-get state)))
+                       (u    (el11-2  (maybe-get state)))
+                       (V    (el11-3  (maybe-get state)))
+                       (kid  (el11-4  (maybe-get state)))
+                       (acc  (el11-5  (maybe-get state)))
+                       (k    (el11-6  (maybe-get state)))
+                       (ni   (el11-7  (maybe-get state)))
+                       (nr   (el11-8  (maybe-get state)))
+                       (kmac (el11-9  (maybe-get state)))
+                       (sid  (el11-10 (maybe-get state)))
+                       (mess (el11-11 (maybe-get state))))
+                  (=> (and (= u false)
+                           (= acc (mk-some true)))
+                      (not (is-mk-none (select Values (mk-tuple2 (mk-tuple5 kid U V (maybe-get ni) (maybe-get nr))
+                                                                 (mk-tuple2 (maybe-get nr) 4)))))))))))
+
+(define-fun responder-accepts-with-mac-three-only
+    ((Values (Array (Tuple2 (Tuple5 Int Int Int Bits_256 Bits_256) (Tuple2 Bits_256 Int)) (Maybe Bits_256)))
+     (Fresh (Array Int (Maybe Bool)))
+     (State (Array Int (Maybe (Tuple11 Int Bool Int Int (Maybe Bool) (Maybe Bits_256)
+                                       (Maybe Bits_256) (Maybe Bits_256) (Maybe Bits_256)
+                                       (Maybe (Tuple5 Int Int Bits_256 Bits_256 Bits_256)) Int)))))
+  Bool
+  (forall ((ctr Int))
+          (let ((state (select State ctr)))
+            (=> (and (not (is-mk-none state))
+                     (= (mk-some true) (select Fresh ctr)))
+                (let  ((U    (el11-1  (maybe-get state)))
+                       (u    (el11-2  (maybe-get state)))
+                       (V    (el11-3  (maybe-get state)))
+                       (kid  (el11-4  (maybe-get state)))
+                       (acc  (el11-5  (maybe-get state)))
+                       (k    (el11-6  (maybe-get state)))
+                       (ni   (el11-7  (maybe-get state)))
+                       (nr   (el11-8  (maybe-get state)))
+                       (kmac (el11-9  (maybe-get state)))
+                       (sid  (el11-10 (maybe-get state)))
+                       (mess (el11-11 (maybe-get state))))
+                  (=> (and (= u true)
+                           (= acc (mk-some true)))
+                      (not (is-mk-none (select Values (mk-tuple2 (mk-tuple5 kid U V (maybe-get ni) (maybe-get nr))
+                                                                 (mk-tuple2 (maybe-get ni) 3)))))))))))
+
+;; if first[sid] = some ctr and state[ctr].kid is fresh
+;; the state[ctr].u == false and prfvalues[...] = tau
+;; (forall kid U V ni nr tau ctr
+        
+        
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Brainstorming on AtLeast
 ;;
@@ -636,7 +757,17 @@
            (sessions-in-first-exist First0 State0)
            (sessions-in-first-exist Second0 State0)
 
+           (four-mac-implies-three-mac Values0)
+           (three-mac-implies-two-mac Values0)
+
+           (two-mac-implies-first Values0 First0)
+           (three-mac-implies-second Values0 Second0)
+
+           (initiator-accepts-with-mac-four-only Values0 Fresh0 State0)
+           (responder-accepts-with-mac-three-only Values0 Fresh0 State0)
+           
            (honest-sid-have-tau-in-mac State0 Fresh0 Values0)
+           (first-set-by-initiator State0 First0 Fresh0 Values0)
            ;; (honest-sessions-to-first-and-second State0 Fresh0 First0 Second0)
 
            ))))
