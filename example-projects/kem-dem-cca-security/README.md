@@ -22,8 +22,12 @@ There are two key differences with the proof introduced in [[1]]:
 
 ## Project structure
 
-The proof file `proofs/proof.ssp` contains the game definitions, hybrid games,
-and game hops to be verified by Domino. See the comments in the file for more explanation of the game hops.
+A Domino project contains en empty file `ssp.toml` at the root of the project 
+along with three subdirectories `proofs`, `packages`, and `games`, which 
+respectively contain the proofs to be verified, SSP package definition, and 
+security games as package compositions. The proof file `proofs/proof.ssp` 
+contains instances of the security games and game hops to be verified by Domino. 
+See the comments in the file for more explanation of the game hops.
 
 ## How to run the verification?
 
