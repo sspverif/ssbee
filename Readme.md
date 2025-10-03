@@ -15,14 +15,17 @@
 
 ## Installation
 
-You need a somewhat recent Rust toolchain. If you don't have that, look into [rustup].
+Requirements:
+
+- A somewhat recent Rust toolchain. If you don't have that, look into [rustup].
+- CVC5 installed and in the `PATH` (not needed for building domino, but for running it)
 
 Install the tool using `cargo install --git https://github.com/domino-lang/domino domino`. 
 Ensure that the installed binary is in your `PATH`. (By default, Cargo installs to (`~/.cargo/bin`).)
 
 ## Usage
 
-Enter a project directory and run `domino prove`. 
+Enter a project directory and run `domino prove`.
 To get an idea how a project is structured, see the `example-projects/hello-world` directory (sorry, proper documentation is on the roadmap).
 
 To generate LaTeX for a project, use `domino latex`. The output will be in `_build/latex`, relative to the project root.
