@@ -33,7 +33,7 @@
               (is-mk-none (select State ctr)))))
 
 
-(define-fun no-overwriting-prf
+(define-fun H-LTK-tables-empty-above-max
     ((max-kid Int)
      (H (Array Int (Maybe Bool)))
      (Ltk (Array Int (Maybe Bits_256))))
@@ -296,7 +296,7 @@
        (= left-State right-State)
 
        (no-overwriting-state left-ctr left-State)
-       (no-overwriting-prf left-kid left-H left-LTK)
+       (H-LTK-tables-empty-above-max left-kid left-H left-LTK)
 
        (kmac-requires-nonces left-State)
        (kmac-is-wellformed left-State left-Fresh left-LTK left-PRF)
