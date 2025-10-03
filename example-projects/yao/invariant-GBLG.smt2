@@ -207,46 +207,38 @@ false
       (= (select T h) (as mk-none (Maybe (Array Bool (Maybe Bits_n)))))
       (forall ((b Bool))
         (not
-          (= (select (maybe-get (select T h)) b) (as mk-none (Maybe Bits_n)))
-)))))
+          (= (select (maybe-get (select T h)) b) (as mk-none (Maybe Bits_n))))))))
 
 ; captures the possible states which a Key package can be in when
 ; the "top" queries are GETKEYS queries 
 ;
-(define-fun well-defined-Key-bool ((key-state State_keys)) Bool
-(let ((T    (state-keys-T    key-state))
-      (flag (state-keys-flag key-state))
-      (z    (state-keys-z    key-state)))
+(define-fun well-defined-Key-bool
+    ((key-state State_keys))
+  Bool
+  (let ((T    (state-keys-T    key-state))
+        (flag (state-keys-flag key-state))
+        (z    (state-keys-z    key-state)))
 
-; flag is true <=> key has been chosen 
-(and
-
-;If T h != none => T h b != none (for both b=0 and b=1)
-(well-defined T)
-
-(forall ((hhh Int))
-(or
-    (= (select flag hhh) (as mk-none (Maybe Bool)))
-    (= (select flag hhh) (   mk-some        true )))
-)
-
-;If flag h != true => T h  = none
-;If flag h  = true => T h != none (for both b=0 and b=1)
-
-(forall ((hhh Int)) 
-(and 
-(=>
-    (not (= (select flag hhh) (mk-some true)))
-    (= (select T hhh) (as mk-none (Maybe (Array Bool (Maybe Bits_n)))))
-)
-(=>
-    (= (select flag hhh) (mk-some true))
+    ;; flag is true <=> key has been chosen 
     (and
-       (not (= (select T hhh)                            (as mk-none (Maybe (Array Bool (Maybe Bits_n))))))
-       (not (= (select (maybe-get (select T hhh)) true ) (as mk-none (Maybe Bits_n))))
-       (not (= (select (maybe-get (select T hhh)) false) (as mk-none (Maybe Bits_n))))
-    )
-))))))
+
+     ;; If T h != none => T h b != none (for both b=0 and b=1)
+     (well-defined T)
+
+     (forall ((hhh Int))
+             (or (= (select flag hhh) (as mk-none (Maybe Bool)))
+                 (= (select flag hhh) (   mk-some        true ))))
+
+     ;;If flag h != true => T h  = none
+     ;;If flag h  = true => T h != none (for both b=0 and b=1)
+     (forall ((hhh Int)) 
+             (and (=> (not (= (select flag hhh) (mk-some true)))
+                      (= (select T hhh) (as mk-none (Maybe (Array Bool (Maybe Bits_n))))))
+                  (=> (= (select flag hhh) (mk-some true))
+                      (and
+                       (not (= (select T hhh)                            (as mk-none (Maybe (Array Bool (Maybe Bits_n))))))
+                       (not (= (select (maybe-get (select T hhh)) true ) (as mk-none (Maybe Bits_n))))
+                       (not (= (select (maybe-get (select T hhh)) false) (as mk-none (Maybe Bits_n)))))))))))
 
 ; captures the possible states which a Key package can be in when
 ; the "top" queries are GETA and SETBIT queries 
@@ -256,29 +248,26 @@ false
       (flag (state-keys-flag key-state))
       (z    (state-keys-z    key-state)))
 
-(and
+  (and
 
-;If T h != none => T h b != none (for both b=0 and b=1)
-(well-defined T)
+   ;; If T h != none => T h b != none (for both b=0 and b=1)
+   (well-defined T)
 
-(forall ((hhh Int))
-(or
-  (= (select flag hhh) (as mk-none (Maybe Bool)))
-  (= (select flag hhh) (   mk-some        true ))))
+   (forall ((hhh Int))
+           (or
+            (= (select flag hhh) (as mk-none (Maybe Bool)))
+            (= (select flag hhh) (   mk-some        true ))))
 
-; flag has been set  => bit has been set
-(forall ((hhh Int)) (=> (=  (mk-some true ) (select flag hhh))  
-                    (or (=  (mk-some true ) (select z    hhh))
-                        (=  (mk-some false) (select z    hhh))
-                    )))
+   ;; flag has been set  => bit has been set
+   (forall ((hhh Int)) (=> (=  (mk-some true ) (select flag hhh))  
+                           (or (=  (mk-some true ) (select z    hhh))
+                               (=  (mk-some false) (select z    hhh)))))
 
-; key has been set => flag has been set
-(forall ((hhh Int)) (=>
-                    (not
-                    (= (select T hhh) (as mk-none (Maybe (Array Bool (Maybe Bits_n)))))
-                    )
-                    (= (select flag hhh) (mk-some true)))
-                    ))))
+   ;; key has been set => flag has been set
+   (forall ((hhh Int))
+           (=>
+            (not (= (select T hhh) (as mk-none (Maybe (Array Bool (Maybe Bits_n))))))
+            (= (select flag hhh) (mk-some true)))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -303,54 +292,47 @@ false
 )
     Bool
     (let
+        ;; state of the key packages
+        ((top-key-package-left  (project-State_Left_keys_top      (composition-pkgstate-Left-keys_top     state-left )))
+         (top-key-package-right (project-State_Right_keys_top     (composition-pkgstate-Right-keys_top    state-right)))
+         (bot-key-package-left  (project-State_Left_keys_bottom   (composition-pkgstate-Left-keys_bottom  state-left )))
+         (bot-key-package-right (project-State_Right_keys_bottom  (composition-pkgstate-Right-keys_bottom state-right))))
 
-; state of the key packages
-(
-(top-key-package-left  (project-State_Left_keys_top      (composition-pkgstate-Left-keys_top     state-left )))
-(top-key-package-right (project-State_Right_keys_top     (composition-pkgstate-Right-keys_top    state-right)))
-(bot-key-package-left  (project-State_Left_keys_bottom   (composition-pkgstate-Left-keys_bottom  state-left )))
-(bot-key-package-right (project-State_Right_keys_bottom  (composition-pkgstate-Right-keys_bottom state-right)))
-)
+      (let
+          ;; table of the bottom key package
+          ((table-bot-left  (state-keys-T    bot-key-package-left))
+           (table-bot-right (state-keys-T    bot-key-package-right))
+           (    z-bot-left  (state-keys-z    bot-key-package-left))
+           (    z-bot-right (state-keys-z    bot-key-package-right))
+           (flag-bot-left   (state-keys-flag bot-key-package-left))
+           (flag-bot-right  (state-keys-flag bot-key-package-right)))
 
-(let
+        (and
+         ;; top key package states are equal
+         (= top-key-package-left top-key-package-right)
 
-; table of the bottom key package
-(
-(table-bot-left  (state-keys-T    bot-key-package-left))
-(table-bot-right (state-keys-T    bot-key-package-right))
-(    z-bot-left  (state-keys-z    bot-key-package-left))
-(    z-bot-right (state-keys-z    bot-key-package-right))
-(flag-bot-left   (state-keys-flag bot-key-package-left))
-(flag-bot-right  (state-keys-flag bot-key-package-right))
-)
+         ;; for bottom key package, tables are equal
+         (= table-bot-left table-bot-right)
 
-(and
-;top key package states are equal
-(= top-key-package-left top-key-package-right)
+         ;; top key package state is "good"
+         (well-defined-Key-active top-key-package-left )
+         (well-defined-Key-active top-key-package-right)
 
-;for bottom key package, tables are equal
-(= table-bot-left table-bot-right)
-
-;top key package state is "good"
-(well-defined-Key-active top-key-package-left )
-(well-defined-Key-active top-key-package-right)
-
-;bottom key packages state is "good"
-(well-defined-Key-bool   bot-key-package-left )
-(well-defined-Key-active bot-key-package-right)
-(forall ((h Int))
-(and
-    (= (select  flag-bot-left  h) 
-       (select  flag-bot-right h))
-(=> (= (select table-bot-left  h) (as mk-none (Maybe (Array Bool (Maybe Bits_n)))))
-    (= (select  flag-bot-left  h) (   mk-some        false)))
-(=> (= (select table-bot-right h) (as mk-none (Maybe (Array Bool (Maybe Bits_n)))))
-    (and
-    (= (select  flag-bot-right h) (   mk-some        false))
-    (= (select     z-bot-right h) (as mk-none (Maybe Bool )))))
-(=> (= (select  flag-bot-right h) (   mk-some        false))
-    (= (select     z-bot-right h) (as mk-none (Maybe Bool ))))
-))))))
+         ;; bottom key packages state is "good"
+         (well-defined-Key-bool   bot-key-package-left )
+         (well-defined-Key-active bot-key-package-right)
+         (forall ((h Int))
+                 (and
+                  (= (select  flag-bot-left  h) 
+                     (select  flag-bot-right h))
+                  (=> (= (select table-bot-left  h) (as mk-none (Maybe (Array Bool (Maybe Bits_n)))))
+                      (= (select  flag-bot-left  h) (   mk-some        false)))
+                  (=> (= (select table-bot-right h) (as mk-none (Maybe (Array Bool (Maybe Bits_n)))))
+                      (and
+                       (= (select  flag-bot-right h) (   mk-some        false))
+                       (= (select     z-bot-right h) (as mk-none (Maybe Bool )))))
+                  (=> (= (select  flag-bot-right h) (   mk-some        false))
+                      (= (select     z-bot-right h) (as mk-none (Maybe Bool ))))))))))
 
 
 (define-fun invariant-SETBIT      (
@@ -564,15 +546,11 @@ false
       )
          )
 
-  (let
+      (let ;; state of the key packages
+          ((top-key-package-left-1     (project-State_Left_inst-_keys_top     (composition-pkgstate-Left_inst--keys_top     state-left-1)))
+           (bottom-key-package-left-1  (project-State_Left_inst-_keys_bottom  (composition-pkgstate-Left_inst--keys_bottom  state-left-1))))
 
-; state of the key packages
-(
-(top-key-package-left-1     (project-State_Left_inst-_keys_top     (composition-pkgstate-Left_inst--keys_top     state-left-1)))
-(bottom-key-package-left-1  (project-State_Left_inst-_keys_bottom  (composition-pkgstate-Left_inst--keys_bottom  state-left-1)))
-)
-
-(let
+        (let
 
 ; table of the top key package
 ;        T: Table(Integer,Table(Bool,Bits(n))),
